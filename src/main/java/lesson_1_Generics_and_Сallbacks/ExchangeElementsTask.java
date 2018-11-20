@@ -16,7 +16,8 @@ public class ExchangeElementsTask <T> {
         return elements;
     }
 
-    public void printArr (T[] elements){
+    public void printArr (T[] elements, String comment){
+        System.out.println(comment);
         for(T t : elements){
             System.out.print(t + " ");
         }

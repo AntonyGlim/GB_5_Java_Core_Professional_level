@@ -21,8 +21,8 @@ public class MainGenericsTask {
 
         ExchangeElementsTask<String> strArr2 = new ExchangeElementsTask<String>(strArr1);
         strArr2.showType();
-        strArr2.printArr(strArr1);
+        strArr2.printArr(strArr1, "Массив до перестановки: ");
         strArr1 = strArr2.exchangeElements(2, 4);
-        strArr2.printArr(strArr1);
+        strArr2.printArr(strArr1, "Массив после перестановки: ");
     }
 }
