@@ -7,4 +7,9 @@ public class ExampleCat {
     public ExampleCat(String catName) {
         this.catName = catName;
     }
+
+    public String getCatName() {
+        return catName;
+    }
+
 }
