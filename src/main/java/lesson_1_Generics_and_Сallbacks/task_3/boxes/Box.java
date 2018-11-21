@@ -40,7 +40,14 @@ public class Box<F extends Fruit> {
         return this.weight;
     }
 
+    /**
+     * Метод сравнивает две коробки с разными типами
+     * Если разница весов, взятая по модулю, меньше маленького числа (т.к. тип float)
+     * <?> - метасимвольный аргумент типа, позволит нам сравнить о-ты разных типов
+     * @param another
+     * @return
+     */
     public boolean compareBoxes (Box<?> another){
-        return (this.getWeight() == another.getWeight());
+        return (Math.abs(this.getWeight() - another.getWeight()) <= 0.001);
     }
 }

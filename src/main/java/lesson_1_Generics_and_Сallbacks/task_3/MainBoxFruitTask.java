@@ -22,18 +22,26 @@ import lesson_1_Generics_and_Сallbacks.task_3.fruits.Fruit;
 import lesson_1_Generics_and_Сallbacks.task_3.fruits.Orange;
 
 public class MainBoxFruitTask {
-    //TODO метод isTypeCorrect проверяет, соответствует-ли тип элемента, который мы хотим добавить тому типу, который уже имеет коробка
+
     public static void main(String[] args) {
 
         Box<Fruit> box_1 = new Box();
         System.out.println(box_1.getWeight());
-        box_1.add(new Apple(1.2f));
-        box_1.add(new Apple(1.2f));
-        box_1.add(new Apple(1.2f));
-        box_1.add(new Apple(1.2f));
+        box_1.add(new Apple(1.0f));
+        box_1.add(new Apple(2.1f));
+        box_1.add(new Apple(2.1f));
         box_1.add(new Orange(1.2f));
         System.out.println(box_1.getWeight());
 
+        Box<Fruit> box_2 = new Box();
+        System.out.println(box_2.getWeight());
+        box_2.add(new Orange(1.8f));
+        box_2.add(new Orange(1.7f));
+        box_2.add(new Orange(1.7f));
+        box_2.add(new Apple(1.7f));
+        System.out.println(box_2.getWeight());
+
+        System.out.println(box_1.compareBoxes(box_2));
     }
 
 
