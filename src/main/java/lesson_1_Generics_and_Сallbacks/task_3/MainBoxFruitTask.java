@@ -17,4 +17,5 @@
 package lesson_1_Generics_and_Сallbacks.task_3;
 
 public class MainBoxFruitTask {
+    //TODO метод isTypeCorrect проверяет, соответствует-ли тип элемента, который мы хотим добавить тому типу, который уже имеет коробка
 }
