@@ -63,6 +63,11 @@ public class Box<F extends Fruit> {                     //Класс сможе�
         return (Math.abs(this.getWeight() - another.getWeight()) <= 0.001);
     }
 
+    /**
+     * Метод пересыпает фрукты из одной коробки в другую,
+     * если тип коробок совпадет
+     * @param another
+     */
     public void pourFruitIn (Box<F> another){
         Iterator<F> iter = fruitsInBox.iterator();
         while(iter.hasNext()){
@@ -70,10 +75,19 @@ public class Box<F extends Fruit> {                     //Класс сможе�
         }
     }
 
+    /**
+     * Метод проверяет совпадают-ли типы элементов находящихся в листах
+     * @param fruit - элемент стороннего листа
+     * @return - да/нет
+     */
     public boolean isTypesEquals(F fruit){
         return (fruit.getClass().getName().toString().equals(fruitsInBox.get(0).getClass().getName()));
     }
 
+    /**
+     * Получить лист с фруктами, находящимися в коробке
+     * @return
+     */
     public ArrayList<F> getFruitsInBox() {
         return fruitsInBox;
     }
