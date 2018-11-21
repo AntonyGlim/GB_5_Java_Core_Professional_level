@@ -1,4 +1,4 @@
 package lesson_1_Generics_and_Сallbacks.task_3.fruits;
 
-public class Apple {
+public class Apple extends Fruit  {
 }
