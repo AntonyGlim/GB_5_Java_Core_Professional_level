@@ -25,23 +25,44 @@ public class MainBoxFruitTask {
 
     public static void main(String[] args) {
 
-        Box<Fruit> box_1 = new Box();
-        System.out.println(box_1.getWeight());
-        box_1.add(new Apple(1.0f));
+        Box<Fruit> box_1 = new Box();                                               //Тип Fruit установлен, чтобы можно было ПОПЫТАТЬСЯ добавить фрукты разного типа
+        System.out.println("Коробка 1 пуста. Ее вес: " + box_1.getWeight());
+        box_1.add(new Apple(1.0f));                                         //Заполняем коробку фруктами
         box_1.add(new Apple(2.1f));
         box_1.add(new Apple(2.1f));
-        box_1.add(new Orange(1.2f));
-        System.out.println(box_1.getWeight());
+        box_1.add(new Orange(1.2f));                                        //Безуспешная попытка добавить фрукт другого типа
+        System.out.println("Коробку 1 заполнили. Ее вес: " + box_1.getWeight());    //Выводим вес фруктов в коробке для информации
+        System.out.println();
 
         Box<Fruit> box_2 = new Box();
-        System.out.println(box_2.getWeight());
+        System.out.println("Коробка 2 пуста. Ее вес: " + box_2.getWeight());
         box_2.add(new Orange(1.8f));
         box_2.add(new Orange(1.7f));
         box_2.add(new Orange(1.7f));
         box_2.add(new Apple(1.7f));
-        System.out.println(box_2.getWeight());
+        System.out.println("Коробку 2 заполнили. Ее вес: " + box_2.getWeight());
+        System.out.println();
 
-        System.out.println(box_1.compareBoxes(box_2));
+        Box<Fruit> box_3 = new Box();
+        System.out.println("Коробка 3 пуста. Ее вес: " + box_3.getWeight());
+        box_3.add(new Orange(1.8f));
+        box_3.add(new Orange(1.1f));
+        box_3.add(new Orange(1.7f));
+        System.out.println("Коробку 3 заполнили. Ее вес: " + box_3.getWeight());
+        System.out.println();
+
+        Box<Fruit> box_4 = new Box();
+        System.out.println("Коробка 3 пуста. Ее вес: " + box_4.getWeight());
+        box_4.add(new Apple(2.2f));
+        box_4.add(new Apple(1.1f));
+        box_4.add(new Apple(2.3f));
+        System.out.println("Коробку 3 заполнили. Ее вес: " + box_4.getWeight());
+        System.out.println();
+
+        //Блок сравнения весов в разных коробках
+        System.out.println("Вес коробки 1 равен весу коробки 2? : " + box_1.compareBoxes(box_2));
+        System.out.println("Вес коробки 1 равен весу коробки 3? : " + box_1.compareBoxes(box_3));
+        System.out.println("Вес коробки 1 равен весу коробки 4? : " + box_1.compareBoxes(box_4));
     }
 
 
