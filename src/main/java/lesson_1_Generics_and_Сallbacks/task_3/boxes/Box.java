@@ -5,18 +5,23 @@ import java.util.ArrayList;
 
 public class Box<F extends Fruit> {
 
-    private ArrayList<F> frutsInBox;
+    private ArrayList<F> fruitsInBox;
+    private float weight;
 
-    public Box(ArrayList<F> fruts) {
-        this.frutsInBox = frutsInBox;
+    public Box() {
+        fruitsInBox = new ArrayList<F>();
+    }
+
+    public void add (F fruit){
+        fruitsInBox.add(fruit);
     }
 
     public float getWeight() {
-        float weight = 0.0f;
-        for (F f : frutsInBox) {
+        this.weight = 0.0f;
+        for (F f : fruitsInBox) {
             weight += f.getWeight();
         }
-        return weight;
+        return this.weight;
     }
 
     public boolean compareBoxes (Box<?> anoter){
