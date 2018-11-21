@@ -1,3 +1,6 @@
+/**
+ * 2. Написать метод, который преобразует массив в ArrayList;
+ */
 package lesson_1_Generics_and_Сallbacks.task_2;
 
 import lesson_1_Generics_and_Сallbacks.task_1.ExampleCat;
