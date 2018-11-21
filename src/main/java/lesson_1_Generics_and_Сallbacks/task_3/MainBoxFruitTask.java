@@ -16,14 +16,24 @@
  */
 package lesson_1_Generics_and_Сallbacks.task_3;
 
+import lesson_1_Generics_and_Сallbacks.task_3.boxes.Box;
 import lesson_1_Generics_and_Сallbacks.task_3.fruits.Apple;
 import lesson_1_Generics_and_Сallbacks.task_3.fruits.Fruit;
+import lesson_1_Generics_and_Сallbacks.task_3.fruits.Orange;
 
 public class MainBoxFruitTask {
     //TODO метод isTypeCorrect проверяет, соответствует-ли тип элемента, который мы хотим добавить тому типу, который уже имеет коробка
     public static void main(String[] args) {
-        Fruit app1 = new Apple(1.0f);
-        System.out.println(app1.getWeight());
+
+        Box<Fruit> box_1 = new Box();
+        System.out.println(box_1.getWeight());
+        box_1.add(new Apple(1.2f));
+        box_1.add(new Apple(1.2f));
+        box_1.add(new Apple(1.2f));
+        box_1.add(new Apple(1.2f));
+        box_1.add(new Orange(1.2f));
+        System.out.println(box_1.getWeight());
+
     }
 
 

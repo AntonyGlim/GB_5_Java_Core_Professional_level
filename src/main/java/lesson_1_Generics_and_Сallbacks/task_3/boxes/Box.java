@@ -13,7 +13,14 @@ public class Box<F extends Fruit> {
     }
 
     public void add (F fruit){
-        fruitsInBox.add(fruit);
+        if(fruitsInBox.isEmpty()){
+            fruitsInBox.add(fruit);
+        } else if (fruit.getClass().getName().toString().equals(fruitsInBox.get(0).getClass().getName())){
+            fruitsInBox.add(fruit);
+            System.out.println("Фрукт добавлен");
+        } else {
+            System.out.println("В коробке находятся фрукты другого типа");
+        }
     }
 
     public float getWeight() {
@@ -24,7 +31,7 @@ public class Box<F extends Fruit> {
         return this.weight;
     }
 
-    public boolean compareBoxes (Box<?> anoter){
-        return (this.getWeight() == anoter.getWeight());
+    public boolean compareBoxes (Box<?> another){
+        return (this.getWeight() == another.getWeight());
     }
 }
