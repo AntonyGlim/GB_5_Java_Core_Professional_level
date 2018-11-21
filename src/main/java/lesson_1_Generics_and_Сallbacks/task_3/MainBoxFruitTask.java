@@ -16,6 +16,15 @@
  */
 package lesson_1_Generics_and_Сallbacks.task_3;
 
+import lesson_1_Generics_and_Сallbacks.task_3.fruits.Apple;
+import lesson_1_Generics_and_Сallbacks.task_3.fruits.Fruit;
+
 public class MainBoxFruitTask {
     //TODO метод isTypeCorrect проверяет, соответствует-ли тип элемента, который мы хотим добавить тому типу, который уже имеет коробка
+    public static void main(String[] args) {
+        Fruit app1 = new Apple(1.0f);
+        System.out.println(app1.getWeight());
+    }
+
+
 }
