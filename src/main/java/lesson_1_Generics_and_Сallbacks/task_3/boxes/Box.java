@@ -2,6 +2,7 @@ package lesson_1_Generics_and_Сallbacks.task_3.boxes;
 
 import lesson_1_Generics_and_Сallbacks.task_3.fruits.Fruit;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Класс создает о-кт коробка  для хранения фруктов
@@ -30,7 +31,7 @@ public class Box<F extends Fruit> {                     //Класс сможе�
         if(fruitsInBox.isEmpty()){
             fruitsInBox.add(fruit);
             System.out.println("Фрукт тпа " + fruitsInBox.get(0).getName() + " - добавлен");
-        } else if (fruit.getClass().getName().toString().equals(fruitsInBox.get(0).getClass().getName())){
+        } else if (isTypesEquals(fruit)){
             fruitsInBox.add(fruit);
             System.out.println("Фрукт тпа " + fruitsInBox.get(0).getName() + " - добавлен");
         } else {
@@ -60,5 +61,20 @@ public class Box<F extends Fruit> {                     //Класс сможе�
      */
     public boolean compareBoxes (Box<?> another){
         return (Math.abs(this.getWeight() - another.getWeight()) <= 0.001);
+    }
+
+    public void pourFruitIn (Box<F> another){
+        Iterator<F> iter = fruitsInBox.iterator();
+        while(iter.hasNext()){
+            another.add(iter.next());
+        }
+    }
+
+    public boolean isTypesEquals(F fruit){
+        return (fruit.getClass().getName().toString().equals(fruitsInBox.get(0).getClass().getName()));
+    }
+
+    public ArrayList<F> getFruitsInBox() {
+        return fruitsInBox;
     }
 }

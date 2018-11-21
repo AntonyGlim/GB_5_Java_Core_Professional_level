@@ -63,6 +63,16 @@ public class MainBoxFruitTask {
         System.out.println("Вес коробки 1 равен весу коробки 2? : " + box_1.compareBoxes(box_2));
         System.out.println("Вес коробки 1 равен весу коробки 3? : " + box_1.compareBoxes(box_3));
         System.out.println("Вес коробки 1 равен весу коробки 4? : " + box_1.compareBoxes(box_4));
+        System.out.println();
+
+        System.out.println(box_1.getFruitsInBox().size());
+        System.out.println("1 до: " + box_1.getFruitsInBox());
+        System.out.println(box_4.getFruitsInBox().size());
+        System.out.println("4 до: " + box_4.getFruitsInBox());
+        box_1.pourFruitIn(box_4);
+        System.out.println("1 после: " + box_1.getFruitsInBox());
+//        System.out.println(box_1.getFruitsInBox());
+        System.out.println("4 после: " + box_4.getFruitsInBox());
     }
 
 
