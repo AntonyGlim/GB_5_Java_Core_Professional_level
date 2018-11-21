@@ -3,11 +3,18 @@ package lesson_1_Generics_and_Сallbacks.task_3.boxes;
 import lesson_1_Generics_and_Сallbacks.task_3.fruits.Fruit;
 import java.util.ArrayList;
 
-public class Box<F extends Fruit> {
+/**
+ * Класс создает о-кт коробка  для хранения фруктов
+ * @param <F> - обобщенный тип данных Fruit и его подклассы
+ */
+public class Box<F extends Fruit> {                     //Класс сможет принять только тип Fruit и все его подклассы
 
-    private ArrayList<F> fruitsInBox;
-    private float weight;
+    private ArrayList<F> fruitsInBox;                   //В листе храняться все фрукты добавленные в коробку
+    private float weight;                               //Общий вес коробки (складывается из суммы всех фруктов)
 
+    /**
+     * В конструкторе создаем новый лист
+     */
     public Box() {
         fruitsInBox = new ArrayList<F>();
     }
@@ -32,6 +39,10 @@ public class Box<F extends Fruit> {
         }
     }
 
+    /**
+     * Подсчет веса фруктов в коробке
+     * @return - Вернет вес коробки (сумму весов всех элементов коробки)
+     */
     public float getWeight() {
         this.weight = 0.0f;
         for (F f : fruitsInBox) {
