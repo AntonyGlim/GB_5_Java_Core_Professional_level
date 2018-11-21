@@ -1,4 +1,4 @@
-package lesson_1_Generics_and_Сallbacks;
+package lesson_1_Generics_and_Сallbacks.task_1;
 
 public class ExchangeElementsTask <T> {
 

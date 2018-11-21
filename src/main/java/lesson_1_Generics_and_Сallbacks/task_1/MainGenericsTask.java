@@ -2,7 +2,7 @@
  * 1. Написать метод, который меняет два элемента массива местами (массив может быть любого ссылочного типа);
  */
 
-package lesson_1_Generics_and_Сallbacks;
+package lesson_1_Generics_and_Сallbacks.task_1;
 
 public class MainGenericsTask {
     public static void main(String[] args) {
