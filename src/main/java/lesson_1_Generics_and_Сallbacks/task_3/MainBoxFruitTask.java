@@ -25,6 +25,7 @@ public class MainBoxFruitTask {
 
     public static void main(String[] args) {
 
+    //Блок создания коробок с фруктами
         Box<Fruit> box_1 = new Box();                                               //Тип Fruit установлен, чтобы можно было ПОПЫТАТЬСЯ добавить фрукты разного типа
         System.out.println("Коробка 1 пуста. Ее вес: " + box_1.getWeight());
         box_1.add(new Apple(1.0f));                                         //Заполняем коробку фруктами
@@ -59,23 +60,37 @@ public class MainBoxFruitTask {
         System.out.println("Коробку 3 заполнили. Ее вес: " + box_4.getWeight());
         System.out.println();
 
-        //Блок сравнения весов в разных коробках
+    //Блок сравнения весов в разных коробках
         System.out.println("Вес коробки 1 равен весу коробки 2? : " + box_1.compareBoxes(box_2));
         System.out.println("Вес коробки 1 равен весу коробки 3? : " + box_1.compareBoxes(box_3));
         System.out.println("Вес коробки 1 равен весу коробки 4? : " + box_1.compareBoxes(box_4));
         System.out.println();
 
-        System.out.println("1 до: " + box_1.getFruitsInBox());
-        System.out.println("4 до: " + box_4.getFruitsInBox());
+    //Блок с пересыпаниями
+        System.out.println("Пересыпем из 1 в 4: ");
+        System.out.println("Коробка 1 до пересыпания содержит: " + box_1.getFruitsInBox());
+        System.out.println("Коробка 4 до пересыпания содержит: " + box_4.getFruitsInBox());
+        //Пересыпаем из 1 в 4
         box_1.pourFruitIn(box_4);
-        System.out.println("1 после: " + box_1.getFruitsInBox());
-        System.out.println("4 после: " + box_4.getFruitsInBox());
+        System.out.println("Коробка 1 после пересыпания содержит: " + box_1.getFruitsInBox());
+        System.out.println("Коробка 4 до пересыпания содержит: " + box_4.getFruitsInBox());
+        System.out.println();
 
-        System.out.println("4 до: " + box_4.getFruitsInBox());
-        System.out.println("3 до: " + box_3.getFruitsInBox());
+        System.out.println("Пересыпем из 4 в 3: ");
+        System.out.println("Коробка 4 до пересыпания содержит: " + box_4.getFruitsInBox());
+        System.out.println("Коробка 3 до пересыпания содержит: " + box_3.getFruitsInBox());
+        //Пересыпаем из 4 в 3
         box_4.pourFruitIn(box_3);
-        System.out.println("4 после: " + box_4.getFruitsInBox());
-        System.out.println("3 после: " + box_3.getFruitsInBox());
+        System.out.println("Коробка 4 после пересыпания содержит: " + box_4.getFruitsInBox());
+        System.out.println("Коробка 3 после пересыпания содержит: " + box_3.getFruitsInBox());
+        System.out.println();
+
+    //В коробке 1 были Яблоки, попробуем добавить в нее Апельсины
+        box_1.add(new Orange(1.8f));
+        box_1.add(new Orange(1.7f));
+        box_1.add(new Orange(1.7f));
+        box_1.add(new Apple(2.1f));                                         //Яблоко уже не добавятся
+        System.out.println("Коробку 1 заполнили. Ее вес: " + box_1.getWeight());
     }
 
 
