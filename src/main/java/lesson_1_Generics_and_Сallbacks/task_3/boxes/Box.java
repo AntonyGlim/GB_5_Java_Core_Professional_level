@@ -69,8 +69,12 @@ public class Box<F extends Fruit> {                     //Класс сможе�
      * @param another
      */
     public void pourFruitIn (Box<F> another){
-        while(!fruitsInBox.isEmpty()){
-            another.add(fruitsInBox.remove(fruitsInBox.size() - 1));
+        if(isTypesEquals(another.getFruitsInBox().get(0))){
+            while(!fruitsInBox.isEmpty()){
+                another.add(fruitsInBox.remove(fruitsInBox.size() - 1));
+            }
+        } else {
+            System.out.println("Типы фруктов в коробках не совпадают! Все останеться как есть!");
         }
     }
 
