@@ -70,8 +70,8 @@ public class Box<F extends Fruit> {                     //Класс сможе�
      */
     public void pourFruitIn (Box<F> another){
         if(isTypesEquals(another.getFruitsInBox().get(0))){
-            while(!fruitsInBox.isEmpty()){
-                another.add(fruitsInBox.remove(fruitsInBox.size() - 1));
+            while(!fruitsInBox.isEmpty()){                                                          //Пока в листе есть элементы
+                another.add(fruitsInBox.remove(fruitsInBox.size() - 1));                        //Работаем с последним элементом, чтобы все не сдвигать
             }
         } else {
             System.out.println("Типы фруктов в коробках не совпадают! Все останеться как есть!");
@@ -84,7 +84,7 @@ public class Box<F extends Fruit> {                     //Класс сможе�
      * @return - да/нет
      */
     public boolean isTypesEquals(F fruit){
-        return (fruit.getClass().getName().toString().equals(fruitsInBox.get(0).getClass().getName()));
+        return (fruit.getClass().getName().equals(fruitsInBox.get(0).getClass().getName()));        //Достаем типы элементов и сравниваем имена типов элементов
     }
 
     /**
