@@ -4,9 +4,12 @@
 
 package lesson_1_Generics_and_Сallbacks.task_1;
 
+import lesson_1_Generics_and_Сallbacks.ExampleCat;
+
 public class MainGenericsTask {
     public static void main(String[] args) {
 
+        //Создаем массивы
         String[] strArr1 = {"0", "1", "2", "3", "4", "5"};
         Integer[] intArr1 = {0, 11, 22, 33, 44, 55};
         Float[] fltArr1 = {0.1f, 1.1f, 2.1f, 3.1f, 4.1f, 5.1f};
@@ -19,10 +22,11 @@ public class MainGenericsTask {
                 new ExampleCat("Котей"),
         };
 
+
         ExchangeElementsTask<String> strArr2 = new ExchangeElementsTask<String>(strArr1);
-        strArr2.showType();
+        strArr2.showType();                                                             //Для наглядности демонстрируем тип
         strArr2.printArr(strArr1, "Массив до перестановки: ");
-        strArr1 = strArr2.exchangeElements(2, 4);
+        strArr1 = strArr2.exchangeElements(2, 4);                                       //Меняем элементы местами
         strArr2.printArr(strArr1, "Массив после перестановки: ");
         System.out.println();
 
@@ -49,6 +53,8 @@ public class MainGenericsTask {
 
     }
 
+    //Поскольку мы выполняем одно и то-же действие несколько раз, здесь была попытка написать метод,
+    //в который мы бы просто передавали массив
 //    public void showResults(ExchangeElementsTask<?> arr1){
 //        ExchangeElementsTask<?>[] arr2 = new ExchangeElementsTask<?>[](arr1);
 //        arr2.showType();

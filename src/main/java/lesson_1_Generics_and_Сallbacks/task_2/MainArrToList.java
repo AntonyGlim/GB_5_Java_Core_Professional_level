@@ -3,7 +3,7 @@
  */
 package lesson_1_Generics_and_Сallbacks.task_2;
 
-import lesson_1_Generics_and_Сallbacks.task_1.ExampleCat;
+import lesson_1_Generics_and_Сallbacks.ExampleCat;
 
 import java.util.ArrayList;
 
