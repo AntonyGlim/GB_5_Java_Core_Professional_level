@@ -30,13 +30,13 @@ public class Box<F extends Fruit> {                     //Класс сможе�
     public void add (F fruit){
         if(fruitsInBox.isEmpty()){
             fruitsInBox.add(fruit);
-            System.out.println("Фрукт тпа " + fruitsInBox.get(0).getName() + " - добавлен");
+            System.out.println("Фрукт тпа " + fruitsInBox.get(0).getType() + " - добавлен");
         } else if (isTypesEquals(fruit)){
             fruitsInBox.add(fruit);
-            System.out.println("Фрукт тпа " + fruitsInBox.get(0).getName() + " - добавлен");
+            System.out.println("Фрукт тпа " + fruitsInBox.get(0).getType() + " - добавлен");
         } else {
-            System.out.print("Нельзя добавить фрукт типа " + fruit.getName());
-            System.out.println(". В коробке находятся фрукты типа: " + fruitsInBox.get(0).getName());
+            System.out.print("Нельзя добавить фрукт типа " + fruit.getType());
+            System.out.println(". В коробке находятся фрукты типа: " + fruitsInBox.get(0).getType());
         }
     }
 

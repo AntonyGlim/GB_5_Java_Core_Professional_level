@@ -1,10 +1,13 @@
 package lesson_1_Generics_and_Сallbacks.task_3.fruits;
 
-public abstract class Fruit {
+/**
+ * Класс родитель для фруктов в котором описаны общие поля и методы
+ */
+public class Fruit {
 
-    String name;
+    String type;
 
-    private float weight;
+    private float weight;           //Вес фрукта
 
     public Fruit(float weight) {
         this.weight = weight;
@@ -14,7 +17,7 @@ public abstract class Fruit {
         return weight;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 }
