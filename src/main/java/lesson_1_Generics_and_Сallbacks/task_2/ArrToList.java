@@ -10,6 +10,11 @@ public class ArrToList<T> {
         this.arr = arr;
     }
 
+    /**
+     * Метод преобразует массив в лист
+     * @param arr
+     * @return
+     */
     public ArrayList<T> toList(T[] arr) {
         ArrayList<T> list = new ArrayList<T>();
         for (int i = 0; i < arr.length; i++) {
@@ -18,6 +23,9 @@ public class ArrToList<T> {
         return list;
     }
 
+    /**
+     * Метод выведет массив на экран
+     */
     void printArr(T[] arr) {
         System.out.println("Массив: ");
         for (T t : arr) {
