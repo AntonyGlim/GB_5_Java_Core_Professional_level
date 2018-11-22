@@ -69,9 +69,8 @@ public class Box<F extends Fruit> {                     //Класс сможе�
      * @param another
      */
     public void pourFruitIn (Box<F> another){
-        Iterator<F> iter = fruitsInBox.iterator();
-        while(iter.hasNext()){
-            another.add(iter.next());
+        while(!fruitsInBox.isEmpty()){
+            another.add(fruitsInBox.remove(fruitsInBox.size() - 1));
         }
     }
 
