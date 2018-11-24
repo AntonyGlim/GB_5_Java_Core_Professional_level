@@ -3,26 +3,34 @@ package lesson_2_Work_with_DataBase;
 import com.sun.javafx.binding.StringFormatter;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class Main {
     private static Connection connection;
     private static Statement statement;
     private static String tableName = "products_table";
 
+
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
         try {
 
             connect();
 //            createTable(tableName);
 //            dropTable(tableName);
-            deleteAllFromTable(tableName);
-            connection.setAutoCommit(false);
-            for (int i = 1; i <= 1000; i++) {
-                insertIntoTable(tableName, i, ("Товар_" + i), i);
+//            deleteAllFromTable(tableName);
+//            connection.setAutoCommit(false);
+//            for (int i = 1; i <= 1000; i++) {
+//                insertIntoTable(tableName, i, ("Товар_" + i), i);
+//            }
+//            connection.commit();
+//            connection.setAutoCommit(true);
+            while (true){
+                String s = in.nextLine();
+                if (s.equalsIgnoreCase("/q")) break;
+                returnCostByName(tableName, s);
             }
-            connection.commit();
-            connection.setAutoCommit(true);
-            returnCostByName(tableName, "Товар_12");
+
             disconnect();
 
         } catch (ClassNotFoundException e) {
