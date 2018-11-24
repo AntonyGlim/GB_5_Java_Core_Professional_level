@@ -16,15 +16,6 @@ public class WorkWithDB {
         statement = connection.createStatement();
     }
 
-
-    //TODO - createDB() if not exist
-    //TODO - createTable() if not exist
-    //TODO - cleanTable()
-    //TODO - insertIntoTable() data
-    //TODO - int returnCostByName(String productName) from database
-    //TODO - int updateCostByName(String productName) from database
-    //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
-
     //TODO - disconnect();
     public static void disconnect(){
         try {
@@ -33,4 +24,26 @@ public class WorkWithDB {
             e.printStackTrace();
         }
     }
+
+    //TODO - createTable() if not exist
+
+    public void createTable() throws SQLException {
+        statement.execute("CREATE TABLE [IF NOT EXISTS] [schema_name].table_name (\n"+
+                " column_1 data_type PRIMARY KEY,\n"+
+                "   column_2 data_type NOT NULL,\n"+
+                " column_3 data_type DEFAULT 0,\n"+
+                " table_constraint\n"+
+                ") [WITHOUT ROWID];");
+    }
+
+
+    //TODO - createDB() if not exist
+
+    //TODO - cleanTable()
+    //TODO - insertIntoTable() data
+    //TODO - int returnCostByName(String productName) from database
+    //TODO - int updateCostByName(String productName) from database
+    //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
+
+
 }
