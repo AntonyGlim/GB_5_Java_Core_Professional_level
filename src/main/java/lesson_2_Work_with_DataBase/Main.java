@@ -10,14 +10,16 @@ import java.sql.Statement;
 public class Main {
     private static Connection connection;
     private static Statement statement;
+    private static String tableName = "products_table";
 
     public static void main(String[] args) {
         try {
 
             connect();
-            createTable("products_table");
-//            dropTable("products_table");
-            insertIntoTable("products_table", 1, "SemplTitel", 2);
+//            createTable(tableName);
+//            dropTable(tableName);
+            insertIntoTable(tableName, 1, "SemplTitel", 2);
+//            deleteAllFromTable(tableName);
             disconnect();
 
         } catch (ClassNotFoundException e) {
@@ -53,6 +55,11 @@ public class Main {
         statement.execute(sql);
     }
 
+    public static void dropTable(String tableName) throws SQLException {
+        String sql = String.format("DROP TABLE %s;", tableName);
+        statement.execute(sql);
+    }
+
     //TODO - insertIntoTable() data
     public static void insertIntoTable(String tableName, int prodid, String title, int cost) throws SQLException {
         String sql = String.format("INSERT INTO %s (prodid, title, cost) " +
@@ -60,15 +67,18 @@ public class Main {
         statement.execute(sql);
     }
 
-    public static void dropTable(String tableName) throws SQLException {
-        String sql = String.format("DROP TABLE %s;", tableName);
+    //TODO - cleanTable()
+    public static void deleteAllFromTable(String tableName) throws SQLException {
+        String sql = String.format("DELETE FROM %s ", tableName);
         statement.execute(sql);
     }
 
 
+
+
     //TODO - createDB() if not exist
 
-    //TODO - cleanTable()
+
     //TODO - int returnCostByName(String productName) from database
     //TODO - int updateCostByName(String productName) from database
     //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
