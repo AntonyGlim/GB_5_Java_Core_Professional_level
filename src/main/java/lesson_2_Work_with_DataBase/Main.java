@@ -18,20 +18,26 @@ public class Main {
             connect();
 //            createTable(tableName);
 //            dropTable(tableName);
-//            deleteAllFromTable(tableName);
-//            connection.setAutoCommit(false);
-//            for (int i = 1; i <= 1000; i++) {
-//                insertIntoTable(tableName, i, ("Товар_" + i), i);
-//            }
-//            connection.commit();
-//            connection.setAutoCommit(true);
+            deleteAllFromTable(tableName);
+            connection.setAutoCommit(false);
+            for (int i = 1; i <= 100; i++) {
+                insertIntoTable(tableName, i, ("Т_" + i), i);
+            }
+            connection.commit();
+            connection.setAutoCommit(true);
             System.out.println("Для выхода введите /q)");
             while (true){
                 String s = in.nextLine();
-                String[] tokens = s.split(" ", 2);
+                String[] tokens = s.split(" ", 3);
                 if (s.equalsIgnoreCase("/q")) break;
-                if (s.startsWith("цена")){
+                if (s.startsWith("ц")){
                     returnCostByName(tableName, tokens[1]);
+                }
+                if (s.startsWith("с")){
+                    updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));
+                }
+                if (s.startsWith("т")){
+                    returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
                 }
 
             }
@@ -102,19 +108,30 @@ public class Main {
         }
     }
 
-    //TODO - int updateCostByName(String productName) from database
-    public static void updateCostByName(String tableName, String titleToUbdateCost) throws SQLException {
-        String sql = String.format("UPDATE %s SET cost = '%s' WHERE title = '%s';", tableName, titleToUbdateCost);
+    //TODO - Защита, если пользователь введен ни число а строку
+    public static void updateCostByName(String tableName, String titleToUbdateCost, int newCost) throws SQLException {
+        String sql = String.format("UPDATE %s SET cost = '%d' WHERE title = '%s';", tableName, newCost, titleToUbdateCost);
+        System.out.println("Стоимость " + titleToUbdateCost + " изменена.");
         statement.execute(sql);
+    }
+
+    //TODO - Защита, если пользователь введен ни число а строку
+    public static void returnFromDiapasonByCost(String tableName, int lowerBorder, int upperBorder) throws SQLException {
+        String sql = String.format("SELECT * FROM %s WHERE cost >= %d AND cost <= %d;", tableName, lowerBorder, upperBorder);
+        ResultSet rs = statement.executeQuery(sql);
+//        if (rs.next()) {
+        System.out.println("id" + "\t" + "prodid" + "\t" + "title" + "\t" + "cost");
+        while (rs.next()){
+                System.out.println(rs.getInt(1) + "\t" + rs.getInt(2) + "\t" + rs.getString(3) + "\t" + rs.getInt(4));
+            }
+//        }
     }
 
 
 
+
+
+
+
     //TODO - createDB() if not exist
-
-
-
-    //TODO - int updateCostByName(String productName) from database
-    //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
-
 }
