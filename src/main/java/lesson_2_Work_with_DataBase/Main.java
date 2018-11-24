@@ -16,7 +16,8 @@ public class Main {
 
             connect();
             createTable("products_table");
-            dropTable("products_table");
+//            dropTable("products_table");
+            insertIntoTable("products_table", 1, "SemplTitel", 2);
             disconnect();
 
         } catch (ClassNotFoundException e) {
@@ -53,8 +54,10 @@ public class Main {
     }
 
     //TODO - insertIntoTable() data
-    public static void insertIntoTable(){
-
+    public static void insertIntoTable(String tableName, int prodid, String title, int cost) throws SQLException {
+        String sql = String.format("INSERT INTO %s (prodid, title, cost) " +
+                "VALUES (%d, '%s', %d);", tableName, prodid, title, cost);
+        statement.execute(sql);
     }
 
     public static void dropTable(String tableName) throws SQLException {
