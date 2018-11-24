@@ -25,6 +25,7 @@ public class Main {
 //            }
 //            connection.commit();
 //            connection.setAutoCommit(true);
+            System.out.println("Введите название товара. (для выхода введите /q)");
             while (true){
                 String s = in.nextLine();
                 if (s.equalsIgnoreCase("/q")) break;
@@ -89,11 +90,20 @@ public class Main {
         String sql = String.format("SELECT cost " +
                 "FROM %s WHERE title = '%s';", tableName, titleToFined);
         ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()) {
+        if (rs.next()) {
             int cost = rs.getInt("cost");
-            System.out.println(cost + "р.");
+            System.out.println("Стоимость товара: " + cost + "р.");
+        } else {
+            System.out.println("Такого товара нет.");
         }
     }
+
+    //TODO - int updateCostByName(String productName) from database
+//    public static void deleteAllFromTable(String tableName) throws SQLException {
+//        String sql = String.format("DELETE FROM %s ", tableName);
+//        statement.execute(sql);
+//    }
+
 
 
     //TODO - createDB() if not exist
