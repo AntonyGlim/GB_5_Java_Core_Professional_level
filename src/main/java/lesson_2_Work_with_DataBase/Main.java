@@ -18,8 +18,13 @@ public class Main {
             connect();
 //            createTable(tableName);
 //            dropTable(tableName);
-            insertIntoTable(tableName, 1, "SemplTitel", 2);
-//            deleteAllFromTable(tableName);
+            deleteAllFromTable(tableName);
+            connection.setAutoCommit(false);
+            for (int i = 1; i <= 1000; i++) {
+                insertIntoTable(tableName, i, ("Товар_" + i), i);
+            }
+            connection.commit();
+            connection.setAutoCommit(true);
             disconnect();
 
         } catch (ClassNotFoundException e) {
