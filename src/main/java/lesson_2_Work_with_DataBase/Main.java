@@ -2,10 +2,7 @@ package lesson_2_Work_with_DataBase;
 
 import com.sun.javafx.binding.StringFormatter;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Main {
     private static Connection connection;
@@ -25,6 +22,7 @@ public class Main {
             }
             connection.commit();
             connection.setAutoCommit(true);
+            returnCostByName(tableName, "Товар_12");
             disconnect();
 
         } catch (ClassNotFoundException e) {
@@ -78,13 +76,22 @@ public class Main {
         statement.execute(sql);
     }
 
-
+    //TODO - int returnCostByName(String productName) from database
+    public static void returnCostByName(String tableName, String titleToFined) throws SQLException {
+        String sql = String.format("SELECT cost " +
+                "FROM %s WHERE title = '%s';", tableName, titleToFined);
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            int cost = rs.getInt("cost");
+            System.out.println(cost + "р.");
+        }
+    }
 
 
     //TODO - createDB() if not exist
 
 
-    //TODO - int returnCostByName(String productName) from database
+
     //TODO - int updateCostByName(String productName) from database
     //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
 
