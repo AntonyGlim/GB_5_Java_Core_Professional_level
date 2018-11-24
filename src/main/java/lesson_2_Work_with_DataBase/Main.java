@@ -25,11 +25,15 @@ public class Main {
 //            }
 //            connection.commit();
 //            connection.setAutoCommit(true);
-            System.out.println("Введите название товара. (для выхода введите /q)");
+            System.out.println("Для выхода введите /q)");
             while (true){
                 String s = in.nextLine();
+                String[] tokens = s.split(" ", 2);
                 if (s.equalsIgnoreCase("/q")) break;
-                returnCostByName(tableName, s);
+                if (s.startsWith("цена")){
+                    returnCostByName(tableName, tokens[1]);
+                }
+
             }
 
             disconnect();
@@ -99,10 +103,10 @@ public class Main {
     }
 
     //TODO - int updateCostByName(String productName) from database
-//    public static void deleteAllFromTable(String tableName) throws SQLException {
-//        String sql = String.format("DELETE FROM %s ", tableName);
-//        statement.execute(sql);
-//    }
+    public static void updateCostByName(String tableName, String titleToUbdateCost) throws SQLException {
+        String sql = String.format("UPDATE %s SET cost = '%s' WHERE title = '%s';", tableName, titleToUbdateCost);
+        statement.execute(sql);
+    }
 
 
 
