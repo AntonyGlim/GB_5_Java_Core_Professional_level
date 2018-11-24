@@ -1,5 +1,7 @@
 package lesson_2_Work_with_DataBase;
 
+import com.sun.javafx.binding.StringFormatter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -40,20 +42,29 @@ public class Main {
     }
 
     //TODO - createTable() if not exist
-
-    public static void createTable() throws SQLException {
-        statement.execute("CREATE TABLE IF NOT EXISTS products_table (\n"+
+    public static void createTable(String tableName) throws SQLException {
+        String sql = String.format("CREATE TABLE IF NOT EXISTS %s (\n"+
                 " id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n"+
                 " prodid INTEGER NOT NULL,\n"+
                 " title TEXT NOT NULL,\n"+
-                " cost INTEGER NOT NULL);");
+                " cost INTEGER NOT NULL);", tableName);
+        statement.execute("sql");
+    }
+
+    //TODO - insertIntoTable() data
+    public static void insertIntoTable(){
+
+    }
+
+    public static void dropTable(String tableName) throws SQLException {
+        String sql = String.format("DROP TABLE %s;", tableName);
+        statement.execute("sql");
     }
 
 
     //TODO - createDB() if not exist
 
     //TODO - cleanTable()
-    //TODO - insertIntoTable() data
     //TODO - int returnCostByName(String productName) from database
     //TODO - int updateCostByName(String productName) from database
     //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
