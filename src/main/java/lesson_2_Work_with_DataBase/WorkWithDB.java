@@ -24,5 +24,13 @@ public class WorkWithDB {
     //TODO - int returnCostByName(String productName) from database
     //TODO - int updateCostByName(String productName) from database
     //TODO - returnFromDiapason(String columnName, int lowerBorder, int upperBorder) from database
+
     //TODO - disconnect();
+    public static void disconnect(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
