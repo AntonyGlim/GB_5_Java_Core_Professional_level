@@ -15,7 +15,8 @@ public class Main {
         try {
 
             connect();
-            createTable();
+            createTable("products_table");
+            dropTable("products_table");
             disconnect();
 
         } catch (ClassNotFoundException e) {
@@ -48,7 +49,7 @@ public class Main {
                 " prodid INTEGER NOT NULL,\n"+
                 " title TEXT NOT NULL,\n"+
                 " cost INTEGER NOT NULL);", tableName);
-        statement.execute("sql");
+        statement.execute(sql);
     }
 
     //TODO - insertIntoTable() data
@@ -58,7 +59,7 @@ public class Main {
 
     public static void dropTable(String tableName) throws SQLException {
         String sql = String.format("DROP TABLE %s;", tableName);
-        statement.execute("sql");
+        statement.execute(sql);
     }
 
 
