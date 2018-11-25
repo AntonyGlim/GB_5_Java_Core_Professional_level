@@ -46,7 +46,7 @@ public class Main {
 
         //Заполнение БД элементами
             connection.setAutoCommit(false);                                                            //Отключаем автокомиты в БД, чтобы сократить время работы с ней
-            for (int i = 1; i <= 10000; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}          //Записываем в таблицу значения
+            for (int i = 1; i <= 10000; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}        //Записываем в таблицу значения
             connection.commit();                                                                        //Принудительно вручную делаем коммит для уверенности
             connection.setAutoCommit(true);                                                             //Включаем обратно автокомит
 
@@ -62,7 +62,7 @@ public class Main {
                     break;
                 }
                 if (s.equalsIgnoreCase("/ui")){
-                    userInformation();                                                               //Метод выведет в консоль описание основных команд программы
+                    userInformation();                                                                  //Метод выведет в консоль описание основных команд программы
                 }
                 if (s.startsWith("цена")){
                         returnCostByName(tableName, tokens[1]);                                         //Метод выведет в консоль стоимость товара по введенному имени
