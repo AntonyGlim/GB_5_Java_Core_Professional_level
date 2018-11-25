@@ -1,43 +1,75 @@
+/**
+ * Сформировать таблицу товаров (id, prodid, title, cost) запросом из Java-приложения:
+ * id – порядковый номер записи, первичный ключ;
+ * prodid – уникальный номер товара;
+ * title – название товара;
+ * cost – стоимость.
+ *
+ * При запуске приложения очистить таблицу и заполнить 10000 товаров вида:
+ * id_товара 1 товар1 10
+ * id_товара 2 товар2 20
+ * id_товара 3 товар3 30
+ * id_товара 10000 товар10000 100000
+ *
+ * Написать консольное приложение, которое позволяет узнать цену товара по его имени, либо
+ * вывести сообщение «Такого товара нет», если товар не обнаружен в базе. Консольная
+ * команда: «цена товар545».
+ *
+ * Добавить возможность изменения цены товара. Указываем имя товара и новую цену.
+ * Консольная команда: «сменитьцену товар10 10000».
+ *
+ * Вывести товары в заданном ценовом диапазоне. Консольная команда: «товарыпоцене 100
+ * 600»
+ */
 package lesson_2_Work_with_DataBase;
-
-import com.sun.javafx.binding.StringFormatter;
 
 import java.sql.*;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
     private static Connection connection;
     private static Statement statement;
-    private static String tableName = "products_table";
-
+    private static String tableName = "products_table";             //Имя таблицы вынесенео, для удобства
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         try {
 
-            connect();
-//            createTable(tableName);
-//            dropTable(tableName);
-            deleteAllFromTable(tableName);
-            connection.setAutoCommit(false);
-            for (int i = 1; i <= 100; i++) {
-                insertIntoTable(tableName, i, ("Т_" + i), i);
-            }
-            connection.commit();
-            connection.setAutoCommit(true);
-            System.out.println("Для выхода введите /q)");
+            connect();                                                                              //Подключаемся к БД
+            dropTable(tableName);                                                                   //Удаляем таблицу из БД (если существует)
+            createTable(tableName);                                                                 //Создаем таблицу (если не существует)
+            deleteAllFromTable(tableName);                                                          //Удаляем содержимое таблицы (если таблица имела данные)
+
+            connection.setAutoCommit(false);                                                        //Отключаем автокомиты в БД, чтобы сократить время работы с ней
+            for (int i = 1; i <= 100; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}      //Записываем в таблицу значения
+            connection.commit();                                                                    //Принудительно вручную делаем коммит для уверенности
+            connection.setAutoCommit(true);                                                         //Включаем обратно автокомит
+
+            //Блок основной работы
+            System.out.println("Для получения информации введите \"/i\"");
             while (true){
                 String s = in.nextLine();
-                String[] tokens = s.split(" ", 3);
+                String[] tokens = s.split(" ", 4);
                 if (s.equalsIgnoreCase("/q")) break;
+                if (s.equalsIgnoreCase("/i")){ programInformation();}
                 if (s.startsWith("ц")){
                     returnCostByName(tableName, tokens[1]);
                 }
                 if (s.startsWith("с")){
-                    updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));
+                    if(isValidNumber(tokens[2])){
+                        updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));
+                    } else {
+                        System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
+                    }
                 }
                 if (s.startsWith("т")){
-                    returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
+                    if(isValidNumber(tokens[1]) && isValidNumber(tokens[2])){
+                        returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
+                    } else {
+                        System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
+                    }
                 }
 
             }
@@ -78,7 +110,7 @@ public class Main {
     }
 
     public static void dropTable(String tableName) throws SQLException {
-        String sql = String.format("DROP TABLE %s;", tableName);
+        String sql = String.format("DROP TABLE IF EXISTS %s;", tableName);
         statement.execute(sql);
     }
 
@@ -111,27 +143,39 @@ public class Main {
     //TODO - Защита, если пользователь введен ни число а строку
     public static void updateCostByName(String tableName, String titleToUbdateCost, int newCost) throws SQLException {
         String sql = String.format("UPDATE %s SET cost = '%d' WHERE title = '%s';", tableName, newCost, titleToUbdateCost);
-        System.out.println("Стоимость " + titleToUbdateCost + " изменена.");
-        statement.execute(sql);
+        int count = statement.executeUpdate(sql);
+        if (count > 0){
+            System.out.println("Стоимость " + titleToUbdateCost + " изменена.");
+        } else {
+            System.out.println("К сожалению, обновления не произошло! Проверьте имя товара.");
+        }
     }
 
     //TODO - Защита, если пользователь введен ни число а строку
     public static void returnFromDiapasonByCost(String tableName, int lowerBorder, int upperBorder) throws SQLException {
         String sql = String.format("SELECT * FROM %s WHERE cost >= %d AND cost <= %d;", tableName, lowerBorder, upperBorder);
         ResultSet rs = statement.executeQuery(sql);
-//        if (rs.next()) {
         System.out.println("id" + "\t" + "prodid" + "\t" + "title" + "\t" + "cost");
         while (rs.next()){
-                System.out.println(rs.getInt(1) + "\t" + rs.getInt(2) + "\t" + rs.getString(3) + "\t" + rs.getInt(4));
-            }
-//        }
+            System.out.println(rs.getInt(1) + "\t" + rs.getInt(2) + "\t" + rs.getString(3) + "\t" + rs.getInt(4));
+        }
     }
 
+    private static boolean isValidNumber(String str){
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(str);
+        return m.matches();
+    }
 
-
-
-
-
-
-    //TODO - createDB() if not exist
+    private static void programInformation(){
+        System.out.println("Ознакомтесь с информацией для работы: ");
+        System.out.println("1.Чтобы узнать цену товара, введите ключевое слово \"цена\" и имя товара через пробел," +
+                "\nзатем нажмите Enter. Пример: \"цена Товар_456\";");
+        System.out.println("2.Чтобы изменить цену товара, введите ключевое слово \"сменитьцену\", имя товара через пробел " +
+                "\nи новую цену товара, затем нажмите Enter. Пример: \"сменитьцену Товар_456 55\"");
+        System.out.println("3.Чтобы получить список товаров из определенного ценового диапазона, " +
+                "\nвведите ключевое слово \"товарыпоцене\", минимальную и максимальную цену товара, " +
+                "\nзатем нажмите Enter. Пример: \"товарыпоцене 100 200\"");
+        System.out.println("4. Для выхода введите \"/q\")");
+    }
 }
