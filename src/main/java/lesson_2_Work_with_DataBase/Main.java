@@ -155,9 +155,15 @@ public class Main {
     public static void returnFromDiapasonByCost(String tableName, int lowerBorder, int upperBorder) throws SQLException {
         String sql = String.format("SELECT * FROM %s WHERE cost >= %d AND cost <= %d;", tableName, lowerBorder, upperBorder);
         ResultSet rs = statement.executeQuery(sql);
-        System.out.println("id" + "\t" + "prodid" + "\t" + "title" + "\t" + "cost");
+        System.out.printf("%6s", "id");
+        System.out.printf("%8s", "prodid");
+        System.out.printf("%12s", "title");
+        System.out.printf("%10s", "cost" + "\n");
         while (rs.next()){
-            System.out.println(rs.getInt(1) + "\t" + rs.getInt(2) + "\t" + rs.getString(3) + "\t" + rs.getInt(4));
+            System.out.printf("%6d", rs.getInt(1));
+            System.out.printf("%8d", rs.getInt(2));
+            System.out.printf("%12s", rs.getString(3));
+            System.out.printf("%10s", (rs.getInt(4) + "\n"));
         }
     }
 
