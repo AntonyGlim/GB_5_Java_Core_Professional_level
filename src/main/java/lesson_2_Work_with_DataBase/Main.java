@@ -37,43 +37,49 @@ public class Main {
         Scanner in = new Scanner(System.in);
         try {
 
+        //Подготовка БД
             connect();                                                                              //Подключаемся к БД
             dropTable(tableName);                                                                   //Удаляем таблицу из БД (если существует)
             createTable(tableName);                                                                 //Создаем таблицу (если не существует)
             deleteAllFromTable(tableName);                                                          //Удаляем содержимое таблицы (если таблица имела данные)
 
+        //Заполнение БД элементами
             connection.setAutoCommit(false);                                                        //Отключаем автокомиты в БД, чтобы сократить время работы с ней
             for (int i = 1; i <= 100; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}      //Записываем в таблицу значения
             connection.commit();                                                                    //Принудительно вручную делаем коммит для уверенности
             connection.setAutoCommit(true);                                                         //Включаем обратно автокомит
 
-            //Блок основной работы
+        //Блок основной работы
             System.out.println("Для получения информации введите \"/i\"");
             while (true){
-                String s = in.nextLine();
+                String s = in.nextLine();                       //Читаем данные из консоли
                 String[] tokens = s.split(" ", 4);
-                if (s.equalsIgnoreCase("/q")) break;
-                if (s.equalsIgnoreCase("/i")){ programInformation();}
-                if (s.startsWith("ц")){
+                if (s.equalsIgnoreCase("/q")){
+                    break;
+                }
+                if (s.equalsIgnoreCase("/i")){
+                    programInformation();
+                }
+                if (s.startsWith("цена")){
                     returnCostByName(tableName, tokens[1]);
                 }
-                if (s.startsWith("с")){
+                if (s.startsWith("сменитьцену")){
                     if(isValidNumber(tokens[2])){
                         updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));
                     } else {
                         System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
                     }
                 }
-                if (s.startsWith("т")){
+                if (s.startsWith("товарыпоцене")){
                     if(isValidNumber(tokens[1]) && isValidNumber(tokens[2])){
                         returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
                     } else {
                         System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
                     }
                 }
-
             }
 
+        //Высвобождение ресурсов
             disconnect();
 
         } catch (ClassNotFoundException e) {
