@@ -32,12 +32,12 @@ public class Main {
     private static Connection connection;
     private static Statement statement;
     private static String tableName = "products_table";                                                 //Имя таблицы вынесенео, для удобства
-    private static String[] tokens = {"б", "б", "б", "б"};
+    private static String[] tokens = {" ", " ", " ", " "};                                              //Костыль, который защищает программу от вылета, если пользователь введет не правильные запросы
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         try {
-            
+
         //Подготовка БД
             connect();                                                                                  //Подключаемся к БД
             dropTable(tableName);                                                                       //Удаляем таблицу из БД (если существует)
@@ -54,7 +54,10 @@ public class Main {
             System.out.println("Для получения информации введите \"/i\"");
             while (true){
                 String s = in.nextLine();                                                               //Читаем данные из консоли
-                tokens = s.split(" ", 4);                                                      //Устанавливаем лимит 4 для удобства работы с командами, остальное отбросим (защита от инъекций)
+                String[] tok = s.split(" ", 4);                                                         //Устанавливаем лимит 4 для удобства работы с командами, остальное отбросим (защита от инъекций)
+                for (int i = 0; i < tok.length ; i++) {                                                 //Суть костыля в том, что массив, который мы передаем в качестве параметров запроса всегда имеет какие-то значения
+                    tokens[i] = tok[i];
+                }
                 if (s.equalsIgnoreCase("/q")){                                                          //Ветка для выхода из программы
                     break;
                 }
@@ -62,25 +65,24 @@ public class Main {
                     programInformation();                                                               //Метод выведет в консоль описание основных команд программы
                 }
                 if (s.startsWith("цена")){
-                    if(isValidNumber(tokens[1])){
-                        returnCostByName(tableName, tokens[1]);                                             //Метод выведет в консоль стоимость товара по введенному имени
-                    } else {
-                        System.out.println("Запрос выполнен не корректно");
-                    }
+                        returnCostByName(tableName, tokens[1]);                                         //Метод выведет в консоль стоимость товара по введенному имени
                 }
                 if (s.startsWith("сменитьцену")){
                     if(isValidNumber(tokens[2])){                                                       //Пользователь вводит число?
                         updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));            //Метод заменит цену товара в БД
                     } else {                                                                            //Если пытаются ввести не число
-                        System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
+                        System.out.println("Запрос выполнен не корректно");
                     }
                 }
                 if (s.startsWith("товарыпоцене")){
                     if(isValidNumber(tokens[1]) && isValidNumber(tokens[2])){
                         returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));      //Метод выведет в консоль список товаров в отыформатированном виде
                     } else {
-                        System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");   //Если пытаются ввести не число
+                        System.out.println("Запрос выполнен не корректно");                             //Если пытаются ввести не число
                     }
+                }
+                for (int i = 0; i < tokens.length ; i++) {                                              //Обнуляем костыльный массив
+                    tokens[i] = " ";
                 }
             }
 
