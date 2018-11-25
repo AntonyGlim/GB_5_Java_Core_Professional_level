@@ -46,12 +46,12 @@ public class Main {
 
         //Заполнение БД элементами
             connection.setAutoCommit(false);                                                            //Отключаем автокомиты в БД, чтобы сократить время работы с ней
-            for (int i = 1; i <= 100; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}          //Записываем в таблицу значения
+            for (int i = 1; i <= 10000; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}          //Записываем в таблицу значения
             connection.commit();                                                                        //Принудительно вручную делаем коммит для уверенности
             connection.setAutoCommit(true);                                                             //Включаем обратно автокомит
 
         //Блок основной работы
-            System.out.println("Для получения информации введите \"/i\"");
+            System.out.println("Для получения информации введите \"/ui\"");
             while (true){
                 String s = in.nextLine();                                                               //Читаем данные из консоли
                 String[] tok = s.split(" ", 4);                                                         //Устанавливаем лимит 4 для удобства работы с командами, остальное отбросим (защита от инъекций)
@@ -61,8 +61,8 @@ public class Main {
                 if (s.equalsIgnoreCase("/q")){                                                          //Ветка для выхода из программы
                     break;
                 }
-                if (s.equalsIgnoreCase("/i")){
-                    programInformation();                                                               //Метод выведет в консоль описание основных команд программы
+                if (s.equalsIgnoreCase("/ui")){
+                    userInformation();                                                               //Метод выведет в консоль описание основных команд программы
                 }
                 if (s.startsWith("цена")){
                         returnCostByName(tableName, tokens[1]);                                         //Метод выведет в консоль стоимость товара по введенному имени
@@ -240,7 +240,7 @@ public class Main {
     /**
      * Метод выведет на экран информацию о командах в приложении
      */
-    private static void programInformation(){
+    private static void userInformation(){
         System.out.println("Ознакомтесь с информацией для работы: ");
         System.out.println("1.Чтобы узнать цену товара, введите ключевое слово \"цена\" и имя товара через пробел," +
                 "\nзатем нажмите Enter. Пример: \"цена Товар_456\";");
