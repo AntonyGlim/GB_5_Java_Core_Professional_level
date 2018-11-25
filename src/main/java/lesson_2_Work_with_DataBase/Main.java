@@ -32,11 +32,12 @@ public class Main {
     private static Connection connection;
     private static Statement statement;
     private static String tableName = "products_table";                                                 //Имя таблицы вынесенео, для удобства
+    private static String[] tokens = {"б", "б", "б", "б"};
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         try {
-
+            
         //Подготовка БД
             connect();                                                                                  //Подключаемся к БД
             dropTable(tableName);                                                                       //Удаляем таблицу из БД (если существует)
@@ -53,7 +54,7 @@ public class Main {
             System.out.println("Для получения информации введите \"/i\"");
             while (true){
                 String s = in.nextLine();                                                               //Читаем данные из консоли
-                String[] tokens = s.split(" ", 4);                                                      //Устанавливаем лимит 4 для удобства работы с командами, остальное отбросим (защита от инъекций)
+                tokens = s.split(" ", 4);                                                      //Устанавливаем лимит 4 для удобства работы с командами, остальное отбросим (защита от инъекций)
                 if (s.equalsIgnoreCase("/q")){                                                          //Ветка для выхода из программы
                     break;
                 }
@@ -61,7 +62,11 @@ public class Main {
                     programInformation();                                                               //Метод выведет в консоль описание основных команд программы
                 }
                 if (s.startsWith("цена")){
-                    returnCostByName(tableName, tokens[1]);                                             //Метод выведет в консоль стоимость товара по введенному имени
+                    if(isValidNumber(tokens[1])){
+                        returnCostByName(tableName, tokens[1]);                                             //Метод выведет в консоль стоимость товара по введенному имени
+                    } else {
+                        System.out.println("Запрос выполнен не корректно");
+                    }
                 }
                 if (s.startsWith("сменитьцену")){
                     if(isValidNumber(tokens[2])){                                                       //Пользователь вводит число?
@@ -219,12 +224,20 @@ public class Main {
         }
     }
 
+    /**
+     * Метод проверит, является-ли строка введенная пользователем положительным числом
+     * @param str
+     * @return
+     */
     private static boolean isValidNumber(String str){
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(str);
         return m.matches();
     }
 
+    /**
+     * Метод выведет на экран информацию о командах в приложении
+     */
     private static void programInformation(){
         System.out.println("Ознакомтесь с информацией для работы: ");
         System.out.println("1.Чтобы узнать цену товара, введите ключевое слово \"цена\" и имя товара через пробел," +
