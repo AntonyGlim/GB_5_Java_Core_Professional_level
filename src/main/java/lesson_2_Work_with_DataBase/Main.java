@@ -31,56 +31,56 @@ import java.util.regex.Pattern;
 public class Main {
     private static Connection connection;
     private static Statement statement;
-    private static String tableName = "products_table";             //Имя таблицы вынесенео, для удобства
+    private static String tableName = "products_table";                                                 //Имя таблицы вынесенео, для удобства
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         try {
 
         //Подготовка БД
-            connect();                                                                              //Подключаемся к БД
-            dropTable(tableName);                                                                   //Удаляем таблицу из БД (если существует)
-            createTable(tableName);                                                                 //Создаем таблицу (если не существует)
-            deleteAllFromTable(tableName);                                                          //Удаляем содержимое таблицы (если таблица имела данные)
+            connect();                                                                                  //Подключаемся к БД
+            dropTable(tableName);                                                                       //Удаляем таблицу из БД (если существует)
+            createTable(tableName);                                                                     //Создаем таблицу (если не существует)
+            deleteAllFromTable(tableName);                                                              //Удаляем содержимое таблицы (если таблица имела данные)
 
         //Заполнение БД элементами
-            connection.setAutoCommit(false);                                                        //Отключаем автокомиты в БД, чтобы сократить время работы с ней
-            for (int i = 1; i <= 100; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}      //Записываем в таблицу значения
-            connection.commit();                                                                    //Принудительно вручную делаем коммит для уверенности
-            connection.setAutoCommit(true);                                                         //Включаем обратно автокомит
+            connection.setAutoCommit(false);                                                            //Отключаем автокомиты в БД, чтобы сократить время работы с ней
+            for (int i = 1; i <= 100; i++){ insertIntoTable(tableName, i, ("Товар_" + i), i);}          //Записываем в таблицу значения
+            connection.commit();                                                                        //Принудительно вручную делаем коммит для уверенности
+            connection.setAutoCommit(true);                                                             //Включаем обратно автокомит
 
         //Блок основной работы
             System.out.println("Для получения информации введите \"/i\"");
             while (true){
-                String s = in.nextLine();                       //Читаем данные из консоли
-                String[] tokens = s.split(" ", 4);
-                if (s.equalsIgnoreCase("/q")){
+                String s = in.nextLine();                                                               //Читаем данные из консоли
+                String[] tokens = s.split(" ", 4);                                                      //Устанавливаем лимит 4 для удобства работы с командами, остальное отбросим (защита от инъекций)
+                if (s.equalsIgnoreCase("/q")){                                                          //Ветка для выхода из программы
                     break;
                 }
                 if (s.equalsIgnoreCase("/i")){
-                    programInformation();
+                    programInformation();                                                               //Метод выведет в консоль описание основных команд программы
                 }
                 if (s.startsWith("цена")){
-                    returnCostByName(tableName, tokens[1]);
+                    returnCostByName(tableName, tokens[1]);                                             //Метод выведет в консоль стоимость товара по введенному имени
                 }
                 if (s.startsWith("сменитьцену")){
-                    if(isValidNumber(tokens[2])){
-                        updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));
-                    } else {
+                    if(isValidNumber(tokens[2])){                                                       //Пользователь вводит число?
+                        updateCostByName(tableName, tokens[1], Integer.parseInt(tokens[2]));            //Метод заменит цену товара в БД
+                    } else {                                                                            //Если пытаются ввести не число
                         System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
                     }
                 }
                 if (s.startsWith("товарыпоцене")){
                     if(isValidNumber(tokens[1]) && isValidNumber(tokens[2])){
-                        returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
+                        returnFromDiapasonByCost(tableName, Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));      //Метод выведет в консоль список товаров в отыформатированном виде
                     } else {
-                        System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");
+                        System.out.println("Вы пытаетесь ввести строку там, где должно быть число.");   //Если пытаются ввести не число
                     }
                 }
             }
 
         //Высвобождение ресурсов
-            disconnect();
+            disconnect();                                                                               //Закрываем соединение с БД
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -89,14 +89,20 @@ public class Main {
         }
     }
 
-    //TODO - connect();
+    /**
+     * Устанавливаем соединение с БД
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:src/main/java/lesson_2_Work_with_DataBase/lesson_2_products.db");
         statement = connection.createStatement();
     }
 
-    //TODO - disconnect();
+    /**
+     * Закрываем соединение с БД
+     */
     public static void disconnect(){
         try {
             connection.close();
@@ -105,7 +111,11 @@ public class Main {
         }
     }
 
-    //TODO - createTable() if not exist
+    /**
+     * Метод создает новую таблицу в БД (если она еще не существует)
+     * @param tableName
+     * @throws SQLException
+     */
     public static void createTable(String tableName) throws SQLException {
         String sql = String.format("CREATE TABLE IF NOT EXISTS %s (\n"+
                 " id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,\n"+
@@ -115,25 +125,48 @@ public class Main {
         statement.execute(sql);
     }
 
+    /**
+     * Метод удаляет таблицу из БД (если она существует) - метод для отладки
+     * @param tableName
+     * @throws SQLException
+     */
     public static void dropTable(String tableName) throws SQLException {
         String sql = String.format("DROP TABLE IF EXISTS %s;", tableName);
         statement.execute(sql);
     }
 
-    //TODO - insertIntoTable() data
+    /**
+     * Метод добавляет запись в таблицу
+     * @param tableName
+     * @param prodid - столбец 2
+     * @param title - столбец 3
+     * @param cost - столбец 4
+     * @throws SQLException
+     */
     public static void insertIntoTable(String tableName, int prodid, String title, int cost) throws SQLException {
         String sql = String.format("INSERT INTO %s (prodid, title, cost) " +
                 "VALUES (%d, '%s', %d);", tableName, prodid, title, cost);
         statement.execute(sql);
     }
 
-    //TODO - cleanTable()
+    /**
+     * Метод удаляет все данные из таблицы - метод для отладки
+     * @param tableName
+     * @throws SQLException
+     */
     public static void deleteAllFromTable(String tableName) throws SQLException {
         String sql = String.format("DELETE FROM %s ", tableName);
         statement.execute(sql);
     }
 
-    //TODO - int returnCostByName(String productName) from database
+    /**
+     * Метод возвращает стоимость товара по его имени.
+     * Если ResultSet не будет иметь хотябы одного элемента
+     * Пользователь увидит сообщение, что товара с таким именем нет
+     * @param tableName
+     * @param titleToFined
+     * @throws SQLException
+     */
     public static void returnCostByName(String tableName, String titleToFined) throws SQLException {
         String sql = String.format("SELECT cost " +
                 "FROM %s WHERE title = '%s';", tableName, titleToFined);
@@ -146,7 +179,14 @@ public class Main {
         }
     }
 
-    //TODO - Защита, если пользователь введен ни число а строку
+    /**
+     * Метод обновит значение цены по имени.
+     * Если пользователь введет не существующее имя - вернется предупреждение
+     * @param tableName
+     * @param titleToUbdateCost
+     * @param newCost
+     * @throws SQLException
+     */
     public static void updateCostByName(String tableName, String titleToUbdateCost, int newCost) throws SQLException {
         String sql = String.format("UPDATE %s SET cost = '%d' WHERE title = '%s';", tableName, newCost, titleToUbdateCost);
         int count = statement.executeUpdate(sql);
@@ -157,11 +197,17 @@ public class Main {
         }
     }
 
-    //TODO - Защита, если пользователь введен ни число а строку
+    /**
+     * Метод вернет строки из БД цена которых будет соответствовать ценовому диапазону.
+     * @param tableName
+     * @param lowerBorder - минимальная цена
+     * @param upperBorder - максимальная цена
+     * @throws SQLException
+     */
     public static void returnFromDiapasonByCost(String tableName, int lowerBorder, int upperBorder) throws SQLException {
         String sql = String.format("SELECT * FROM %s WHERE cost >= %d AND cost <= %d;", tableName, lowerBorder, upperBorder);
         ResultSet rs = statement.executeQuery(sql);
-        System.out.printf("%6s", "id");
+        System.out.printf("%6s", "id");                             //printf - для удобства восприятия информации
         System.out.printf("%8s", "prodid");
         System.out.printf("%12s", "title");
         System.out.printf("%10s", "cost" + "\n");
