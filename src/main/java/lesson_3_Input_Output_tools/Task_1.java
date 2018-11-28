@@ -13,25 +13,9 @@ public class Task_1 {
     final static int arrSize = 50;
 
     public static void main(String[] args) {
-        byte[] byteArr = createNewByteArr(arrSize);
         FileInputStream fis = null;
-        FileOutputStream fos = null;
 
-        try {
-            fos = new FileOutputStream(pathAndName);   //Файл создасться, если до этого не существовал
-            fos.write(byteArr);
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        createFileWithBytes(pathAndName, arrSize);
 
         try {
             byte[] secondArr = new byte[arrSize];
@@ -69,4 +53,25 @@ public class Task_1 {
             System.out.print(arr[i] + " ");
         }
     }
+
+    public static void createFileWithBytes (String pathAndName, int arrSize){
+        byte[] byteArr = createNewByteArr(arrSize);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(pathAndName);   //Файл создасться, если до этого не существовал
+            fos.write(byteArr);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
