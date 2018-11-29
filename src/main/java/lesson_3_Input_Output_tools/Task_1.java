@@ -9,30 +9,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Task_1 {
-    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/task_1_2/task_1_file.txt";
+    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_1_file.txt";
     final static int arrSize = 500;
 
     public static void main(String[] args) {
-        FileInputStream fis = null;
+
         byte[] byteArr = createNewByteArr(arrSize);
         writeArrInFile(pathAndName, byteArr);
-        try {
-            byte[] secondArr = new byte[arrSize];
-            fis = new FileInputStream(pathAndName);
-            int count = fis.read(secondArr);
-            System.out.println("Размер массива: " + count);
-            printByteArr(secondArr);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        byte[] secondArr = readFromFileInArray();
+        printByteArr(secondArr);
+
     }
 
     public static byte[] createNewByteArr (int arrSize){
@@ -56,9 +42,11 @@ public class Task_1 {
     public static void writeArrInFile (String pathAndName, byte[] byteArr){
         FileOutputStream fos = null;
         try {
+
             int count = 0;
             fos = new FileOutputStream(pathAndName);   //Файл создасться, если до этого не существовал
             fos.write(byteArr);
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -70,6 +58,29 @@ public class Task_1 {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static byte[] readFromFileInArray (){
+        FileInputStream fis = null;
+        byte[] arr = new byte[arrSize];
+        try {
+
+            fis = new FileInputStream(pathAndName);
+            int count = fis.read(arr);
+            System.out.println("Размер массива: " + count);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return arr;
     }
 
 }
