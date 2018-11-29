@@ -48,6 +48,7 @@ public class Task_2 {
                 System.out.println();
             }
         }
+        System.out.println("Всего прочитано байт: " + count);
         sqis.close();
     }
 }
