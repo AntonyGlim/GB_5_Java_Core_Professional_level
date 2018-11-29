@@ -40,14 +40,17 @@ public class Task_2 {
             }
         }
 
-    //Читаем последовательно файлы и пишем их в единый файл
+    //Читаем последовательно файлы и пишем их в единый файл (для контроля выводим в консоль)
         SequenceInputStream sqis = new SequenceInputStream(Collections.enumeration(ali));
         int x;
         int count = 0;
+        FileOutputStream fos = new FileOutputStream(returnDirectoryAndName(1000));
         while ((x = sqis.read()) != -1){
+            fos.write(x);
             System.out.print((char) x);
             count ++;
             if (count % 100 == 0 ){
+                fos.write('\n');
                 System.out.println();
             }
         }
@@ -56,7 +59,7 @@ public class Task_2 {
     }
 
     /**
-     * 
+     *
      * @param serialNumber
      * @return
      */
