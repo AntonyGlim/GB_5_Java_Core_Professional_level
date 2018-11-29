@@ -49,7 +49,7 @@ public class Task_1 {
             if (i % 50 == 0 && i != 0){
                 System.out.println();
             }
-            System.out.print((char) arr[i] + " ");
+            System.out.print((char) arr[i]);
         }
     }
 
