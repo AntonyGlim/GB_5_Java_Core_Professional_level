@@ -14,7 +14,6 @@ public class Task_1 {
 
     public static void main(String[] args) {
         FileInputStream fis = null;
-
         createFileWithBytes(pathAndName, arrSize);
 
         try {
