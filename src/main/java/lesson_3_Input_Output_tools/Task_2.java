@@ -14,45 +14,41 @@ import static lesson_3_Input_Output_tools.Task_1.writeArrInFile;
 
 public class Task_2 {
 
-    private static ArrayList<String> pathNameslist;
+    private static String[] pathNameslist;
     final static int arrSize = 100;
+    final static int filesCount = 5;
 
     public static void main(String[] args) throws IOException {
 
-        pathNameslist = new ArrayList<String>();
-        pathNameslist.add("src/main/java/lesson_3_Input_Output_tools/Task_2_file_1.txt");
-        pathNameslist.add("src/main/java/lesson_3_Input_Output_tools/Task_2_file_2.txt");
-        pathNameslist.add("src/main/java/lesson_3_Input_Output_tools/Task_2_file_3.txt");
-        pathNameslist.add("src/main/java/lesson_3_Input_Output_tools/Task_2_file_4.txt");
-        pathNameslist.add("src/main/java/lesson_3_Input_Output_tools/Task_2_file_5.txt");
-
-        byte[] sumbols = {'a', 'b', 'c', 'd', 'f'};
-        for (int i = 0; i < pathNameslist.size(); i++) {
-            byte[] byteArr = createNewByteArr(arrSize, (byte) 'g');
-            writeArrInFile(pathNameslist.get(i), byteArr);
-        }
-        ArrayList<InputStream> ali = new ArrayList<InputStream>();
-        try {
-            ali.add(new FileInputStream(pathAndName_1));
-            ali.add(new FileInputStream(pathAndName_2));
-            ali.add(new FileInputStream(pathAndName_3));
-            ali.add(new FileInputStream(pathAndName_4));
-            ali.add(new FileInputStream(pathAndName_5));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        pathNameslist = new String[filesCount];                                                                         //Имена файлов пропишем в отдельный массив, чтобы с ним работать
+        byte[] symbols = {'a', 'b', 'c', 'd', 'f'};                                                                     //Чтобы в файлах были записаны разные символы
+        for (int i = 0; i < pathNameslist.length; i++) {
+            pathNameslist[i] = String.format("src/main/java/lesson_3_Input_Output_tools/Task_2_file_%s.txt", (i + 1));  //Заполняем массив именами и директориями
+            writeArrInFile(pathNameslist[i], createNewByteArr(arrSize, symbols[i]));                                    //Пишем в определенные директории массивы с разными байтами, массивы формируем в аргументах метода
         }
 
-        SequenceInputStream sqis = new SequenceInputStream(Collections.enumeration(ali));
-        int x;
-        int count = 0;
-        while ((x = sqis.read()) != -1){
-            System.out.print((char) x);
-            count ++;
-            if (count % 100 == 0 ){
-                System.out.println();
-            }
-        }
-        System.out.println("Всего прочитано байт: " + count);
-        sqis.close();
+//        ArrayList<InputStream> ali = new ArrayList<InputStream>();
+//        try {
+//            ali.add(new FileInputStream(pathAndName_1));
+//            ali.add(new FileInputStream(pathAndName_2));
+//            ali.add(new FileInputStream(pathAndName_3));
+//            ali.add(new FileInputStream(pathAndName_4));
+//            ali.add(new FileInputStream(pathAndName_5));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        SequenceInputStream sqis = new SequenceInputStream(Collections.enumeration(ali));
+//        int x;
+//        int count = 0;
+//        while ((x = sqis.read()) != -1){
+//            System.out.print((char) x);
+//            count ++;
+//            if (count % 100 == 0 ){
+//                System.out.println();
+//            }
+//        }
+//        System.out.println("Всего прочитано байт: " + count);
+//        sqis.close();
     }
 }
