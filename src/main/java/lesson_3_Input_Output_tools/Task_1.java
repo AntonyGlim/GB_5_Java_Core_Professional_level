@@ -10,12 +10,12 @@ import java.io.IOException;
 
 public class Task_1 {
     final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/task_1_2/task_1_file.txt";
-    final static int arrSize = 50;
+    final static int arrSize = 500;
 
     public static void main(String[] args) {
         FileInputStream fis = null;
-        createFileWithBytes(pathAndName, arrSize);
-
+        byte[] byteArr = createNewByteArr(arrSize);
+        writeArrInFile(pathAndName, byteArr);
         try {
             byte[] secondArr = new byte[arrSize];
             fis = new FileInputStream(pathAndName);
@@ -53,10 +53,10 @@ public class Task_1 {
         }
     }
 
-    public static void createFileWithBytes (String pathAndName, int arrSize){
-        byte[] byteArr = createNewByteArr(arrSize);
+    public static void writeArrInFile (String pathAndName, byte[] byteArr){
         FileOutputStream fos = null;
         try {
+            int count = 0;
             fos = new FileOutputStream(pathAndName);   //Файл создасться, если до этого не существовал
             fos.write(byteArr);
         } catch (FileNotFoundException e) {
@@ -71,6 +71,5 @@ public class Task_1 {
             }
         }
     }
-
 
 }
