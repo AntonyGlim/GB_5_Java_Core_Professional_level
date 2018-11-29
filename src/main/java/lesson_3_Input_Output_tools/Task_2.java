@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import static lesson_3_Input_Output_tools.Task_1.createNewByteArr;
+import static lesson_3_Input_Output_tools.Task_1.readFromFileInArray;
 import static lesson_3_Input_Output_tools.Task_1.writeArrInFile;
 
 public class Task_2 {
@@ -21,33 +22,46 @@ public class Task_2 {
 
     public static void main(String[] args) throws IOException {
 
+    //Создание файлов и заполнение их бфйтами
         pathNameslist = new String[filesCount];                                                                         //Имена файлов пропишем в отдельный массив, чтобы с ним работать
-        byte[] symbols = {'a', 'b', 'c', 'd', 'f'};                                                                     //Чтобы в файлах были записаны разные символы
+        byte[] symbols = {'1', '2', '3', '4', '5'};                                                                     //Чтобы в файлах были записаны разные символы
         for (int i = 0; i < pathNameslist.length; i++) {
-            pathNameslist[i] = String.format("src/main/java/lesson_3_Input_Output_tools/Task_2_file_%s.txt", (i + 1));  //Заполняем массив именами и директориями
+            pathNameslist[i] = returnDirectoryAndName(i + 1);                                                           //Заполняем массив именами и директориями
             writeArrInFile(pathNameslist[i], createNewByteArr(arrSize, symbols[i]));                                    //Пишем в определенные директории массивы с разными байтами, массивы формируем в аргументах метода
         }
 
+    //Создаем и заполняем лист с потоками для чтения в SequenceInputStream
         ali = new ArrayList<InputStream>();
-        for (int i = 0; i < ali.size(); i++) {
+        for (int i = 0; i < filesCount; i++) {
             try {
-                ali.add(new FileInputStream(String.format("src/main/java/lesson_3_Input_Output_tools/Task_2_file_%s.txt", (i + 1))));
+                ali.add(new FileInputStream(returnDirectoryAndName(i + 1)));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
 
+    //Читаем последовательно файлы и пишем их в единый файл
         SequenceInputStream sqis = new SequenceInputStream(Collections.enumeration(ali));
-//        int x;
-//        int count = 0;
-//        while ((x = sqis.read()) != -1){
-//            System.out.print((char) x);
-//            count ++;
-//            if (count % 100 == 0 ){
-//                System.out.println();
-//            }
-//        }
-//        System.out.println("Всего прочитано байт: " + count);
-//        sqis.close();
+        int x;
+        int count = 0;
+        while ((x = sqis.read()) != -1){
+            System.out.print((char) x);
+            count ++;
+            if (count % 100 == 0 ){
+                System.out.println();
+            }
+        }
+        System.out.println("Всего прочитано байт: " + count);
+        sqis.close();
+    }
+
+    /**
+     * 
+     * @param serialNumber
+     * @return
+     */
+    public static String returnDirectoryAndName(int serialNumber){
+        String str = String.format("src/main/java/lesson_3_Input_Output_tools/Task_2_file_%s.txt", serialNumber);
+        return str;
     }
 }
