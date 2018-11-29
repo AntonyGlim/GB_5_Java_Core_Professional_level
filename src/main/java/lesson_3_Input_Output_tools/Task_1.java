@@ -14,17 +14,17 @@ public class Task_1 {
 
     public static void main(String[] args) {
 
-        byte[] byteArr = createNewByteArr(arrSize);
+        byte[] byteArr = createNewByteArr(arrSize, (byte) 'g');
         writeArrInFile(pathAndName, byteArr);
         byte[] secondArr = readFromFileInArray();
         printByteArr(secondArr);
 
     }
 
-    public static byte[] createNewByteArr (int arrSize){
+    public static byte[] createNewByteArr (int arrSize, byte b){
         byte[] byteArray = new byte[arrSize];
         for (int i = 0; i < byteArray.length; i++) {
-            byteArray[i] = 'i';
+            byteArray[i] = b;
         }
         return byteArray;
     }
@@ -46,7 +46,7 @@ public class Task_1 {
             int count = 0;
             fos = new FileOutputStream(pathAndName);   //Файл создасться, если до этого не существовал
             fos.write(byteArr);
-            
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

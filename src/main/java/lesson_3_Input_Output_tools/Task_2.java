@@ -9,8 +9,6 @@
 //import java.util.Collection;
 //import java.util.Collections;
 //
-//import static lesson_3_Input_Output_tools.Task_1.createFileWithBytes;
-//
 //public class Task_2 {
 //
 //    final static String pathAndName_1 = "src/main/java/lesson_3_Input_Output_tools/task_1_2/task_2_file_1.txt";
