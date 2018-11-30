@@ -14,15 +14,13 @@ import static lesson_3_Input_Output_tools.Task_1.readFromFileInArray;
 
 public class Task_3 {
 
-//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
-//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir111.txt";
-//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir222.txt";
     final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_King.txt";
     final static int symbolsOnPage = 1800;
 
     public static void main(String[] args) throws IOException {
 
-        FileInputStream in = new FileInputStream(pathAndName);
+        InputStream in = new BufferedInputStream(new FileInputStream(pathAndName));
+
         int x;
         int count = 1;
         char[] chars = new char[symbolsOnPage];
@@ -31,58 +29,23 @@ public class Task_3 {
         while((x = in.read()) != -1) {
             chars[count - 1] = (char) x;
             if (count == symbolsOnPage){
-                list.add( String.valueOf(chars));
+                list.add(String.valueOf(chars));
                 count = 1;
             } else {
                 count++;
             }
-
         }
+        list.add(String.valueOf(chars));
+        for (int i = 0; i < chars.length; i++) {
+            System.out.println(chars[i]);
+        }
+        in.close();
 
         System.out.println(list.size());
-        
-
-    }
-
-
-
-    public static ArrayList<byte[]> readFromFileInArrayList (String pathAndName){
-        FileInputStream fis = null;
-        byte[] arr = new byte[symbolsOnPage];
-        ArrayList<byte[]> list = new ArrayList<byte[]>();
-        try {
-
-            fis = new FileInputStream(pathAndName);
-            StringBuilder stringBuilder = new StringBuilder();
-            while (fis.read() != -1){
-                int count = fis.read(arr);
-                if(count == symbolsOnPage){
-                    count = 0;
-                    list.add(arr);
-                }
-            }
-//            int count = fis.read(arr);
-//            System.out.println("Размер массива: " + count);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fis.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return list;
-    }
-
-    public static void printByteArr (byte[] arr){
-        System.out.println("Выведем массив: ");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print((char) arr[i]);
-        }
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.println(list.get(0));
+        System.out.println("-------------------------------------------------------------------------------------------");
+        System.out.println(list.get(list.size() - 1));
     }
 
 }
