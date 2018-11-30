@@ -25,31 +25,12 @@ public class Task_3 {
 //    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir222.txt";
     final static int symbolsOnPage = 1800;
 
-    public static void main(String[] args) {
-        ArrayList<byte[]> pagesList = new ArrayList<byte[]>();
-        try {
-//            InputStream in = new BufferedInputStream(new FileInputStream(pathAndName));
-            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(pathAndName), "UTF-8"));
-            int count = 1;
-            byte[] byteArr = new byte[symbolsOnPage];
-            while (in.read() != -1){
-                byteArr[count - 1] = (byte) in.read();
-                if (count == symbolsOnPage){
-                    pagesList.add(byteArr);
-                    count = 1;
-                } else {
-                    count++;
-                }
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void main(String[] args) throws IOException {
+        FileInputStream in = new FileInputStream(pathAndName);
+        int x;
+        while((x = in.read()) != -1) {
+            System.out.print((char) x);
         }
-        System.out.println(pagesList.size());
-//        printByteArr(pagesList.get(1));
-        ArrayList<byte[]> newList = readFromFileInArrayList(pathAndName);
-        printByteArr(newList.get(0));
     }
 
 
