@@ -18,8 +18,7 @@ import static lesson_3_Input_Output_tools.Task_1.printByteArr;
 //TODO Оптимизировать задания 1 и 2
 public class Task_3 {
 
-//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
-    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_King Stephen. It - royallib.ru.txt";
+    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
     final static int symbolsOnPage = 1800;
 
     public static void main(String[] args) {
@@ -44,7 +43,7 @@ public class Task_3 {
             e.printStackTrace();
         }
         System.out.println(pagesList.size());
-        printByteArr(pagesList.get(1));
+        printByteArr(pagesList.get(0));
     }
 
 }
