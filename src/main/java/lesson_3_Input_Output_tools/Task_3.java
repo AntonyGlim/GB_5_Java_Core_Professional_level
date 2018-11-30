@@ -18,10 +18,31 @@ import static lesson_3_Input_Output_tools.Task_1.printByteArr;
 //TODO Оптимизировать задания 1 и 2
 public class Task_3 {
 
-    final static int symbolsOnPage = 18000;
+    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
+    final static int symbolsOnPage = 1800;
 
-
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) {
+        ArrayList<byte[]> pagesList = new ArrayList<byte[]>();
+        try {
+            InputStream in = new BufferedInputStream(new FileInputStream(pathAndName));
+            int count = 1;
+            byte[] byteArr = new byte[symbolsOnPage];
+            while (in.read() != -1){
+                byteArr[count - 1] = (byte) in.read();
+                if (count == symbolsOnPage){
+                    pagesList.add(byteArr);
+                    count = 1;
+                } else {
+                    count++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(pagesList.size());
+        printByteArr(pagesList.get(0));
     }
+
 }
