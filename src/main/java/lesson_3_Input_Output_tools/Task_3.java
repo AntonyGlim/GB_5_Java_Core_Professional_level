@@ -22,7 +22,10 @@ public class Task_3 {
 
     public static void main(String[] args) throws IOException {
 
+        long start = System.currentTimeMillis();
         ArrayList list = readFromFileWriteToList();
+        System.out.println("Файл считан за: " + (System.currentTimeMillis() - start) + "мс");
+
         System.out.println("В файле всего: " + list.size() + " страниц.");
         workingWithUser(readFromFileWriteToList());
 
@@ -72,10 +75,12 @@ public class Task_3 {
             }
             if (isValidNumber(s)){
                 int pageNumber = Integer.parseInt(s);
+                long start = System.currentTimeMillis();
                 if (pageNumber <= list.size() && pageNumber != 0){
                     System.out.println("PAGE " + pageNumber + " START:");
                     System.out.println(list.get(pageNumber - 1));
-                    System.out.println("** PAGE " + pageNumber + " END **");
+                    System.out.print("** PAGE " + pageNumber + " END ** ");
+                    System.out.println("Страница загружена за: " + (System.currentTimeMillis() - start) + "мс\n");
                 } else {
                     System.out.println("Такой страницы нет!");
                 }
