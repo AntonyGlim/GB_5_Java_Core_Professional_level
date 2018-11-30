@@ -10,17 +10,23 @@ import java.io.IOException;
 
 public class Task_1 {
     final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_1_file.txt";
-    final static int arrSize = 500;
+    final static int arrSize = 50;                                              //Размер массива
 
     public static void main(String[] args) {
 
-        byte[] byteArr = createNewByteArr(arrSize, (byte) 'g');
-        writeArrInFile(pathAndName, byteArr);
-        byte[] secondArr = readFromFileInArray(pathAndName);
-        printByteArr(secondArr);
+        byte[] byteArr = createNewByteArr(arrSize, (byte) 'g');                 //Создаем новый массив с байтами
+        writeArrInFile(pathAndName, byteArr);                                   //Записываем массив в файл
+        byte[] secondArr = readFromFileInArray(pathAndName);                    //Создаем второй массив в который записываем данные из файла
+        printByteArr(secondArr);                                                //Выводим считаный массив в консоль
 
     }
 
+    /**
+     * Метод создаст массив с байтами
+     * @param arrSize - размеры массива
+     * @param b - символ, который будет помещен в массив
+     * @return - массив с байтами
+     */
     public static byte[] createNewByteArr (int arrSize, byte b){
         byte[] byteArray = new byte[arrSize];
         for (int i = 0; i < byteArray.length; i++) {
@@ -29,6 +35,10 @@ public class Task_1 {
         return byteArray;
     }
 
+    /**
+     * Метод выводит в консоль массив
+     * @param arr - получает на вход байтовый массив
+     */
     public static void printByteArr (byte[] arr){
         System.out.println("Выведем массив: ");
         for (int i = 0; i < arr.length; i++) {
@@ -39,6 +49,11 @@ public class Task_1 {
         }
     }
 
+    /**
+     * Метод записывает байтовый массив в файл
+     * @param pathAndName - директория и имя файла
+     * @param byteArr - массив байтов
+     */
     public static void writeArrInFile (String pathAndName, byte[] byteArr){
         FileOutputStream fos = null;
         try {
@@ -60,6 +75,11 @@ public class Task_1 {
         }
     }
 
+    /**
+     * Метод считывает байты из файла и записывает в массив
+     * @param pathAndName - директория и имя файла
+     * @return - возвращает масив
+     */
     public static byte[] readFromFileInArray (String pathAndName){
         FileInputStream fis = null;
         byte[] arr = new byte[arrSize];
