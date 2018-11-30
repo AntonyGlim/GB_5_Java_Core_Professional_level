@@ -22,14 +22,23 @@ public class Task_3 {
 
     public static void main(String[] args) throws IOException {
 
-        InputStream in = new BufferedInputStream(new FileInputStream(pathAndName));
+        ArrayList list = readFromFileWriteToList();
+        System.out.println("В файле всего: " + list.size() + " страниц.");
+        workingWithUser(readFromFileWriteToList());
 
+    }
+
+    /**
+     * Метод запишет данные из файла в лист
+     * @return - лист, у которого в качестве элементов - стринги (страницы)
+     * @throws IOException
+     */
+    public static ArrayList<String> readFromFileWriteToList() throws IOException {
+        InputStream in = new BufferedInputStream(new FileInputStream(pathAndName));
+        ArrayList<String> list = new ArrayList<String>();
         int x;
         int count = 1;
         char[] chars = new char[symbolsOnPage];
-        ArrayList<String> list = new ArrayList<String>();
-        Scanner scanner = new Scanner(System.in);
-
         while((x = in.read()) != -1) {
             chars[count - 1] = (char) x;
             if (count == symbolsOnPage){
@@ -44,10 +53,17 @@ public class Task_3 {
             ch[i] = chars[i];
         }
         list.add(String.valueOf(ch));
-
-        System.out.println("В файле всего: " + list.size() + " страниц.");
         in.close();
+        return list;
+    }
 
+    /**
+     * Блок работы пользователя с файлом. В данном блоке пользователь вводит номер страницы,
+     * в ответ, она выводтся на экран
+     * @param list - Лист содержит страницы книги. Каждый элемент - это отдельная страница в формате стринг
+     */
+    public static void workingWithUser (ArrayList<String> list){
+        Scanner scanner = new Scanner(System.in);
         while (true){
             System.out.println("Введите номер страницы: (Номер должен быть числом)");
             String s = scanner.nextLine();
@@ -79,5 +95,4 @@ public class Task_3 {
         Matcher m = p.matcher(str);
         return m.matches();
     }
-
 }
