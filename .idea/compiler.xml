@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="GB_5_Java_Core_Professional_level" />
+        <module name="gb_5_java_core_professional_level" />
       </profile>
     </annotationProcessing>
   </component>
