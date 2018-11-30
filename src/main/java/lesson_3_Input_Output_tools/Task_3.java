@@ -12,25 +12,37 @@ import java.util.Collections;
 import static lesson_3_Input_Output_tools.Task_1.printByteArr;
 import static lesson_3_Input_Output_tools.Task_1.readFromFileInArray;
 
-//TODO Для чтения использовать буферы всякие
-//TODO Разобраться с кодировкой
-//TODO Вынести метод чтения в отдельный метод
-//TODO Поработать со структурой файлов в задании
-//TODO Засечь время выполнения
-//TODO Оптимизировать задания 1 и 2
 public class Task_3 {
 
 //    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
-    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir111.txt";
+//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir111.txt";
 //    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir222.txt";
+    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_King.txt";
     final static int symbolsOnPage = 1800;
 
     public static void main(String[] args) throws IOException {
+
         FileInputStream in = new FileInputStream(pathAndName);
         int x;
+        int count = 1;
+        char[] chars = new char[symbolsOnPage];
+        ArrayList<String> list = new ArrayList<String>();
+
         while((x = in.read()) != -1) {
-            System.out.print((char) x);
+            chars[count - 1] = (char) x;
+            if (count == symbolsOnPage){
+                list.add( String.valueOf(chars));
+                count = 1;
+            } else {
+                count++;
+            }
+
         }
+
+        System.out.println(list.size());
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
     }
 
 
