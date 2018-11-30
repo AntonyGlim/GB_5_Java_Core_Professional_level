@@ -23,11 +23,11 @@ public class Task_2 {
     public static void main(String[] args) throws IOException {
 
     //Создание файлов и заполнение их бфйтами
-        pathNameslist = new String[filesCount];                                                                         //Имена файлов пропишем в отдельный массив, чтобы с ним работать
-        byte[] symbols = {'1', '2', '3', '4', '5'};                                                                     //Чтобы в файлах были записаны разные символы
+        pathNameslist = new String[filesCount];                                                 //Имена файлов пропишем в отдельный массив, чтобы с ним работать
+        byte[] symbols = {'1', '2', '3', '4', '5'};                                             //Чтобы в файлах были записаны разные символы
         for (int i = 0; i < pathNameslist.length; i++) {
-            pathNameslist[i] = returnDirectoryAndName(i + 1);                                                           //Заполняем массив именами и директориями
-            writeArrInFile(pathNameslist[i], createNewByteArr(arrSize, symbols[i]));                                    //Пишем в определенные директории массивы с разными байтами, массивы формируем в аргументах метода
+            pathNameslist[i] = returnDirectoryAndName(i + 1);                                   //Заполняем массив именами и директориями
+            writeArrInFile(pathNameslist[i], createNewByteArr(arrSize, symbols[i]));            //Пишем в определенные директории массивы с разными байтами, массивы формируем в аргументах метода
         }
 
     //Создаем и заполняем лист с потоками для чтения в SequenceInputStream
@@ -59,9 +59,9 @@ public class Task_2 {
     }
 
     /**
-     *
-     * @param serialNumber
-     * @return
+     * Метод автоматически формирует имя входного/выходного файла
+     * @param serialNumber - номер файла
+     * @return - директорию и имя файла
      */
     public static String returnDirectoryAndName(int serialNumber){
         String str = String.format("src/main/java/lesson_3_Input_Output_tools/Task_2_file_%s.txt", serialNumber);
