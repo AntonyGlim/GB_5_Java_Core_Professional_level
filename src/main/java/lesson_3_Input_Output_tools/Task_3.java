@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static lesson_3_Input_Output_tools.Task_1.printByteArr;
+import static lesson_3_Input_Output_tools.Task_1.readFromFileInArray;
+
 //TODO Для чтения использовать буферы всякие
 //TODO Разобраться с кодировкой
 //TODO Вынести метод чтения в отдельный метод
@@ -18,7 +20,9 @@ import static lesson_3_Input_Output_tools.Task_1.printByteArr;
 //TODO Оптимизировать задания 1 и 2
 public class Task_3 {
 
-    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
+//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir.txt";
+    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir111.txt";
+//    final static String pathAndName = "src/main/java/lesson_3_Input_Output_tools/Task_3_voina-i-mir222.txt";
     final static int symbolsOnPage = 1800;
 
     public static void main(String[] args) {
@@ -43,7 +47,50 @@ public class Task_3 {
             e.printStackTrace();
         }
         System.out.println(pagesList.size());
-        printByteArr(pagesList.get(0));
+//        printByteArr(pagesList.get(1));
+        ArrayList<byte[]> newList = readFromFileInArrayList(pathAndName);
+        printByteArr(newList.get(0));
+    }
+
+
+
+    public static ArrayList<byte[]> readFromFileInArrayList (String pathAndName){
+        FileInputStream fis = null;
+        byte[] arr = new byte[symbolsOnPage];
+        ArrayList<byte[]> list = new ArrayList<byte[]>();
+        try {
+
+            fis = new FileInputStream(pathAndName);
+            StringBuilder stringBuilder = new StringBuilder();
+            while (fis.read() != -1){
+                int count = fis.read(arr);
+                if(count == symbolsOnPage){
+                    count = 0;
+                    list.add(arr);
+                }
+            }
+//            int count = fis.read(arr);
+//            System.out.println("Размер массива: " + count);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    public static void printByteArr (byte[] arr){
+        System.out.println("Выведем массив: ");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print((char) arr[i]);
+        }
     }
 
 }

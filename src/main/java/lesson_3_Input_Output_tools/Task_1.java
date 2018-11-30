@@ -16,7 +16,7 @@ public class Task_1 {
 
         byte[] byteArr = createNewByteArr(arrSize, (byte) 'g');
         writeArrInFile(pathAndName, byteArr);
-        byte[] secondArr = readFromFileInArray();
+        byte[] secondArr = readFromFileInArray(pathAndName);
         printByteArr(secondArr);
 
     }
@@ -32,7 +32,7 @@ public class Task_1 {
     public static void printByteArr (byte[] arr){
         System.out.println("Выведем массив: ");
         for (int i = 0; i < arr.length; i++) {
-            if (i % 200 == 0 && i != 0){
+            if (i % 100 == 0 && i != 0){
                 System.out.println();
             }
             System.out.print((char) arr[i]);
@@ -60,7 +60,7 @@ public class Task_1 {
         }
     }
 
-    public static byte[] readFromFileInArray (){
+    public static byte[] readFromFileInArray (String pathAndName){
         FileInputStream fis = null;
         byte[] arr = new byte[arrSize];
         try {
