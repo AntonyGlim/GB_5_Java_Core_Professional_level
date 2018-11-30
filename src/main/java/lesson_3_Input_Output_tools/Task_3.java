@@ -8,6 +8,9 @@ package lesson_3_Input_Output_tools;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static lesson_3_Input_Output_tools.Task_1.printByteArr;
 import static lesson_3_Input_Output_tools.Task_1.readFromFileInArray;
@@ -25,6 +28,7 @@ public class Task_3 {
         int count = 1;
         char[] chars = new char[symbolsOnPage];
         ArrayList<String> list = new ArrayList<String>();
+        Scanner scanner = new Scanner(System.in);
 
         while((x = in.read()) != -1) {
             chars[count - 1] = (char) x;
@@ -35,17 +39,45 @@ public class Task_3 {
                 count++;
             }
         }
-        list.add(String.valueOf(chars));
-        for (int i = 0; i < chars.length; i++) {
-            System.out.println(chars[i]);
+        char[] ch = new char[count - 1];
+        for (int i = 0; i < ch.length; i++) {
+            ch[i] = chars[i];
         }
+        list.add(String.valueOf(ch));
+
+        System.out.println("В файле всего: " + list.size() + " страниц.");
         in.close();
 
-        System.out.println(list.size());
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println(list.get(0));
-        System.out.println("-------------------------------------------------------------------------------------------");
-        System.out.println(list.get(list.size() - 1));
+        while (true){
+            System.out.println("Введите номер страницы: (Номер должен быть числом)");
+            String s = scanner.nextLine();
+            if (s.equalsIgnoreCase("/q")){                                                          //Ветка для выхода из программы
+                break;
+            }
+            if (isValidNumber(s)){
+                int pageNumber = Integer.parseInt(s);
+                if (pageNumber <= list.size() && pageNumber != 0){
+                    System.out.println("PAGE " + pageNumber + " START:");
+                    System.out.println(list.get(pageNumber - 1));
+                    System.out.println("** PAGE " + pageNumber + " END **");
+                } else {
+                    System.out.println("Такой страницы нет!");
+                }
+            } else {
+                System.out.println("Введенное значение должно быть числом");
+            }
+        }
+    }
+
+    /**
+     * Метод проверит, является-ли строка введенная пользователем положительным числом
+     * @param str
+     * @return
+     */
+    private static boolean isValidNumber(String str){
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(str);
+        return m.matches();
     }
 
 }
