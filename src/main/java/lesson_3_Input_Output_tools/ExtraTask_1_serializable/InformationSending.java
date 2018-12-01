@@ -32,6 +32,9 @@ public class InformationSending implements Runnable {
                     out.flush();
                     if (msg.equalsIgnoreCase("/q"))
                         break;
+                    if (msg.equalsIgnoreCase("/ser")){
+
+                    }
             }
 
         } catch (IOException e) {
