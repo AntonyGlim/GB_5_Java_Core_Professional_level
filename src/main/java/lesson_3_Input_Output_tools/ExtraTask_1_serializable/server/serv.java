@@ -68,7 +68,7 @@ public class serv {
         Date d = null;
 
         try {
-            ser = new ServerSocket(8020);
+            ser = new ServerSocket(8011);
             /*
              * This will wait for a connection to be made to this socket.
              */
