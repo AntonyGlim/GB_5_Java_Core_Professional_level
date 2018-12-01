@@ -25,13 +25,15 @@ public class Task_3 {
 
     public static void main(String[] args) throws IOException {
 
-        long start = System.currentTimeMillis();                                                //Засекаем время
-        ArrayList list = readFromFileWriteToList();                                             //Переписываем данные из файла в ArrayList
-        System.out.println("Файл считан за: " + (System.currentTimeMillis() - start) + "мс");   //Выводим затраченное время
+//        long start = System.currentTimeMillis();                                                //Засекаем время
+//        ArrayList list = readFromFileWriteToList();                                             //Переписываем данные из файла в ArrayList
+//        System.out.println("Файл считан за: " + (System.currentTimeMillis() - start) + "мс");   //Выводим затраченное время
+//
+//        System.out.println("В файле всего: " + list.size() + " страниц.");                      //Информируем о количестве страниц
+//        workingWithUser(readFromFileWriteToList());                                             //В этом блоке пользоваель вводит номера страниц и получает их отображение в консоль
 
-        System.out.println("В файле всего: " + list.size() + " страниц.");                      //Информируем о количестве страниц
-        workingWithUser(readFromFileWriteToList());                                             //В этом блоке пользоваель вводит номера страниц и получает их отображение в консоль
 
+        exampleWithRandomAccessFile(pathAndName);                                               //Этот метод заменяет всю выполненную выше работу
     }
 
     /**
@@ -102,5 +104,27 @@ public class Task_3 {
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher(str);
         return m.matches();
+    }
+
+    /**
+     * Решение задачи при помощи RandomAccessFile значительно упрощает решение
+     * @param pathAndName
+     * @throws IOException
+     */
+    private static void exampleWithRandomAccessFile(String pathAndName) throws IOException {
+        RandomAccessFile randomAccessFile = new RandomAccessFile(pathAndName, "r");
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Введите номер страницы: (Номер должен быть числом)");
+            int n = scanner.nextInt() - 1;
+            if (n == -1) {                                              //Ветка для выхода из программы
+                break;
+            }
+            randomAccessFile.seek(n * symbolsOnPage);               //метод устанавливает смещение указателя файла, измеренное от начала этого файла, при котором происходит следующее чтение или запись.
+            byte[] byteArray = new byte[symbolsOnPage];
+            randomAccessFile.read(byteArray);
+            System.out.println(new String(byteArray));
+        }
+        randomAccessFile.close();
     }
 }
