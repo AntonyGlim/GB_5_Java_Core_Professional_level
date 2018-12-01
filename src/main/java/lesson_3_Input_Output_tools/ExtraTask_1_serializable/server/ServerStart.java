@@ -10,7 +10,7 @@
  * который будет ожидать второго/третьего/n-го клиентов.
  */
 
-package lesson_6_Work_with_network.consoleСhatTask.server;
+package lesson_3_Input_Output_tools.ExtraTask_1_serializable.server;
 
 import java.io.IOException;
 

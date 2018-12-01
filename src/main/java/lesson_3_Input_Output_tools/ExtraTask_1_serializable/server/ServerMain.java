@@ -1,4 +1,4 @@
-package lesson_6_Work_with_network.consoleСhatTask.server;
+package lesson_3_Input_Output_tools.ExtraTask_1_serializable.server;
 
 import lesson_6_Work_with_network.consoleСhatTask.InformationGetting;
 import lesson_6_Work_with_network.consoleСhatTask.InformationSending;
