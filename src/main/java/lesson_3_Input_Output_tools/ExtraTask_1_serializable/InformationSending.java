@@ -1,4 +1,4 @@
-package lesson_6_Work_with_network.consoleСhatTask;
+package lesson_3_Input_Output_tools.ExtraTask_1_serializable;
 
 import java.awt.*;
 import java.io.BufferedReader;

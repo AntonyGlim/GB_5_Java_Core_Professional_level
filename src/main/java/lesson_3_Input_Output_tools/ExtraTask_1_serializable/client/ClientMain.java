@@ -1,7 +1,8 @@
 package lesson_3_Input_Output_tools.ExtraTask_1_serializable.client;
 
-import lesson_6_Work_with_network.consoleСhatTask.InformationGetting;
-import lesson_6_Work_with_network.consoleСhatTask.InformationSending;
+
+import lesson_3_Input_Output_tools.ExtraTask_1_serializable.InformationGetting;
+import lesson_3_Input_Output_tools.ExtraTask_1_serializable.InformationSending;
 
 import java.io.IOException;
 import java.net.Socket;

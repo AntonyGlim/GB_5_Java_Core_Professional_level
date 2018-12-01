@@ -1,4 +1,4 @@
-package lesson_6_Work_with_network.consoleСhatTask;
+package lesson_3_Input_Output_tools.ExtraTask_1_serializable;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class InformationGetting  implements Runnable{
             while (true) {                                                  //Получение сообщений
                 String msg = in.readUTF();
                 System.out.println(msg);
-//                if (msg.equalsIgnoreCase("/q")) System.exit(0);         //У меня не получилось выйти иначе! Пояните, пожалуйста, как правильно выйти и закрыть все потоки
+                if (msg.equalsIgnoreCase("/q")) System.exit(0);         //У меня не получилось выйти иначе! Пояните, пожалуйста, как правильно выйти и закрыть все потоки
             }
 
         } catch (IOException e) {
