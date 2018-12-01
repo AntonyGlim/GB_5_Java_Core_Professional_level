@@ -1,6 +1,8 @@
 package lesson_3_Input_Output_tools.ExtraTask_1_serializable;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private String name;
     private String game;
     private int playHours;
@@ -15,6 +17,6 @@ public class Player {
 
     public void playerInfo(){
         System.out.println(name + " " + game + " " + playHours + " " + level);
-        
+
     }
 }

@@ -1,7 +1,9 @@
 package lesson_3_Input_Output_tools.ExtraTask_1_serializable;
 
 import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 
 /**
@@ -25,9 +27,17 @@ public class InformationGetting  implements Runnable{
                 String msg = in.readUTF();
                 System.out.println(msg);
                 if (msg.equalsIgnoreCase("/q")) System.exit(0);             //У меня не получилось выйти иначе! Пояните, пожалуйста, как правильно выйти и закрыть все потоки
+
+                //десериализация о-та
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream("PlayerFromClient.pl"));
+                Player p2 = (Player) ois.readObject();
+                ois.close();
+                p2.playerInfo();
             }
 
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
