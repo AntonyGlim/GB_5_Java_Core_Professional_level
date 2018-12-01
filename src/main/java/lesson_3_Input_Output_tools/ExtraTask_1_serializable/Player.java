@@ -1,3 +1,9 @@
+/**
+ * Доп. ДЗ
+ * Создать клиент и сервер.
+ * Далее создать класс Player
+ * Далее создать экземпляр класса Player, сереализовать объект, передать его по сети и десереализовать.
+ */
 package lesson_3_Input_Output_tools.ExtraTask_1_serializable;
 
 import java.io.Serializable;
@@ -17,6 +23,5 @@ public class Player implements Serializable {
 
     public void playerInfo(){
         System.out.println(name + " " + game + " " + playHours + " " + level);
-
     }
 }

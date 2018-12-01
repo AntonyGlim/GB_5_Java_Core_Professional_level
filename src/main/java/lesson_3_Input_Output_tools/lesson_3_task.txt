@@ -7,7 +7,5 @@ ArrayList<InputStream> al = new ArrayList<>(); ... Enumeration<InputStream> e = 
 
 Доп. ДЗ
 Создать клиент и сервер.
-
 Далее создать класс Player
-
 Далее создать экземпляр класса Player, сереализовать объект, передать его по сети и десереализовать.
