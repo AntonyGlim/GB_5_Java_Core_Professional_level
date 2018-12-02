@@ -7,56 +7,41 @@ package lesson_4_Multithreading_Part_I;
 public class Task_1_ABCABC {
     public static void main(String[] args) {
 
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (this){
-                    for (int i = 0; i < 5; i++) {
-                        System.out.print("A");
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
-
-        Thread t2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (this){
-                    for (int i = 0; i < 5; i++) {
-                        System.out.print("B");
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
-
-        Thread t3 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (this){
-                    for (int i = 0; i < 5; i++) {
-                        System.out.print("C");
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        });
-
+        Symbol symbol = new Symbol();
+        Thread t1 = new Thread(new PrintSymbol(symbol, "A"));
+        Thread t2 = new Thread(new PrintSymbol(symbol, "B"));
+        Thread t3 = new Thread(new PrintSymbol(symbol, "C"));
         t1.start();
         t2.start();
         t3.start();
+    }
+}
+
+/**
+ * Класс по которому будет синхронизация
+ */
+class Symbol{
+    String symbol = "";
+}
+
+/**
+ * Распечатка символа в потоке
+ */
+class PrintSymbol implements Runnable{
+    Symbol symb;
+    String word;
+
+    public PrintSymbol(Symbol symb, String word) {
+        this.symb = symb;
+        this.word = word;
+    }
+
+    @Override
+    public void run() {
+        symb.symbol = word;
+        for (int i = 0; i < 5; i++) {
+            System.out.printf("%s", /*Thread.currentThread().getName(),*/ word);
+        }
+
     }
 }
