@@ -38,10 +38,11 @@ class PrintSymbol implements Runnable{
 
     @Override
     public void run() {
-        symb.symbol = word;
-        for (int i = 0; i < 5; i++) {
-            System.out.printf("%s", /*Thread.currentThread().getName(),*/ word);
+        synchronized (symb) {
+            symb.symbol = word;
+            for (int i = 0; i < 5; i++) {
+                System.out.printf("%s", /*Thread.currentThread().getName(),*/ word);
+            }
         }
-
     }
 }
