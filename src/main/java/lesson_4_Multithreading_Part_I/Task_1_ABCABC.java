@@ -5,54 +5,55 @@
 package lesson_4_Multithreading_Part_I;
 
 public class Task_1_ABCABC {
-    public static void main(String[] args) {
 
-        Symbol symbol = new Symbol();
-        Thread t1 = new Thread(new PrintSymbol(symbol, "A", 0));
-        Thread t2 = new Thread(new PrintSymbol(symbol, "B", 100));
-        Thread t3 = new Thread(new PrintSymbol(symbol, "C", 200));
-        t1.start();
-        t2.start();
-        t3.start();
-    }
-}
+        private final Object mon1 = new Object();
+        private final Object mon2 = new Object();
+        private volatile char currentLetter = 'A';
 
-/**
- * Класс по которому будет синхронизация
- */
-class Symbol{
-    String symbol = "";
-}
-
-/**
- * Распечатка символа в потоке
- */
-class PrintSymbol implements Runnable{
-    Symbol symb;
-    String word;
-    long sleepTime;
-
-    public PrintSymbol(Symbol symb, String word, long sleepTime) {
-        this.symb = symb;
-        this.word = word;
-        this.sleepTime = sleepTime;
-    }
-
-    @Override
-    public void run() {
-            symb.symbol = word;
-        try {
-            Thread.sleep(sleepTime);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        public static void main(String[] args) {
+            Task_1_ABCABC abc = new Task_1_ABCABC();
+            Thread t1 = new Thread(() -> {
+                w.printA();
+            });
+            Thread t2 = new Thread(() -> {
+                w.printB();
+            });
+            t1.start();
+            t2.start();
         }
-            for (int i = 0; i < 5; i++) {
-                System.out.printf("%s", /*Thread.currentThread().getName(),*/ word);
+
+        public void printA() {
+            synchronized (mon) {
                 try {
-                    Thread.sleep(500);
+                    for (int i = 0; i < 3; i++) {
+                        while (currentLetter != 'A') {
+                            mon.wait();
+                        }
+                        System.out.print("A");
+                        currentLetter = 'B';
+                        mon.notify();
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-    }
+        }
+
+        public void printB() {
+            synchronized (mon) {
+                try {
+                    for (int i = 0; i < 3; i++) {
+                        while (currentLetter != 'B') {
+                            mon.wait();
+                        }
+                        System.out.print("B");
+                        currentLetter = 'A';
+                        mon.notify();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
 }
