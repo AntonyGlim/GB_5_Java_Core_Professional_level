@@ -13,21 +13,19 @@ public class Task_1_ABCABC {
         public static void main(String[] args) {
 
             final Task_1_ABCABC abc = new Task_1_ABCABC();
-
+            //Работа с потоками
             Thread tA = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     abc.printA();
                 }
             });
-
             Thread tB = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     abc.printB();
                 }
             });
-
             Thread tC = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -35,13 +33,16 @@ public class Task_1_ABCABC {
                 }
             });
 
-
             tA.start();
             tB.start();
             tC.start();
         }
 
-        public void printA() {
+    /**
+     * Если не А, то ждем пока будет А
+     * Если А - печатаем А и изменяем volatile значение
+     */
+    public void printA() {
             synchronized (mon) {
                 try {
                     for (int i = 0; i < cicleCount; i++) {
@@ -58,23 +59,31 @@ public class Task_1_ABCABC {
             }
         }
 
-        public void printB() {
-            synchronized (mon) {
-                try {
-                    for (int i = 0; i < cicleCount; i++) {
-                        while (currentLetter != 'B') {
-                            mon.wait();
-                        }
-                        System.out.print("B");
-                        currentLetter = 'C';
-                        mon.notifyAll();
+    /**
+     * Если не B, то ждем пока будет B
+     * Если B - печатаем B и изменяем volatile значение
+     */
+    public void printB() {
+        synchronized (mon) {
+            try {
+                for (int i = 0; i < cicleCount; i++) {
+                    while (currentLetter != 'B') {
+                        mon.wait();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    System.out.print("B");
+                    currentLetter = 'C';
+                    mon.notifyAll();
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+    }
 
+    /**
+     * Если не C, то ждем пока будет C
+     * Если C - печатаем C и изменяем volatile значение
+     */
     public void printC() {
         synchronized (mon) {
             try {
