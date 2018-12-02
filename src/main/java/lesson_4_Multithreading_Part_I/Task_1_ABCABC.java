@@ -6,32 +6,51 @@ package lesson_4_Multithreading_Part_I;
 
 public class Task_1_ABCABC {
 
-        private final Object mon1 = new Object();
-        private final Object mon2 = new Object();
+        private final Object mon = new Object();
         private volatile char currentLetter = 'A';
+        private final int cicleCount = 5;
 
         public static void main(String[] args) {
-            Task_1_ABCABC abc = new Task_1_ABCABC();
-            Thread t1 = new Thread(() -> {
-                w.printA();
+
+            final Task_1_ABCABC abc = new Task_1_ABCABC();
+
+            Thread tA = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    abc.printA();
+                }
             });
-            Thread t2 = new Thread(() -> {
-                w.printB();
+
+            Thread tB = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    abc.printB();
+                }
             });
-            t1.start();
-            t2.start();
+
+            Thread tC = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    abc.printC();
+                }
+            });
+
+
+            tA.start();
+            tB.start();
+            tC.start();
         }
 
         public void printA() {
             synchronized (mon) {
                 try {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < cicleCount; i++) {
                         while (currentLetter != 'A') {
                             mon.wait();
                         }
                         System.out.print("A");
                         currentLetter = 'B';
-                        mon.notify();
+                        mon.notifyAll();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -42,18 +61,35 @@ public class Task_1_ABCABC {
         public void printB() {
             synchronized (mon) {
                 try {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < cicleCount; i++) {
                         while (currentLetter != 'B') {
                             mon.wait();
                         }
                         System.out.print("B");
-                        currentLetter = 'A';
-                        mon.notify();
+                        currentLetter = 'C';
+                        mon.notifyAll();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
+
+    public void printC() {
+        synchronized (mon) {
+            try {
+                for (int i = 0; i < cicleCount; i++) {
+                    while (currentLetter != 'C') {
+                        mon.wait();
+                    }
+                    System.out.print("C");
+                    currentLetter = 'A';
+                    mon.notifyAll();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
