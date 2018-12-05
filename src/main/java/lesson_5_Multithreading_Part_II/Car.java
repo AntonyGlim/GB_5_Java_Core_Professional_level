@@ -1,5 +1,6 @@
 package lesson_5_Multithreading_Part_II;
 
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 public class Car implements Runnable {
