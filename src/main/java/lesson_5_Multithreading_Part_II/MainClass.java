@@ -17,25 +17,30 @@ import java.util.concurrent.Semaphore;
 public class MainClass {
     public static final int CARS_COUNT = 4;
     public static Semaphore smp = new Semaphore(CARS_COUNT / 2);
-    static final CountDownLatch cdl = new CountDownLatch(CARS_COUNT);
+    static final CountDownLatch cdl_1 = new CountDownLatch(CARS_COUNT);
+    static final CountDownLatch cdl_2 = new CountDownLatch(CARS_COUNT);
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(smp), new Road(40));
         CyclicBarrier cb = new CyclicBarrier(CARS_COUNT);
         Car[] cars = new Car[CARS_COUNT];
         for (int i = 0; i < cars.length; i++) {
-            cars[i] = new Car(race, 20 + (int) (Math.random() * 10), cb, cdl);
+            cars[i] = new Car(race, 20 + (int) (Math.random() * 10), cb, cdl_1, cdl_2);
         }
         for (int i = 0; i < cars.length; i++) {
             new Thread(cars[i]).start();
         }
         try {
-            cdl.await();
+            cdl_1.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-
+        try {
+            cdl_2.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
     }
 }

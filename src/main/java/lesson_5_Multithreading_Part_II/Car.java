@@ -13,7 +13,8 @@ public class Car implements Runnable {
     private int speed;
     private String name;
     private CyclicBarrier cb;
-    private CountDownLatch cdl;
+    private CountDownLatch cdl_1;
+    private CountDownLatch cdl_2;
 
     public String getName() {
         return name;
@@ -22,13 +23,14 @@ public class Car implements Runnable {
         return speed;
     }
 
-    public Car(Race race, int speed, CyclicBarrier cb, CountDownLatch cdl) {
+    public Car(Race race, int speed, CyclicBarrier cb, CountDownLatch cdl_1, CountDownLatch cdl_2) {
         this.race = race;
         this.speed = speed;
         CARS_COUNT++;
         this.name = "Участник #" + CARS_COUNT;
         this.cb = cb;
-        this.cdl = cdl;
+        this.cdl_1 = cdl_1;
+        this.cdl_2 = cdl_2;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Car implements Runnable {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
-            cdl.countDown();
+            cdl_1.countDown();
             Thread.sleep(1);
             cb.await();
         } catch (Exception e) {
@@ -47,5 +49,6 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+        cdl_2.countDown();
     }
 }
