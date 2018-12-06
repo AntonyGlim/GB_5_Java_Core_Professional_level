@@ -1,5 +1,8 @@
 package lesson_5_Multithreading_Part_II;
 
+/**
+ * Класс описывает участок дороги, по которому могут парралельно ехать все машины
+ */
 public class Road extends Stage {
     public Road(int length) {
         this.length = length;

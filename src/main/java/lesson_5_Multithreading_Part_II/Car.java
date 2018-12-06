@@ -1,14 +1,15 @@
 package lesson_5_Multithreading_Part_II;
 
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
+/**
+ * Класс создает машину в отдельном потоке
+ */
 public class Car implements Runnable {
+
     private static int CARS_COUNT;
-    static {
-        CARS_COUNT = 0;
-    }
+    static { CARS_COUNT = 0; }
     private Race race;
     private int speed;
     private String name;
@@ -23,6 +24,14 @@ public class Car implements Runnable {
         return speed;
     }
 
+    /**
+     * Конструктор принимает, кроме прочих, параметры для синхронизации
+     * @param race - полоса препятствий
+     * @param speed - скорость
+     * @param cb - CyclicBarrier для одновременного старта
+     * @param cdl_1 - Для синхронизации с Main потоком (объявление о старте)
+     * @param cdl_2 - Для синхронизации с Main потоком (объявление о завершении)
+     */
     public Car(Race race, int speed, CyclicBarrier cb, CountDownLatch cdl_1, CountDownLatch cdl_2) {
         this.race = race;
         this.speed = speed;
@@ -39,18 +48,18 @@ public class Car implements Runnable {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
-            cdl_1.countDown();
-            Thread.sleep(1);
-            cb.await();
+            cdl_1.countDown();                                                          //Закончил подготовку
+            Thread.sleep(1);                                                            //Чтобы избежать фальстартов
+            cb.await();                                                                 //Готов к старту!
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < race.getStages().size(); i++) {
+        for (int i = 0; i < race.getStages().size(); i++) {                             //Проходит препятствия
             race.getStages().get(i).go(this);
         }
-        cdl_2.countDown();
-        MainClass.number++;
+        cdl_2.countDown();                                                              //Финишировал!
+        MainClass.number++;                                                             //Вычисляем номер победителя
         if (MainClass.number == 1) System.out.println(this.name + " финишировал под номером " + MainClass.number + ". ПОБЕДА!");
         else System.out.println(this.name + " финишировал под номером " + MainClass.number);
     }
