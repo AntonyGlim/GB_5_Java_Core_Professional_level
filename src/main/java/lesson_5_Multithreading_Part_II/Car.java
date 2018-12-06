@@ -50,5 +50,8 @@ public class Car implements Runnable {
             race.getStages().get(i).go(this);
         }
         cdl_2.countDown();
+        MainClass.number++;
+        if (MainClass.number == 1) System.out.println(this.name + " финишировал под номером " + MainClass.number + ". ПОБЕДА!");
+        else System.out.println(this.name + " финишировал под номером " + MainClass.number);
     }
 }

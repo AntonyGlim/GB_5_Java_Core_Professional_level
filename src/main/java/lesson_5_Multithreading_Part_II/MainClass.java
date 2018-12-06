@@ -15,10 +15,15 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.Semaphore;
 
 public class MainClass {
+
     public static final int CARS_COUNT = 4;
+    public static volatile int number = 0;
+
     public static Semaphore smp = new Semaphore(CARS_COUNT / 2);
     static final CountDownLatch cdl_1 = new CountDownLatch(CARS_COUNT);
     static final CountDownLatch cdl_2 = new CountDownLatch(CARS_COUNT);
+
+
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(smp), new Road(40));
