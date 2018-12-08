@@ -38,7 +38,7 @@ public class FromArrToArrTest {
     public void testFromArrToArr() {
 //        int[] arrStart = {1, 2, 3, 4, 5};
 //        int[] expectedResult = {5};
-        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+        Assert.assertArrayEquals(this.expectedResult, this.fromArrToArr.arrStrtsAfterFour(arrStart));
     }
 
     @Test(expected = RuntimeException.class)
