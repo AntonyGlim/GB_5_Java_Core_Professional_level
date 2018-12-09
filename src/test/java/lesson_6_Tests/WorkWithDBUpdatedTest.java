@@ -31,20 +31,21 @@ public class WorkWithDBUpdatedTest {
         workWithDB = new WorkWithDB();
     }
 
+    /**
+     * Тестируем обновление данных в БД
+     * Для этого восим запись, обновляем ее, проверяем обновление, и удаляем запись
+     */
     @Test
     public void updateDataInDBTest(){
         try {
             String sendTo = "Фамилия1";
             String updateTo = "Обновленная фамилия1";
-            String expected = "Фамилия1 5";
-            String expectedTwo = "Обновленная фамилия1 5";
-            workWithDB.insertIntoTable(statement, tableName, "Фамилия1", 5);
+            workWithDB.insertIntoTable(statement, tableName, sendTo, 5);
             Assert.assertTrue(workWithDB.updateStudBySecondName(statement, tableName, sendTo, updateTo) != 0);
             workWithDB.deleteFromTable(statement, tableName, updateTo);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Assert.assertTrue(true);
     }
 
     /**
