@@ -44,9 +44,43 @@ public class ArrWithFourAndOneTest {
     }
 
     @Test
-    public void massTestAdd() {
-        int[] arr = {4, 4, 4};
-        Assert.assertTrue(!arrWithFourAndOne.isFourOrOne(arr));
+    public void test1() {
+        int[] arr = {};
+        Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test2() {
+        int[] arr = {1, 1, 1, 1, 1, 1, 1};
+        Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test3() {
+        int[] arr = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+        Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test4() {
+        int[] arr = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
+        Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test5() {
+        int[] arr = {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+        Assert.assertTrue(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test6() {
+        int[] arr = {1, 4};
+        Assert.assertTrue(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test7() {
+        int[] arr = {1};
+        Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
+    }
+    @Test
+    public void test8() {
+        int[] arr = {4};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
     }
 }

@@ -41,4 +41,26 @@ public class workWithDB {
         return count;
     }
 
+    /**
+     * Метод вернет строки из БД цена которых будет соответствовать ценовому диапазону.
+     * @param tableName
+     * @param lowerBorder - минимальная цена
+     * @param upperBorder - максимальная цена
+     * @throws SQLException
+     */
+//    public static void returnFromDiapasonByCost(String tableName, String second_name) throws SQLException {
+//        String sql = String.format("SELECT * FROM %s WHERE second_name = '%s';", tableName, second_name);
+//        ResultSet rs = statement.executeQuery(sql);
+//        System.out.printf("%6s", "id");                             //printf - для удобства восприятия информации
+//        System.out.printf("%8s", "prodid");
+//        System.out.printf("%12s", "title");
+//        System.out.printf("%10s", "cost" + "\n");
+//        while (rs.next()){
+//            System.out.printf("%6d", rs.getInt(1));
+//            System.out.printf("%8d", rs.getInt(2));
+//            System.out.printf("%12s", rs.getString(3));
+//            System.out.printf("%10s", (rs.getInt(4) + "\n"));
+//        }
+//    }
+
 }
