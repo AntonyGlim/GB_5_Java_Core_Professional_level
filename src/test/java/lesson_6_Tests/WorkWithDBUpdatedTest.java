@@ -31,15 +31,14 @@ public class WorkWithDBUpdatedTest {
     }
 
     @Test
-    public void updateDataInDB(){
+    public void updateDataInDBTest(){
         try {
             String sendTo = "Фамилия1";
             String updateTo = "Обновленная фамилия1";
             String expected = "Фамилия1 5";
             String expectedTwo = "Обновленная фамилия1 5";
             workWithDB.insertIntoTable(statement, tableName, "Фамилия1", 5);
-            workWithDB.updateStudBySecondName(statement, tableName, sendTo, updateTo);
-            Assert.assertTrue(expectedTwo.equals(workWithDB.returnStringBySecondName(statement, tableName, updateTo)));
+            Assert.assertTrue(workWithDB.updateStudBySecondName(statement, tableName, sendTo, updateTo) != 0);
             workWithDB.deleteFromTable(statement, tableName, updateTo);
         } catch (SQLException e) {
             e.printStackTrace();

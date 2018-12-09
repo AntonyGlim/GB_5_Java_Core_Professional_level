@@ -24,6 +24,13 @@ public class WorkWithDB {
         statement.execute(sql);
     }
 
+    /**
+     * Метод удалит запись из таблицы по фамилии студента
+     * @param statement - объект для подключения к БД
+     * @param table_name - имя таблицы
+     * @param second_name - фамилия студента
+     * @throws SQLException
+     */
     public void deleteFromTable (Statement statement, String table_name, String second_name) throws SQLException {
         String sql = String.format("DELETE FROM %s WHERE second_name = '%s';", table_name, second_name);
         statement.execute(sql);
@@ -48,6 +55,14 @@ public class WorkWithDB {
     /**
      * Метод вернет строку из БД по фамилии студента (Не включая id).
      * @param tableName - имя таблицы
+     * @throws SQLException
+     */
+    /**
+     *
+     * @param statement
+     * @param tableName - имя таблицы
+     * @param second_name
+     * @return
      * @throws SQLException
      */
     public String returnStringBySecondName(Statement statement, String tableName, String second_name) throws SQLException {
