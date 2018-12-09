@@ -20,7 +20,7 @@ public class workWithDB {
      * @throws SQLException
      */
     public void insertIntoTable(Statement statement, String table_name, String second_name, int score) throws SQLException {
-        String sql = String.format("INSERT INTO %s (prodid, title, cost) " +
+        String sql = String.format("INSERT INTO %s (second_name, score) " +
                 "VALUES ('%s', %d);", table_name, second_name, score);
         statement.execute(sql);
     }
