@@ -1,5 +1,6 @@
-package lesson_6_Tests_jUnit_Logging_Log4о;
+package lesson_6_Tests;
 
+import lesson_6_Tests_jUnit_Logging_Log4о.FromArrToArr;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
