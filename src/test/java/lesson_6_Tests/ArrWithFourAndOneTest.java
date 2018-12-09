@@ -13,25 +13,25 @@ import java.util.Collection;
 
 //@RunWith(Parameterized.class)
 public class ArrWithFourAndOneTest {
-//
-//    @Parameterized.Parameters
-//    public static Collection<Object[]> data() {
-//        return Arrays.asList(new Object[][]{
-//                {0, 0, 0},
-//                {1, 1, 2},
-//                {2, 2, 4},
-//                {5, 5, 10},
-//                {4, 2, 6},
-//                {1, 3, 4},
-//                {6, -2, 4},
-//                {-1, 5, 4},
-//        });
-//    }
 
-    private int[] a;
+    @Parameterized.Parameters
+    public static Collection<Object[][]> data() {
+        return Arrays.asList(new Object[][][]{
+                {{false}, {}},
+                {{false}, {1, 1, 1, 1, 1, 1, 1}},
+                {{false}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}},
+                {{false}, {5, 5, 5, 5, 5, 5, 5, 5, 5, 5}},
+                {{true}, {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4}},
+                {{true}, {1, 4}},
+                {{false}, {1}},
+                {{false}, {4}}
+        });
+    }
+
+    private boolean a;
     private int[] b;
 
-    public ArrWithFourAndOneTest(int[] a, int[] b) {
+    public ArrWithFourAndOneTest(boolean a, int[] b) {
         this.a = a;
         this.b = b;
     }
@@ -41,6 +41,12 @@ public class ArrWithFourAndOneTest {
     @Before
     public void init() {
         arrWithFourAndOne = new ArrWithFourAndOne();
+    }
+
+    @Test
+    @Ignore
+    public void testWithParam() {
+        Assert.assertEquals(a, arrWithFourAndOne.isFourOrOne(b));
     }
 
     @Test
