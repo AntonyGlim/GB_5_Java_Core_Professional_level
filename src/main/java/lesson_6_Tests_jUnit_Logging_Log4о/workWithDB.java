@@ -25,6 +25,20 @@ public class workWithDB {
         statement.execute(sql);
     }
 
-    
+    /**
+     * Метод обновит значение фамилии студента
+     * На место старой фамилии поставит новую
+     * @param statement
+     * @param tableName
+     * @param oldSecond_name
+     * @param newSecond_name
+     * @return
+     * @throws SQLException
+     */
+    public int updateStudBySecondName(Statement statement, String tableName, String oldSecond_name, int newSecond_name) throws SQLException {
+        String sql = String.format("UPDATE %s SET second_name = '%s' WHERE second_name = '%s';", tableName, newSecond_name, oldSecond_name);
+        int count = statement.executeUpdate(sql);
+        return count;
+    }
 
 }
