@@ -36,16 +36,32 @@ public class FromArrToArrTest {
     }
 
     @Test
-//    @Ignore
-    public void testFromArrToArr() {
+    public void testFromArrToArr1() {
         int[] arrStart = {1, 4, 3, 4, 5};
         int[] expectedResult = {3, 4, 5};
         Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
     }
+    @Test
+    public void testFromArrToArr2() {
+        int[] arrStart = {1, 0, 3, 4, 5};
+        int[] expectedResult = {5};
+        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+    }
+    @Test
+    public void testFromArrToArr3() {
+        int[] arrStart = {1, 2, 3, 2, 5, 10, 12, 4};
+        int[] expectedResult = {};
+        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+    }
+    @Test
+    public void testFromArrToArr4() {
+        int[] arrStart = {4, 7, 3, 4, 5};
+        int[] expectedResult = {7, 3, 4, 5};
+        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+    }
 
     @Test(expected = RuntimeException.class)
-//    @Ignore ("исключение пока тестировать не нужно")
-    public void testFromArrToArrException(){
+    public void testFromArrToArrException1(){
         int[] arrStart = {1, 2, 3, 3, 5};
         fromArrToArr.arrStrtsAfterFour(arrStart);
     }
