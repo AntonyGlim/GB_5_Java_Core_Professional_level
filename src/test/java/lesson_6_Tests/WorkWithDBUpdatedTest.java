@@ -1,6 +1,7 @@
 package lesson_6_Tests;
 
 import lesson_6_Tests_jUnit_Logging_Log4о.WorkWithDB;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,5 +45,17 @@ public class WorkWithDBUpdatedTest {
             e.printStackTrace();
         }
         Assert.assertTrue(true);
+    }
+
+    /**
+     * Закрываем соединение с БД
+     */
+    @After
+    public void disconnect(){
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
