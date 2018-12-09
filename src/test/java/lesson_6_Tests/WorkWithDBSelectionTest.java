@@ -14,20 +14,20 @@ import java.util.Collection;
 
 @RunWith(Parameterized.class)
 public class WorkWithDBSelectionTest {
-    
+
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"1 Иванов 4", "Иванов"},
-                {"2 Петров 3", "Петров"},
-                {"3 Зюганов 5", "Зюганов"},
-                {"4 Петренко 4", "Петренко"},
-                {"5 Ильявичус 4", "Ильявичус"},
-                {"6 Ильин 4", "Ильин"},
-                {"7 Пуговкин 5", "Пуговкин"},
-                {"8 Коннозаводов 5", "Коннозаводов"},
-                {"9 Якименко 4", "Якименко"},
-                {"10 Кац 5", "Кац"},
+                {"Иванов 4", "Иванов"},
+                {"Петров 3", "Петров"},
+                {"Зюганов 5", "Зюганов"},
+                {"Петренко 4", "Петренко"},
+                {"Ильявичус 4", "Ильявичус"},
+                {"Ильин 4", "Ильин"},
+                {"Пуговкин 5", "Пуговкин"},
+                {"Коннозаводов 5", "Коннозаводов"},
+                {"Якименко 4", "Якименко"},
+                {"Кац 5", "Кац"},
         });
     }
 
@@ -43,12 +43,13 @@ public class WorkWithDBSelectionTest {
     private String tableName = "stud";
     private WorkWithDB workWithDB;
 
-    @Before
+
     /**
      * Устанавливаем соединение с БД
      * @throws ClassNotFoundException
      * @throws SQLException
      */
+    @Before
     public void connect() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:src/main/java/lesson_6_Tests_jUnit_Logging_Log4о/lesson_6_students.db");
@@ -58,7 +59,6 @@ public class WorkWithDBSelectionTest {
 
     @Test
     public void returnStringBySecondNameTest1(){
-        String str = "1 Иванов 4";
         try {
             Assert.assertTrue(expected.equals(workWithDB.returnStringBySecondName(statement, tableName, sendTo)));
         } catch (SQLException e) {
@@ -66,10 +66,11 @@ public class WorkWithDBSelectionTest {
         }
     }
 
-    @After
+
     /**
      * Закрываем соединение с БД
      */
+    @After
     public void disconnect(){
         try {
             connection.close();

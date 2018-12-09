@@ -50,11 +50,10 @@ public class WorkWithDB {
         ResultSet rs = statement.executeQuery(sql);
         Object[] arr = new Object[3];
         while (rs.next()){
-            arr[0] = rs.getInt(1);
             arr[1] = rs.getString(2);
             arr[2] = rs.getInt(3);
         }
-        String studInformation = arr[0].toString() + " " + arr[1] + " " + arr[2].toString();
+        String studInformation = arr[1] + " " + arr[2].toString();
         return studInformation;
     }
 
