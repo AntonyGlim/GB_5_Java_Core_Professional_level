@@ -39,11 +39,11 @@ public class WorkWithDB {
     /**
      * Метод обновит значение фамилии студента
      * На место старой фамилии поставит новую
-     * @param statement
+     * @param statement - объект для подключения к БД
      * @param tableName - имя таблицы
-     * @param oldSecond_name
-     * @param newSecond_name
-     * @return
+     * @param oldSecond_name - фамилия, которую нужно заменить
+     * @param newSecond_name - новая фамилия
+     * @return - количество измененных строк
      * @throws SQLException
      */
     public int updateStudBySecondName(Statement statement, String tableName, String oldSecond_name, String newSecond_name) throws SQLException {
@@ -54,15 +54,10 @@ public class WorkWithDB {
 
     /**
      * Метод вернет строку из БД по фамилии студента (Не включая id).
+     * @param statement - объект для подключения к БД
      * @param tableName - имя таблицы
-     * @throws SQLException
-     */
-    /**
-     *
-     * @param statement
-     * @param tableName - имя таблицы
-     * @param second_name
-     * @return
+     * @param second_name - запрашиваемая фамилия
+     * @return - вернет строку сформированную из запроса к БД
      * @throws SQLException
      */
     public String returnStringBySecondName(Statement statement, String tableName, String second_name) throws SQLException {
@@ -75,27 +70,6 @@ public class WorkWithDB {
         }
         String studInformation = arr[1] + " " + arr[2].toString();
         return studInformation;
-    }
-
-
-//    private static Connection connection;
-//    private static Statement statement;
-//    private static String tableName = "stud";
-//    private static WorkWithDB workWithDB;
-
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//        Object[] arr = new Object[3];
-//        arr[0] = "1";
-//        arr[1] = "Иванов";
-//        arr[2] = "4";
-//        String studInformation = arr[0].toString() + " " + arr[1].toString() + " " + arr[2].toString();
-//        System.out.println(studInformation);
-
-//        Class.forName("org.sqlite.JDBC");
-//        connection = DriverManager.getConnection("jdbc:sqlite:src/main/java/lesson_6_Tests_jUnit_Logging_Log4о/lesson_6_students.db");
-//        statement = connection.createStatement();
-//
-//        System.out.println(returnStringBySecondName(statement, tableName, "Пуговкин"));
     }
 
 }

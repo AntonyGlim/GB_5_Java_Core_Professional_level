@@ -10,17 +10,23 @@
 package lesson_6_Tests_jUnit_Logging_Log4о;
 
 public class FromArrToArr {
+
+    /**
+     * Метод отвечает требованиям задания
+     * @param arr - получает на вход массив с числами
+     * @return - возвращает массив после 1-й 4-ки
+     */
     public int[] arrStrtsAfterFour (int[] arr){
         int[] arrAfterFour;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == 4){
+            if (arr[i] == 4){                                           //Если нашли четверку, пишем массив после 4
                 arrAfterFour = new int[arr.length - i - 1];
                 for (int j = 0; j < arrAfterFour.length; j++) {
                     arrAfterFour[j] = arr[j + i + 1];
                 }
-                return arrAfterFour;
+                return arrAfterFour;                                    //Вернет массив после 4
             }
         }
-        throw new RuntimeException("В массиве нет 4!");
+        throw new RuntimeException("В массиве нет 4!");                 //Если 4 нет, то выкинет исключения
     }
 }
