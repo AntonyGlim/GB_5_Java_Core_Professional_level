@@ -3,6 +3,7 @@ package lesson_6_Tests;
 import lesson_6_Tests_jUnit_Logging_Log4о.ArrWithFourAndOne;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -26,15 +27,14 @@ public class ArrWithFourAndOneTest {
 //                {-1, 5, 4},
 //        });
 //    }
-//    private int a;
-//    private int b;
-//    private int c;
-//
-//    public ArrWithFourAndOneTest(int a, int b, int c) {
-//        this.a = a;
-//        this.b = b;
-//        this.c = c;
-//    }
+
+    private int[] a;
+    private int[] b;
+
+    public ArrWithFourAndOneTest(int[] a, int[] b) {
+        this.a = a;
+        this.b = b;
+    }
 
     ArrWithFourAndOne arrWithFourAndOne;
 
@@ -44,41 +44,49 @@ public class ArrWithFourAndOneTest {
     }
 
     @Test
+    @Ignore
     public void test1() {
         int[] arr = {};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test2() {
         int[] arr = {1, 1, 1, 1, 1, 1, 1};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test3() {
         int[] arr = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test4() {
         int[] arr = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test5() {
         int[] arr = {1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
         Assert.assertTrue(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test6() {
         int[] arr = {1, 4};
         Assert.assertTrue(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test7() {
         int[] arr = {1};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
     }
     @Test
+    @Ignore
     public void test8() {
         int[] arr = {4};
         Assert.assertFalse(arrWithFourAndOne.isFourOrOne(arr));
