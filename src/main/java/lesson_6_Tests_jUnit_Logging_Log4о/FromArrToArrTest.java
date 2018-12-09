@@ -10,22 +10,22 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-@RunWith(Parameterized.class)
+//@RunWith(Parameterized.class)
 public class FromArrToArrTest {
-
-    @Parameterized.Parameters
-    public static Collection<Object[][]> data() {
-        return Arrays.asList(new Object[][][]{
-                {{1, 2, 3, 4, 5}, {5}}
-        });
-    }
-    private int[] arrStart;
-    private int[] expectedResult;
-
-    public FromArrToArrTest(int[] arrStart, int[] expectedResult) {
-        this.arrStart = arrStart;
-        this.expectedResult = expectedResult;
-    }
+//
+//    @Parameterized.Parameters
+//    public static Collection<Object[][]> data() {
+//        return Arrays.asList(new Object[][][]{
+//                {{1, 2, 3, 4, 5}, {5}}
+//        });
+//    }
+//    private int[] arrStart;
+//    private int[] expectedResult;
+//
+//    public FromArrToArrTest(int[] arrStart, int[] expectedResult) {
+//        this.arrStart = arrStart;
+//        this.expectedResult = expectedResult;
+//    }
 
     private FromArrToArr fromArrToArr;
 
@@ -35,10 +35,11 @@ public class FromArrToArrTest {
     }
 
     @Test
+//    @Ignore
     public void testFromArrToArr() {
-//        int[] arrStart = {1, 2, 3, 4, 5};
-//        int[] expectedResult = {5};
-        Assert.assertArrayEquals(this.expectedResult, this.fromArrToArr.arrStrtsAfterFour(arrStart));
+        int[] arrStart = {1, 4, 3, 4, 5};
+        int[] expectedResult = {3, 4, 5};
+        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
     }
 
     @Test(expected = RuntimeException.class)
