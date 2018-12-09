@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Проверяем добавление строк в БД
+ */
 public class WorkWithDBInsertTest {
 
     private Connection connection;
@@ -31,6 +34,12 @@ public class WorkWithDBInsertTest {
         workWithDB = new WorkWithDB();
     }
 
+    /**
+     * Метод вставляет в БД новую строку, с заведомо не правильной оценкой.
+     * При помощи метода returnStringBySecondName возвращаем строку вернувшуюся из БД
+     * И сравниваем ее с заведомо известным результатом.
+     * После чего, удаляем строку из БД.
+     */
     @Test
     public void insertDataIntoDBTest (){
         try {

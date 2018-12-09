@@ -11,6 +11,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Проверяем обновление строк в БД
+ */
 public class WorkWithDBUpdatedTest {
 
     private Connection connection;
@@ -33,7 +36,7 @@ public class WorkWithDBUpdatedTest {
 
     /**
      * Тестируем обновление данных в БД
-     * Для этого восим запись, обновляем ее, проверяем обновление, и удаляем запись
+     * Для этого вносим запись, обновляем ее, проверяем обновление, и удаляем запись
      */
     @Test
     public void updateDataInDBTest(){

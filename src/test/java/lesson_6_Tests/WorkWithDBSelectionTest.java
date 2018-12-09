@@ -12,10 +12,13 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Collection;
 
-@RunWith(Parameterized.class)
+/**
+ * В классе проверяем, корректно - ли работают запросы в БД
+ */
+@RunWith(Parameterized.class)                                                   //Используем параметризацию
 public class WorkWithDBSelectionTest {
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters                                                   //Используем параметризацию
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {"Иванов 4", "Иванов"},
@@ -57,6 +60,10 @@ public class WorkWithDBSelectionTest {
         workWithDB = new WorkWithDB();
     }
 
+    /**
+     * Проверяем, как работает получение данных из БД
+     * Полученная из БД строка запроса, должна соответствовать заранее известному результату
+     */
     @Test
     public void returnStringBySecondNameTest1(){
         try {

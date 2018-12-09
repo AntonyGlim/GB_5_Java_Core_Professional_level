@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
+//TODO не реализован праметризованый ввод 2 массивов. Вопрос Артему.
 //@RunWith(Parameterized.class)
 public class FromArrToArrTest {
 //
@@ -30,6 +31,7 @@ public class FromArrToArrTest {
 
     private FromArrToArr fromArrToArr;
 
+    //Все, что создадим здесь, будет выполняться перед запуском каждого теста
     @Before
     public void startFromArrToArrTest(){
         fromArrToArr = new FromArrToArr();
