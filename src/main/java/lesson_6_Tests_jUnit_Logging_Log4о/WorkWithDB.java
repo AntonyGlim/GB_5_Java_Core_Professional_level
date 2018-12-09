@@ -24,6 +24,11 @@ public class WorkWithDB {
         statement.execute(sql);
     }
 
+    public void deleteFromTable (Statement statement, String table_name, String second_name) throws SQLException {
+        String sql = String.format("DELETE FROM %s WHERE second_name = '%s';", table_name, second_name);
+        statement.execute(sql);
+    }
+
     /**
      * Метод обновит значение фамилии студента
      * На место старой фамилии поставит новую
@@ -34,7 +39,7 @@ public class WorkWithDB {
      * @return
      * @throws SQLException
      */
-    public int updateStudBySecondName(Statement statement, String tableName, String oldSecond_name, int newSecond_name) throws SQLException {
+    public int updateStudBySecondName(Statement statement, String tableName, String oldSecond_name, String newSecond_name) throws SQLException {
         String sql = String.format("UPDATE %s SET second_name = '%s' WHERE second_name = '%s';", tableName, newSecond_name, oldSecond_name);
         int count = statement.executeUpdate(sql);
         return count;
