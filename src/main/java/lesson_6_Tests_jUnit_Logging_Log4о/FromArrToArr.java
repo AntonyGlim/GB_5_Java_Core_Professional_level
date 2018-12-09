@@ -11,7 +11,6 @@ package lesson_6_Tests_jUnit_Logging_Log4о;
 
 public class FromArrToArr {
     public int[] arrStrtsAfterFour (int[] arr){
-        int index;
         int[] arrAfterFour;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == 4){
