@@ -9,6 +9,11 @@ public class Quay {
     private int capacity;
     private String productDescription;
 
+    public Quay(int capacity, String productDescription) {
+        this.capacity = capacity;
+        this.productDescription = productDescription;
+    }
+
     public int getCapacity() {
         return capacity;
     }
