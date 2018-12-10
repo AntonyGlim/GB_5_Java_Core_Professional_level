@@ -6,11 +6,12 @@ package lesson_5_Multithreading_Part_II.ShipsInTheSea;
  * shipSpeed - скорость корабля
  */
 public class Ship {
+    private String name;
     private int shipCapacity;
-    private double shipSpeed;
+    private int shipSpeed;
     private String productType;
 
-    public Ship(int shipCapacity, double shipSpeed, String productType) {
+    public Ship(int shipCapacity, int shipSpeed, String productType) {
         this.shipCapacity = shipCapacity;
         this.shipSpeed = shipSpeed;
         this.productType = productType;
@@ -20,15 +21,19 @@ public class Ship {
         return shipCapacity;
     }
 
-    public double getShipSpeed() {
+    public int getShipSpeed() {
         return shipSpeed;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setShipCapacity(int shipCapacity) {
         this.shipCapacity = shipCapacity;
     }
 
-    public void setShipSpeed(double shipSpeed) {
+    public void setShipSpeed(int shipSpeed) {
         this.shipSpeed = shipSpeed;
     }
 }
