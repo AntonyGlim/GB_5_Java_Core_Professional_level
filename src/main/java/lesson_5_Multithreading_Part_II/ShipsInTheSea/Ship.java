@@ -11,7 +11,10 @@ public class Ship implements Runnable {
     private int shipSpeed;
     private String productType;
 
-    public Ship(int shipCapacity, int shipSpeed, String productType) {
+    private SeaTrevel seaTrevel;
+
+    public Ship(SeaTrevel seaTrevel, int shipCapacity, int shipSpeed, String productType) {
+        this.seaTrevel = seaTrevel;
         this.shipCapacity = shipCapacity;
         this.shipSpeed = shipSpeed;
         this.productType = productType;
@@ -39,8 +42,8 @@ public class Ship implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < trevel.().size(); i++) {                             //Проходит препятствия
-            race.getStages().get(i).go(this);
+        for (int i = 0; i < seaTrevel.getTrevel().size(); i++) {                             //Проходит препятствия
+            seaTrevel.getTrevel().get(i).toDo(this);
         }
     }
 }
