@@ -8,10 +8,12 @@ package lesson_5_Multithreading_Part_II.ShipsInTheSea;
 public class Ship {
     private int shipCapacity;
     private double shipSpeed;
+    private String productType;
 
-    public Ship(int shipCapacity, double shipSpeed) {
+    public Ship(int shipCapacity, double shipSpeed, String productType) {
         this.shipCapacity = shipCapacity;
         this.shipSpeed = shipSpeed;
+        this.productType = productType;
     }
 
     public int getShipCapacity() {
