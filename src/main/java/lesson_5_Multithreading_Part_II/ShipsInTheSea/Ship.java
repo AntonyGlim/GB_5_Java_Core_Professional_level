@@ -5,7 +5,7 @@ package lesson_5_Multithreading_Part_II.ShipsInTheSea;
  * shipCapacity - вместимость
  * shipSpeed - скорость корабля
  */
-public class Ship {
+public class Ship implements Runnable {
     private String name;
     private int shipCapacity;
     private int shipSpeed;
@@ -35,5 +35,12 @@ public class Ship {
 
     public void setShipSpeed(int shipSpeed) {
         this.shipSpeed = shipSpeed;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < trevel.().size(); i++) {                             //Проходит препятствия
+            race.getStages().get(i).go(this);
+        }
     }
 }
