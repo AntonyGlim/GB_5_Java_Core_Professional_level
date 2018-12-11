@@ -12,22 +12,26 @@ import java.util.Arrays;
 import java.util.Collection;
 
 //TODO не реализован праметризованый ввод 2 массивов. Вопрос Артему.
-//@RunWith(Parameterized.class)
+@RunWith(Parameterized.class)
 public class FromArrToArrTest {
-//
-//    @Parameterized.Parameters
-//    public static Collection<Object[][]> data() {
-//        return Arrays.asList(new Object[][][]{
-//                {{1, 2, 3, 4, 5}, {5}}
-//        });
-//    }
-//    private int[] arrStart;
-//    private int[] expectedResult;
-//
-//    public FromArrToArrTest(int[] arrStart, int[] expectedResult) {
-//        this.arrStart = arrStart;
-//        this.expectedResult = expectedResult;
-//    }
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {new int[]{1, 4, 3, 4, 5}, new int[]{3, 4, 5}},
+                {new int[]{1, 0, 3, 4, 5}, new int[]{5}},
+                {new int[]{1, 2, 3, 2, 5, 10, 12, 4}, new int[]{}},
+                {new int[]{4, 7, 3, 4, 5}, new int[]{7, 3, 4, 5}},
+                {new int[]{1, 2, 3, 4, 5}, new int[]{5}}
+        });
+    }
+    private int[] arrStart;
+    private int[] expectedResult;
+
+    public FromArrToArrTest(int[] arrStart, int[] expectedResult) {
+        this.arrStart = arrStart;
+        this.expectedResult = expectedResult;
+    }
 
     private FromArrToArr fromArrToArr;
 
@@ -38,29 +42,34 @@ public class FromArrToArrTest {
     }
 
     @Test
-    public void testFromArrToArr1() {
-        int[] arrStart = {1, 4, 3, 4, 5};
-        int[] expectedResult = {3, 4, 5};
+    public void testFromArrToArr0() {
         Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
     }
-    @Test
-    public void testFromArrToArr2() {
-        int[] arrStart = {1, 0, 3, 4, 5};
-        int[] expectedResult = {5};
-        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
-    }
-    @Test
-    public void testFromArrToArr3() {
-        int[] arrStart = {1, 2, 3, 2, 5, 10, 12, 4};
-        int[] expectedResult = {};
-        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
-    }
-    @Test
-    public void testFromArrToArr4() {
-        int[] arrStart = {4, 7, 3, 4, 5};
-        int[] expectedResult = {7, 3, 4, 5};
-        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
-    }
+
+//    @Test
+//    public void testFromArrToArr1() {
+//        int[] arrStart = {1, 4, 3, 4, 5};
+//        int[] expectedResult = {3, 4, 5};
+//        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+//    }
+//    @Test
+//    public void testFromArrToArr2() {
+//        int[] arrStart = {1, 0, 3, 4, 5};
+//        int[] expectedResult = {5};
+//        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+//    }
+//    @Test
+//    public void testFromArrToArr3() {
+//        int[] arrStart = {1, 2, 3, 2, 5, 10, 12, 4};
+//        int[] expectedResult = {};
+//        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+//    }
+//    @Test
+//    public void testFromArrToArr4() {
+//        int[] arrStart = {4, 7, 3, 4, 5};
+//        int[] expectedResult = {7, 3, 4, 5};
+//        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+//    }
 
     @Test(expected = RuntimeException.class)
     public void testFromArrToArrException1(){
