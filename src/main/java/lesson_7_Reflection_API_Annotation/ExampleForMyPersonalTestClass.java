@@ -4,25 +4,38 @@ package lesson_7_Reflection_API_Annotation;
  * Класс содержит методы, которые необходимо тестировать
  */
 public class ExampleForMyPersonalTestClass {
+    public ExampleForMyPersonalTestClass(byte b, short s, int a, long l, float f, double d, char ch, boolean bul) {
+        this.b = b;
+        this.s = s;
+        this.a = a;
+        this.l = l;
+        this.f = f;
+        this.d = d;
+        this.ch = ch;
+        this.bul = bul;
+    }
+
+    public ExampleForMyPersonalTestClass() {
+    }
+
     /**
      * Создать переменные всех пройденных типов данных, и инициализировать их значения;
      */
-    static void example_1 () {
         byte b = 127;
         short s = 45;
-        int a = 125;
-        long l = 5248L;
-        float f = 4568.56f;
-        double d = 457868.5696d;
-        char ch = 'C';
-        boolean bul = true;
-    }
+        public int a = 125;
+        public long l = 5248L;
+        public float f = 4568.56f;
+        private double d = 457868.5696d;
+        private char ch = 'C';
+        private boolean bul = true;
+
 
     /**
      * Написать метод, вычисляющий выражение a + b и возвращающий результат,
      * где a, b – входные параметры этого метода;
      */
-    static float plus  (int a, int b){
+    float plus  (int a, int b){
         return (a + b);
     }
 

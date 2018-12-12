@@ -12,50 +12,90 @@
  */
 package lesson_7_Reflection_API_Annotation;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
 public class MyPersonalTestClass {
-    public static void main(String[] args) {
-        //Создать переменные всех пройденных типов данных, и инициализировать их значения;
-        System.out.println("example 1");
-        example_1();
-        System.out.println("");
+    public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException {
 
-        //Написать метод, вычисляющий выражение a * (b + (c / d)) и возвращающий результат,
-        // где a, b, c, d – входные параметры этого метода;
-        System.out.println("example 2");
-        System.out.println(example_2(1, 2,3,4));
-        System.out.println("");
+        ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
 
-        //Написать метод, принимающий на вход два числа, и проверяющий,
-        // что их сумма лежит в пределах от 10 до 20 (включительно),
-        // если да – вернуть true, в противном случае – false;
-        System.out.println("example 3");
-        System.out.println(example_3(10, 1));
-        System.out.println("");
+        //Получение объекта типа Class
+        Class exampleClass = example.getClass();
+        System.out.println("Объект типа Class: " + exampleClass + "\n");
 
-        //Написать метод, которому в качестве параметра передается целое число,
-        // метод должен напечатать в консоль положительное число передали или отрицательное
-        // (Замечание: ноль считаем положительным числом.);
-        System.out.println("example 4");
-        System.out.println(example_4(0));
-        System.out.println("");
+        //Получение имени класса
+        System.out.println("Имя класса: " + exampleClass.getName() + "\n");
 
-        //Написать метод, которому в качестве параметра передается целое число,
-        // метод должен вернуть true, если число отрицательное;
-        System.out.println("example 5");
-        System.out.println(example_5(12));
-        System.out.println("");
+        //Исследование модификаторов класса
+        int mods = exampleClass.getModifiers();
 
-        //Написать метод, которому в качестве параметра передается строка, обозначающая имя,
-        // метод должен вывести в консоль сообщение «Привет, указанное_имя!»;
-        System.out.println("example 6");
-        example_6("Федя");
-        System.out.println("");
+        if (Modifier.isPublic(mods)) {
+            System.out.println("Модификаторов класса: " + "public" + "\n");
+        }
+        if (Modifier.isAbstract(mods)) {
+            System.out.println("Модификаторов класса: " + "abstract" + "\n");
+        }
+        if (Modifier.isFinal(mods)) {
+            System.out.println("Модификаторов класса: " + "final" + "\n");
+        }
 
-        //*Написать метод, который определяет, является ли год високосным,
-        // и выводит сообщение в консоль. Каждый 4-й год является високосным,
-        // кроме каждого 100-го, при этом каждый 400-й – високосный.
-        System.out.println("example 7");
-        example_7(400);
+        //Нахождение суперклассов
+        System.out.println("Суперкласс: " + exampleClass.getSuperclass() + "\n");
+
+        //Определение интерфейсов, реализуемых классом
+        Class[] interfaces = exampleClass.getInterfaces();
+        if (interfaces.length < 1){
+            System.out.println("Класс не подписан на интерфейсы" + "\n");
+        }
+        for(Class cInterface : interfaces) {
+            System.out.println("Класс подписан на интерфейс: " + cInterface.getName() + "\n");
+        }
+
+        //Исследование всех полей класса
+        Field[] privateFields = exampleClass.getDeclaredFields();
+        System.out.println("В классе есть следующие поля: ");
+        for (int i = 0; i < privateFields.length; i++) {
+            Class fieldType = privateFields[i].getType();
+            System.out.println("Имя: " + privateFields[i].getName());
+            System.out.println("Тип: " + fieldType.getName());
+            privateFields[i].setAccessible(true);
+            System.out.println("Значение: " + privateFields[i].get(example));
+            System.out.println();
+        }
+
+        //Конструкторы класса
+        Constructor[] constructors = exampleClass.getDeclaredConstructors();
+        if (constructors.length == 1){
+            System.out.println("Класс содержит только конструктор по умолчанию" + "\n");
+        }
+        for (Constructor constructor : constructors) {
+            Class[] paramTypes = constructor.getParameterTypes();
+            System.out.println("Конструктор принимает параметры следующих типов: ");
+            if (paramTypes.length < 1){
+                System.out.println("Конструктор по умолчанию");
+            }
+            for (Class paramType : paramTypes) {
+                System.out.print(paramType.getName() + " ");
+            }
+            System.out.println();
+        }
+
+        //Исследование информации о методе, вызов метода.
+        Method[] methods = exampleClass.getDeclaredMethods();
+        for (Method method : methods) {
+            System.out.println("Имя: " + method.getName());
+            System.out.println("Возвращаемый тип: " + method.getReturnType().getName());
+
+            Class[] paramTypes = method.getParameterTypes();
+            System.out.print("Типы параметров: ");
+            for (Class paramType : paramTypes) {
+                System.out.print(" " + paramType.getName());
+            }
+            System.out.println();
+        }
 
     }
 }
