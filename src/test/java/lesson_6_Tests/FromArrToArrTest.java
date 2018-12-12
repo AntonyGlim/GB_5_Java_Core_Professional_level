@@ -22,7 +22,8 @@ public class FromArrToArrTest {
                 {new int[]{1, 0, 3, 4, 5}, new int[]{5}},
                 {new int[]{1, 2, 3, 2, 5, 10, 12, 4}, new int[]{}},
                 {new int[]{4, 7, 3, 4, 5}, new int[]{7, 3, 4, 5}},
-                {new int[]{1, 2, 3, 4, 5}, new int[]{5}}
+                {new int[]{1, 2, 3, 4, 5}, new int[]{5}},
+                {new int[]{1, 2, 3, 3, 5}, new int[]{}}
         });
     }
     private int[] arrStart;
@@ -42,9 +43,16 @@ public class FromArrToArrTest {
     }
 
     @Test
-    public void testFromArrToArr0() {
-        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+    public void testFromArrToArr0() throws RuntimeException {
+        try {                                                                                       //При помощи try/catch мы проведем наши тесты с исключениями
+            Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
+        } catch (RuntimeException e){
+            System.out.println("В массиве нет числа 4!");
+        }
+
     }
+}
+
 
 //    @Test
 //    public void testFromArrToArr1() {
@@ -70,10 +78,10 @@ public class FromArrToArrTest {
 //        int[] expectedResult = {7, 3, 4, 5};
 //        Assert.assertArrayEquals(expectedResult, fromArrToArr.arrStrtsAfterFour(arrStart));
 //    }
+//
+//    @Test(expected = RuntimeException.class)
+//    public void testFromArrToArrException1(){
+//        int[] arrStart = {1, 2, 3, 3, 5};
+//        fromArrToArr.arrStrtsAfterFour(arrStart);
+//    }
 
-    @Test(expected = RuntimeException.class)
-    public void testFromArrToArrException1(){
-        int[] arrStart = {1, 2, 3, 3, 5};
-        fromArrToArr.arrStrtsAfterFour(arrStart);
-    }
-}
