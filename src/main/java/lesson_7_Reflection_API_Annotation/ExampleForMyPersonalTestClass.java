@@ -1,5 +1,8 @@
 package lesson_7_Reflection_API_Annotation;
 
+/**
+ * Класс содержит методы, которые необходимо тестировать
+ */
 public class ExampleForMyPersonalTestClass {
     /**
      * Создать переменные всех пройденных типов данных, и инициализировать их значения;
@@ -13,15 +16,6 @@ public class ExampleForMyPersonalTestClass {
         double d = 457868.5696d;
         char ch = 'C';
         boolean bul = true;
-
-        System.out.println(b);
-        System.out.println(s);
-        System.out.println(a);
-        System.out.println(l);
-        System.out.println(f);
-        System.out.println(d);
-        System.out.println(ch);
-        System.out.println(bul);
     }
 
     /**
@@ -41,7 +35,7 @@ public class ExampleForMyPersonalTestClass {
     }
 
     /**
-     * Написать метод, вычисляющий выражение a + b и возвращающий результат,
+     * Написать метод, вычисляющий выражение a - b и возвращающий результат,
      * где a, b – входные параметры этого метода;
      */
     static float minus (int a, int b){
@@ -49,7 +43,7 @@ public class ExampleForMyPersonalTestClass {
     }
 
     /**
-     * Написать метод, вычисляющий выражение a * b и возвращающий результат,
+     * Написать метод, вычисляющий выражение a / b и возвращающий результат,
      * где a, b – входные параметры этого метода;
      */
     static float divide (int a, int b) throws ArithmeticException{
@@ -66,12 +60,45 @@ public class ExampleForMyPersonalTestClass {
      * Написать метод, принимающий на вход два числа, и проверяющий,
      * что их сумма лежит в пределах от 10 до 20 (включительно),
      * если да – вернуть true, в противном случае – false;
-     * @param a
-     * @param b
-     * @return
      */
-    static boolean example_3(int a, int b){
+    static boolean example_3_1(int a, int b){
         if ((a + b) >= 10 && (a + b) <= 20)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Написать метод, принимающий на вход два числа, и проверяющий,
+     * что их сумма лежит в пределах от 30 до 40 (включительно),
+     * если да – вернуть true, в противном случае – false;
+     */
+    static boolean example_3_2(int a, int b){
+        if ((a + b) >= 30 && (a + b) <= 40)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Написать метод, принимающий на вход два числа, и проверяющий,
+     * что их сумма лежит в пределах от 50 до 60 (включительно),
+     * если да – вернуть true, в противном случае – false;
+     */
+    static boolean example_3_3(int a, int b){
+        if ((a + b) >= 50 && (a + b) <= 60)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * Написать метод, принимающий на вход два числа, и проверяющий,
+     * что их сумма лежит в пределах от 70 до 80 (включительно),
+     * если да – вернуть true, в противном случае – false;
+     */
+    static boolean example_4(int a, int b){
+        if ((a + b) >= 70 && (a + b) <= 80)
             return true;
         else
             return false;
@@ -81,8 +108,6 @@ public class ExampleForMyPersonalTestClass {
      * Написать метод, которому в качестве параметра передается целое число,
      * метод должен напечатать в консоль положительное число передали или отрицательное
      * (Замечание: ноль считаем положительным числом.);
-     * @param a
-     * @return
      */
     static String example_4(int a){
         if (a >= 0)
@@ -94,8 +119,6 @@ public class ExampleForMyPersonalTestClass {
     /**
      * Написать метод, которому в качестве параметра передается целое число,
      * метод должен вернуть true, если число отрицательное;
-     * @param a
-     * @return
      */
     static boolean example_5(int a) {
         if (a < 0)
@@ -107,7 +130,6 @@ public class ExampleForMyPersonalTestClass {
     /**
      * Написать метод, которому в качестве параметра передается строка, обозначающая имя,
      * метод должен вывести в консоль сообщение «Привет, указанное_имя!»;
-     * @param str
      */
     static void example_6(String str){
         System.out.println("Привет, " + str + "!");
@@ -117,7 +139,6 @@ public class ExampleForMyPersonalTestClass {
      * *Написать метод, который определяет, является ли год високосным,
      * и выводит сообщение в консоль. Каждый 4-й год является високосным,
      * кроме каждого 100-го, при этом каждый 400-й – високосный.
-     * @param year
      */
     static void example_7(int year){
         if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
