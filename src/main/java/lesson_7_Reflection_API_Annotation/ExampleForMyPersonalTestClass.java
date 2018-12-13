@@ -4,6 +4,7 @@ package lesson_7_Reflection_API_Annotation;
  * Класс содержит методы, которые необходимо тестировать
  */
 public class ExampleForMyPersonalTestClass {
+
     public ExampleForMyPersonalTestClass(byte b, short s, int a, long l, float f, double d, char ch, boolean bul) {
         this.b = b;
         this.s = s;
