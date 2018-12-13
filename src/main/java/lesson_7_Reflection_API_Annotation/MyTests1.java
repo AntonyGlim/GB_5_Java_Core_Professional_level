@@ -22,7 +22,7 @@ public class MyTests1 {
     /**
      * Метод тестирует метод "plus", который складывает 2 числа
      */
-    @MyTest(value = 2)
+    @MyTest(priority = 2)
     public void myTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
         Class exampleClass = example.getClass();
@@ -48,7 +48,7 @@ public class MyTests1 {
     /**
      * Метод тестирует метод "minus", который вычитает 2 числа
      */
-    @MyTest(value = 8)
+    @MyTest(priority = 8)
     public void myTest2() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
         Class exampleClass = example.getClass();
