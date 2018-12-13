@@ -17,15 +17,28 @@ public class MyPersonalTestClass {
         Method beforeSuiteMethod = null;
         Method myTestMethod = null;
         Method afterSuiteMethod = null;
+        boolean isBeforeSuiteMeetsOnce = true;
+        boolean isAfterSuiteMeetsOnce = true;
         for (Method o : methods) {
             if(o.getAnnotation(BeforeSuite.class) != null) {
-                beforeSuiteMethod = o;
+                if (isBeforeSuiteMeetsOnce){
+                    beforeSuiteMethod = o;
+                    isBeforeSuiteMeetsOnce = false;
+                } else {
+                    throw new RuntimeException("Метод с анотацией @BeforeSuite должен быть только один!");
+                }
             }
             if(o.getAnnotation(MyTest.class) != null) {
                 myTestMethod = o;
             }
             if(o.getAnnotation(AfterSuite.class) != null) {
-                afterSuiteMethod = o;
+                if (isAfterSuiteMeetsOnce){
+                    afterSuiteMethod = o;
+                    isAfterSuiteMeetsOnce = false;
+                } else {
+                    throw new RuntimeException("Метод с анотацией @AfterSuite должен быть только один!");
+                }
+
             }
         }
         beforeSuiteMethod.invoke(mt1);
