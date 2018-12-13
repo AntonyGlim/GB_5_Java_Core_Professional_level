@@ -9,45 +9,26 @@ import java.lang.reflect.Method;
 
 public class MyTests1 {
 
-    static ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
-    static Class exampleClass = example.getClass();
-
-    public static void main(String[] args) {
-
-        firstOfAll();
-        afterAll();
-
-        try {
-            myTest1();
-        } catch (NoSuchMethodException e1) {
-            e1.printStackTrace();
-        } catch (InvocationTargetException e1) {
-            e1.printStackTrace();
-        } catch (IllegalAccessException e1) {
-            e1.printStackTrace();
-        }
-
-    }
+//    static ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
+//    static Class exampleClass = example.getClass();
 
     @BeforeSuite
-    public static void firstOfAll(){
-        ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
-        exampleClass = example.getClass();
+    public void firstOfAll(){
+        System.out.println("Метод тестирует метод \"plus\", который складывает 2 числа");
     }
 
     @AfterSuite
-    public static void afterAll(){
-
+    public void afterAll(){
+        System.out.println("Тестирование завершено!");
     }
 
     /**
      * Метод тестирует метод "plus", который складывает 2 числа
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
      */
     @MyTest
-    public static void myTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void myTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
+        Class exampleClass = example.getClass();
         Class[] paramTypes = new Class[] { int.class, int.class };
         Method method = exampleClass.getDeclaredMethod("plus", paramTypes);
         System.out.println("Тестирование метода : \"" + method.getName() + "\"");
