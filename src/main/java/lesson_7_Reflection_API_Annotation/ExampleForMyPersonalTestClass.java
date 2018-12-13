@@ -31,12 +31,14 @@ public class ExampleForMyPersonalTestClass {
         private char ch = 'C';
         private boolean bul = true;
 
-
+//    public float plus (){
+//        return (a + b);
+//    }
     /**
      * Написать метод, вычисляющий выражение a + b и возвращающий результат,
      * где a, b – входные параметры этого метода;
      */
-    float plus  (int a, int b){
+    public float plus (int a, int b){
         return (a + b);
     }
 
