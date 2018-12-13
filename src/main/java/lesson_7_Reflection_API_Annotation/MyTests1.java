@@ -22,7 +22,7 @@ public class MyTests1 {
     /**
      * Метод тестирует метод "plus", который складывает 2 числа
      */
-    @MyTest
+    @MyTest(value = 2)
     public void myTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
         Class exampleClass = example.getClass();
@@ -38,9 +38,35 @@ public class MyTests1 {
             result = a + b;
             float d = (Float) method.invoke(example, a, b);
             if (Math.abs(d - result) < 0.000000001){
-                System.out.println("Test passed!");
+                System.out.println("MyTest1 passed!");
             } else {
-                System.err.println("Test failed!");
+                System.err.println("MyTest1 failed!");
+            }
+        }
+    }
+
+    /**
+     * Метод тестирует метод "minus", который вычитает 2 числа
+     */
+    @MyTest(value = 8)
+    public void myTest2() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
+        Class exampleClass = example.getClass();
+        Class[] paramTypes = new Class[] { int.class, int.class };
+        Method method = exampleClass.getDeclaredMethod("minus", paramTypes);
+        System.out.println("Тестирование метода : \"" + method.getName() + "\"");
+        int a;
+        int b;
+        float result;
+        for (int i = 0; i < 10; i++) {
+            a = (int) Math.random() * 100;
+            b = (int) Math.random() * 100;
+            result = a - b;
+            float d = (Float) method.invoke(example, a, b);
+            if (Math.abs(d - result) < 0.000000001){
+                System.out.println("MyTest2 passed!");
+            } else {
+                System.err.println("MyTest2 failed!");
             }
         }
     }
