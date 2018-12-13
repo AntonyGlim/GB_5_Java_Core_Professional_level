@@ -9,12 +9,9 @@ import java.lang.reflect.Method;
 
 public class MyTests1 {
 
-//    static ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
-//    static Class exampleClass = example.getClass();
-
     @BeforeSuite
     public void firstOfAll(){
-        System.out.println("Метод тестирует метод \"plus\", который складывает 2 числа");
+        System.out.println("Класс \"MyTests1\" тестирует метод \"plus\", который складывает 2 числа");
     }
 
     @AfterSuite

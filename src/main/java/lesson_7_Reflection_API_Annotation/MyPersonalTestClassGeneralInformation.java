@@ -16,7 +16,8 @@ package lesson_7_Reflection_API_Annotation;
 import java.lang.reflect.*;
 
 public class MyPersonalTestClassGeneralInformation {
-    public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException {
+
+    public static void MyPersonalTestClassGeneralInformation() throws IllegalAccessException, NoSuchFieldException {
 
         ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
 
