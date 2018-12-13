@@ -110,7 +110,7 @@ public class ExampleForMyPersonalTestClass {
      * что их сумма лежит в пределах от 70 до 80 (включительно),
      * если да – вернуть true, в противном случае – false;
      */
-    static boolean example_4(int a, int b){
+    static boolean example_3_4(int a, int b){
         if ((a + b) >= 70 && (a + b) <= 80)
             return true;
         else
