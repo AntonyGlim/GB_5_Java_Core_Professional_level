@@ -13,10 +13,7 @@
  */
 package lesson_7_Reflection_API_Annotation;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 
 public class MyPersonalTestClass {
     public static void main(String[] args) throws IllegalAccessException, NoSuchFieldException {
@@ -96,6 +93,19 @@ public class MyPersonalTestClass {
                 System.out.print(" " + paramType.getName());
             }
             System.out.println();
+        }
+
+        //Использование метода
+        try {
+            Class[] paramTypes = new Class[] { int.class, int.class };
+            Method method = exampleClass.getDeclaredMethod("plus", paramTypes);
+            Object[] arr = new Object[] { new Integer(2), new Integer(3) };
+            float d = (Float) method.invoke(example, arr);
+            System.out.println("\nРезультат работы метода: " + d);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
 
     }
