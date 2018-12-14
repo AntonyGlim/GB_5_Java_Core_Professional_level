@@ -24,7 +24,7 @@ public class MyPersonalTestClass {
 
             log.info("Старт работы программы");
 
-            startTest();                                        //Запускаем тест
+            startTest();                                                                //Запускаем тест
 
         } catch (InvocationTargetException e) {
             e.printStackTrace();
@@ -69,15 +69,15 @@ public class MyPersonalTestClass {
         Method[] onlyTestMethods = new Method[methods.length - 2];  //TODO - слабое место, если @BeforeSuite или @AfterSuite будет больше чем по одному - то здесь возникнет ошибка. Пока пропускаю
         int count = 0;
         for (Method o : methods) {
-            if(o.getAnnotation(BeforeSuite.class) != null) {        //Если соответствует определенной анотации
-                if (isBeforeSuiteMeetsOnce){                        //Если еще не встречался
+            if(o.getAnnotation(BeforeSuite.class) != null) {                        //Если соответствует определенной анотации
+                if (isBeforeSuiteMeetsOnce){                                        //Если еще не встречался
                     beforeSuiteMethod = o;
                     isBeforeSuiteMeetsOnce = false;
-                } else {                                            //Иначе выкидываем исключение
+                } else {                                                            //Иначе выкидываем исключение
                     throw new RuntimeException("Метод с анотацией @BeforeSuite должен быть только один!");
                 }
             }
-            if(o.getAnnotation(MyTest.class) != null) {             //Все методы с аннотацией MyTest складываем в отдельный массив
+            if(o.getAnnotation(MyTest.class) != null) {                             //Все методы с аннотацией MyTest складываем в отдельный массив
                 onlyTestMethods[count] = o;
                 count ++;
             }
@@ -94,12 +94,12 @@ public class MyPersonalTestClass {
 
         log.info("Старт тестов");
 
-        beforeSuiteMethod.invoke(mt1);                                      //Запускаем первый метод
-        onlyTestMethods = mySortingArr(onlyTestMethods);                    //Сортируем массив по приоритетам
-        for (int i = 0; i < onlyTestMethods.length; i++) {                  //Запускаем тесты
+        beforeSuiteMethod.invoke(mt1);                                              //Запускаем первый метод
+        onlyTestMethods = mySortingArr(onlyTestMethods);                            //Сортируем массив по приоритетам
+        for (int i = 0; i < onlyTestMethods.length; i++) {                          //Запускаем тесты
             onlyTestMethods[i].invoke(mt1);
         }
-        afterSuiteMethod.invoke(mt1);                                       //Запускаем последний метод
+        afterSuiteMethod.invoke(mt1);                                               //Запускаем последний метод
 
         log.info("Тесты проведены");
     }
@@ -111,7 +111,7 @@ public class MyPersonalTestClass {
      */
     public static Method[] mySortingArr(Method[] onlyTestMethods){
         Method[] sortedArr = new Method[onlyTestMethods.length];                    //Новый пустой массив
-        ArrayList<Method> list = new ArrayList<Method>();                                   //Переписываем массив в лист, чтобы удалять из него элементы
+        ArrayList<Method> list = new ArrayList<Method>();                           //Переписываем массив в лист, чтобы удалять из него элементы
         for (Method m : onlyTestMethods){
             list.add(m);
         }
