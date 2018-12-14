@@ -1,0 +1,12 @@
+2018-12-14 12:23:45 INFO  MyPersonalTestClass:21 - Это информационное сообщение!
+2018-12-14 12:25:42 INFO  MyPersonalTestClass:21 - Это информационное сообщение!
+2018-12-14 12:28:13 INFO  MyPersonalTestClass:20 - Старт работы программы
+2018-12-14 12:28:13 INFO  MyPersonalTestClass:31 - Программа завершила работу
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:20 - Старт работы программы
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:36 - Создаем экземпляр класса без ключевого слова new
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:41 - Инициализация переменных для работы с методами
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:47 - Инициализация переменных для управления логикой
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:52 - Извлечение методов из класса
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:78 - Старт тестов
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:84 - Тесты проведены
+2018-12-14 12:33:25 INFO  MyPersonalTestClass:31 - Программа завершила работу
