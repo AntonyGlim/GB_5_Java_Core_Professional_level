@@ -42,7 +42,6 @@ public class MyPersonalTestClass {
         //Эти флаги послужат для последовательного запуска методов класса
         log.info("Инициализация переменных для работы с методами");
         Method beforeSuiteMethod = null;
-        Method myTestMethod = null;
         Method afterSuiteMethod = null;
 
         //Эти флаги послужат для определения - единажды-ли встречается метод с определенной анотацией
@@ -65,8 +64,6 @@ public class MyPersonalTestClass {
                 }
             }
             if(o.getAnnotation(MyTest.class) != null) {
-                myTestMethod = o;
-                
                 onlyTestMethods[count] = o;
                 count ++;
             }
@@ -86,28 +83,39 @@ public class MyPersonalTestClass {
         beforeSuiteMethod.invoke(mt1);
         //TODO сделать, чтобы был не 1 метод, а несколько в массиве,
         //TODO отсортированном по приоритетам
-        myTestMethod.invoke(mt1);
+
+        onlyTestMethods = mySortingArr(onlyTestMethods);
+//        System.out.println(onlyTestMethods.length);
+//        for (int i = 0; i < onlyTestMethods.length; i++) {
+//            onlyTestMethods[i].invoke(mt1);
+//            System.out.println(onlyTestMethods[i].getName());
+//        }
+
+//            m.invoke(mt1);
         afterSuiteMethod.invoke(mt1);
         log.info("Тесты проведены");
     }
 
-    
-    public Method[] mySortingArr(Method[] onlyTestMethods){
+
+    public static Method[] mySortingArr(Method[] onlyTestMethods){
         Method[] sortedArr = new Method[onlyTestMethods.length];
         ArrayList<Method> list = new ArrayList<Method>();
         for (Method m : onlyTestMethods){
             list.add(m);
         }
-        for (int j = 1; j < list.size(); j++) {
-            int min = list.get(0).getAnnotation(MyTest.class).priority();
+        int j = 0;
+        while (list.size() > 0) {
+            int max = list.get(0).getAnnotation(MyTest.class).priority();
             int index = 0;
             for (int i = 1; i < list.size(); i++) {
-                if (list.get(i).getAnnotation(MyTest.class).priority() < min){
-                    min = list.get(i).getAnnotation(MyTest.class).priority();
+                if (list.get(i).getAnnotation(MyTest.class).priority() > max){
+                    max = list.get(i).getAnnotation(MyTest.class).priority();
                     index = i;
                 }
             }
             sortedArr[j] = list.remove(index);
+            System.out.println(sortedArr[j].getName());
+            j++;
         }
         return sortedArr;
     }
