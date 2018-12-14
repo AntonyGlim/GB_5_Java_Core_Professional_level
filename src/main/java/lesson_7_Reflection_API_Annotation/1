@@ -1,0 +1,26 @@
+Map<String, Person> people = new HashMap<String, Person>();
+
+    Person jim = new Person("Jim", 25);
+    Person scott = new Person("Scott", 28);
+    Person anna = new Person("Anna", 23);
+
+    people.put(jim.getName(), jim);
+    people.put(scott.getName(), scott);
+    people.put(anna.getName(), anna);
+
+    // not yet sorted
+    List<Person> peopleByAge = new ArrayList<Person>(people.values());
+
+    Collections.sort(peopleByAge, new Comparator<Person>() {
+
+        public int compare(Person o1, Person o2) {
+            return o1.getAge() - o2.getAge();
+        }
+    });
+
+    for (Person p : peopleByAge) {
+        System.out.println(p.getName() + "\t" + p.getAge());
+    }
+
+    AdvancedAnnotation annotation = m.getAnnotation(AdvancedAnnotation.class);
+                System.out.println("value: " + annotation.value());

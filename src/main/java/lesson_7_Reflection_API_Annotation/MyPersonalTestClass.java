@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.*;
 
 public class MyPersonalTestClass {
 
@@ -51,6 +52,7 @@ public class MyPersonalTestClass {
         //Извлекаем все методы,которые содержаться в классе
         log.info("Извлечение методов из класса");
         Method[] methods = MyTests1.class.getDeclaredMethods();
+        Map<Method, Integer> testsSortByValue = new HashMap<Method, Integer>();
         for (Method o : methods) {
             if(o.getAnnotation(BeforeSuite.class) != null) {        //Если соответствует определенной анотации
                 if (isBeforeSuiteMeetsOnce){                        //Если еще не встречался
@@ -62,6 +64,8 @@ public class MyPersonalTestClass {
             }
             if(o.getAnnotation(MyTest.class) != null) {
                 myTestMethod = o;
+                MyTest annotation = o.getAnnotation(MyTest.class);
+                testsSortByValue.put(o, annotation.priority());
             }
             if(o.getAnnotation(AfterSuite.class) != null) {
                 if (isAfterSuiteMeetsOnce){
@@ -84,4 +88,5 @@ public class MyPersonalTestClass {
         log.info("Тесты проведены");
     }
 
-}
+   }
+
