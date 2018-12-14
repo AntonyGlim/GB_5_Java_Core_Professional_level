@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 public class MyPersonalTestClass {
 
     // Инициализация логера
-    private static final Logger log = Logger.getLogger(MyPersonalTestClass.class);
+    private static final Logger log = Logger.getLogger(MyPersonalTestClass.class);      //Файл с настройками лежит рябом с файлами с расширением .class
 
     public static void main(String[] args) {
 

@@ -3,19 +3,24 @@ package lesson_7_Reflection_API_Annotation;
 import lesson_7_Reflection_API_Annotation.myAnotation.AfterSuite;
 import lesson_7_Reflection_API_Annotation.myAnotation.BeforeSuite;
 import lesson_7_Reflection_API_Annotation.myAnotation.MyTest;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class MyTests1 {
 
+    private static final Logger log = Logger.getLogger(MyTests1.class);
+
     @BeforeSuite
     public void firstOfAll(){
+        log.info("Отработал метод с аннотацией @BeforeSuite");
         System.out.println("Класс \"MyTests1\" тестирует метод \"plus\", который складывает 2 числа");
     }
 
     @AfterSuite
     public void afterAll(){
+        log.info("Отработал метод с аннотацией @AfterSuite");
         System.out.println("Тестирование завершено!");
     }
 
@@ -24,6 +29,7 @@ public class MyTests1 {
      */
     @MyTest(priority = 2)
     public void myTest1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        log.info("Начал выполнение тест");
         ExampleForMyPersonalTestClass example = new ExampleForMyPersonalTestClass();
         Class exampleClass = example.getClass();
         Class[] paramTypes = new Class[] { int.class, int.class };
@@ -37,9 +43,12 @@ public class MyTests1 {
             b = (int) Math.random() * 100;
             result = a + b;
             float d = (Float) method.invoke(example, a, b);
+            if (i == 9) result = 100000;                        //Специально провалим последний тест
             if (Math.abs(d - result) < 0.000000001){
+                log.info("Тест успешно пройден!");
                 System.out.println("MyTest1 passed!");
             } else {
+                log.error("Тест провален!");
                 System.err.println("MyTest1 failed!");
             }
         }
