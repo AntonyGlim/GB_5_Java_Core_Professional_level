@@ -15,6 +15,9 @@ package lesson_7_Reflection_API_Annotation;
 
 import java.lang.reflect.*;
 
+/**
+ * Класс не относиться к ДЗ на прямую, в нем просто собраны методы с коментариями
+ */
 public class MyPersonalTestClassGeneralInformation {
 
     public static void MyPersonalTestClassGeneralInformation() throws IllegalAccessException, NoSuchFieldException {

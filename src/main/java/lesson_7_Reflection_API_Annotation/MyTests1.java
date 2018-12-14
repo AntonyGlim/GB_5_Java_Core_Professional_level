@@ -43,7 +43,6 @@ public class MyTests1 {
             b = (int) Math.random() * 100;
             result = a + b;
             float d = (Float) method.invoke(example, a, b);
-            if (i == 9) result = 100000;                        //Специально провалим последний тест
             if (Math.abs(d - result) < 0.000000001){
                 log.info("Тест успешно пройден!");
                 System.out.println("MyTest1 passed!");
@@ -78,6 +77,33 @@ public class MyTests1 {
                 System.err.println("MyTest2 failed!");
             }
         }
+    }
+
+    /**
+     * Тест создан, чтобы проверить корректность работы сортировки по значению приоритета
+     */
+    @MyTest(priority = 9)
+    public void myTest3(){
+        System.out.println("Тестирование метода : \"" + "myTest3" + "\"");
+        System.out.println("MyTest3 passed!");
+    }
+
+    /**
+     * Тест создан, чтобы проверить корректность работы сортировки по значению приоритета
+     */
+    @MyTest(priority = 9)
+    public void myTest4(){
+        System.out.println("Тестирование метода : \"" + "myTest4" + "\"");
+        System.out.println("MyTest4 passed!");
+    }
+
+    /**
+     * Тест создан, чтобы проверить корректность работы сортировки по значению приоритета
+     */
+    @MyTest(priority = 4)
+    public void myTest5(){
+        System.out.println("Тестирование метода : \"" + "myTest5" + "\"");
+        System.out.println("MyTest5 passed!");
     }
 
 }
