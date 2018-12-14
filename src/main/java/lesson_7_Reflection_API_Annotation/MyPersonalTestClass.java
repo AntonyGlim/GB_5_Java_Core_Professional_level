@@ -65,6 +65,8 @@ public class MyPersonalTestClass {
 
         //Исполняем указанные методы
         beforeSuiteMethod.invoke(mt1);
+        //TODO сделать, чтобы был не 1 метод, а несколько в массиве,
+        //TODO отсортированном по приоритетам
         myTestMethod.invoke(mt1);
         afterSuiteMethod.invoke(mt1);
     }
