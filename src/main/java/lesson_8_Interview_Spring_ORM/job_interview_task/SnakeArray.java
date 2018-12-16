@@ -20,8 +20,8 @@ public class SnakeArray {
             maxNumberInArr = sc.nextInt();
             squareSideSize = calculateSquareSideSize(maxNumberInArr);
             snakeArr = new int[squareSideSize][squareSideSize];
-            int[][] temp = fillInWithNumbers(snakeArr, maxNumberInArr, 1);
-            printArray(temp);
+            snakeArr = fillInWithNumbers(snakeArr, maxNumberInArr, squareSideSize);
+            printArray(snakeArr);
         }
     }
 
@@ -55,29 +55,44 @@ public class SnakeArray {
         }
     }
 
-    private static int[][] fillInWithNumbers(int[][] arr, int maxNumberInArr, int startWith){
-        if (arr.length < 2){
-            return arr;
+    private static int[][] fillInWithNumbers(int[][] arr, int maxNumberInArr, int size) {
+        if(size == 1){
+            arr[0][0] = 1;
         }
-        int presentValue = startWith;
-        for (int i = 0; i < arr[0].length; i++) {
-            arr[0][i] = presentValue;
-            presentValue++;
+        int startLineIndex = 0;
+        int startColumnIndex = 0;
+        int presentValue = 1;
+
+        while (size >= 2){
+            //Работа с первой строкой
+            for (int i = startLineIndex; i < size; i++) {
+                arr[startLineIndex][i] = presentValue;
+                presentValue++;
+                if (presentValue > maxNumberInArr)return arr;
+            }
+            //Работа с последним столбцом
+            for (int i = startLineIndex + 1; i < size; i++) {
+                arr[i][size - 1] = presentValue;
+                presentValue++;
+                if (presentValue > maxNumberInArr)return arr;
+            }
+            //Работа с последней строкой
+            for (int i = size - 2; i >= startColumnIndex; i--) {
+                arr[size - 1][i] = presentValue;
+                presentValue++;
+                if (presentValue > maxNumberInArr)return arr;
+            }
+            //Работа с первым столбцом
+            for (int i = size - 2; i >= startLineIndex + 1; i--) {
+                arr[i][startColumnIndex] = presentValue;
+                presentValue++;
+                if (presentValue > maxNumberInArr)return arr;
+            }
+            size -= 1;
+            startLineIndex++;
+            startColumnIndex++;
         }
-        for (int i = 1; i < arr.length; i++) {
-            arr[i][arr.length - 1] = presentValue;
-            presentValue++;
-        }
-        for (int i = arr.length - 2; i >= 0; i--) {
-            arr[arr.length - 1][i] = presentValue;
-            presentValue++;
-        }
-        for (int i = arr.length - 2; i >= 1; i--) {
-            arr[i][0] = presentValue;
-            presentValue++;
-        }
-        int[][] array = new int[arr.length - 2][arr.length - 2];
-        fillInWithNumbers(array, maxNumberInArr, presentValue);
+
         return arr;
     }
 }
