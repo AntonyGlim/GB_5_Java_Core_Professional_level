@@ -17,10 +17,15 @@ public class SnakeArray {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите последнее число последовательности...");
             maxNumberInArr = sc.nextInt();
-            System.out.println(calculateSquareSideSize(maxNumberInArr));
+            squareSideSize = calculateSquareSideSize(maxNumberInArr);
         }
     }
 
+    /**
+     * Расчитываем размерность будующего массива
+     * @param maxNumberInArr - максимальное значение в массиве
+     * @return - длина стороны массива
+     */
     private static int calculateSquareSideSize(int maxNumberInArr){
         double sqrDoub = Math.sqrt(maxNumberInArr);
         int sqrInt = (int) Math.sqrt(maxNumberInArr);
