@@ -22,6 +22,9 @@ package lesson_8_Interview_Spring_ORM.job_interview_task;
 
 import java.util.*;
 
+/**
+ * Подсчет количества уникальных значений в массиве
+ */
 public class NumbersOfUniqueValuesInArray {
 
     public static void main(String[] args) {
