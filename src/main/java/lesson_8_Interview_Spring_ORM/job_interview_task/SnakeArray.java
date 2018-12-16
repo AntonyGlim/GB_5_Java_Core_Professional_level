@@ -56,7 +56,10 @@ public class SnakeArray {
     }
 
     private static int[][] fillInWithNumbers(int[][] arr, int maxNumberInArr, int startWith){
-        int presentValue = 1;
+        if (arr.length < 2){
+            return arr;
+        }
+        int presentValue = startWith;
         for (int i = 0; i < arr[0].length; i++) {
             arr[0][i] = presentValue;
             presentValue++;
@@ -73,6 +76,8 @@ public class SnakeArray {
             arr[i][0] = presentValue;
             presentValue++;
         }
+        int[][] array = new int[arr.length - 2][arr.length - 2];
+        fillInWithNumbers(array, maxNumberInArr, presentValue);
         return arr;
     }
 }
