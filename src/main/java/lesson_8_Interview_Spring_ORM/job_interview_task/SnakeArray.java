@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 public class SnakeArray {
 
-    static private int maxNumberInArr = 0;
-    static private int squareSideSize = 0;
+    static private int maxNumberInArr;
+    static private int squareSideSize;
+    static private int[][] snakeArr;
 
     public static void main(String[] args) {
         while (true) {
@@ -18,6 +19,7 @@ public class SnakeArray {
             System.out.println("Введите последнее число последовательности...");
             maxNumberInArr = sc.nextInt();
             squareSideSize = calculateSquareSideSize(maxNumberInArr);
+            snakeArr = new int[squareSideSize][squareSideSize];
         }
     }
 
@@ -36,5 +38,19 @@ public class SnakeArray {
             result = sqrInt;
         }
         return result;
+    }
+
+    /**
+     * Метод выведет на экран двумерный массив
+     * @param arr
+     */
+    private static void printArray(int[][] arr){
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+//                arr[i][j] = j;
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
