@@ -7,21 +7,33 @@ package lesson_8_Interview_Spring_ORM.job_interview_task;
 
 import java.util.Scanner;
 
+/**
+ * Класс позволяет получить массив заполненный по спирали.
+ * Размерность массива может быть любой.
+ * Пользователь должен ввести с клавиатуры максимальный элнмент присутствующий в массиве
+ * Если элемент не имеет цеого корня (корень содержит остаток от деления), то
+ * последние элементы массива будут дополнены нулями.
+ */
 public class SnakeArray {
 
-    static private int maxNumberInArr;
-    static private int squareSideSize;
-    static private int[][] snakeArr;
+    static private int maxNumberInArr;                                                  //максимальное значение в массиве
+    static private int squareSideSize;                                                  //размеры массива
+    static private int[][] snakeArr;                                                    //массив для заполнения
 
     public static void main(String[] args) {
         while (true) {
             Scanner sc = new Scanner(System.in);
             System.out.println("Введите последнее число последовательности...");
             maxNumberInArr = sc.nextInt();
-            squareSideSize = calculateSquareSideSize(maxNumberInArr);
-            snakeArr = new int[squareSideSize][squareSideSize];
-            snakeArr = fillInWithNumbers(snakeArr, maxNumberInArr, squareSideSize);
-            printArray(snakeArr);
+            if (maxNumberInArr > 0){                                                    //если число отрицательное либо 0
+                squareSideSize = calculateSquareSideSize(maxNumberInArr);               //расчитывем размерность массива
+                snakeArr = new int[squareSideSize][squareSideSize];
+                snakeArr = fillInWithNumbers(snakeArr, maxNumberInArr, squareSideSize); //заполняем массив значениями
+                printArray(snakeArr);                                                   //выводим массив в консоль
+            } else {
+                System.out.println("Вы ввели отрицательно число или 0. Программа завершит работу.");
+                break;
+            }
         }
     }
 
@@ -34,7 +46,7 @@ public class SnakeArray {
         double sqrDoub = Math.sqrt(maxNumberInArr);
         int sqrInt = (int) Math.sqrt(maxNumberInArr);
         int result;
-        if (sqrDoub % sqrInt != 0){
+        if (sqrDoub % sqrInt != 0){     //если double значение деленное на int значение имеет остаток, увеличиваем размрность на 1
             result = sqrInt + 1;
         } else {
             result = sqrInt;
