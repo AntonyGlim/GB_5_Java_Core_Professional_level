@@ -20,6 +20,8 @@ public class SnakeArray {
             maxNumberInArr = sc.nextInt();
             squareSideSize = calculateSquareSideSize(maxNumberInArr);
             snakeArr = new int[squareSideSize][squareSideSize];
+            int[][] temp = fillInWithNumbers(snakeArr, maxNumberInArr, 1);
+            printArray(temp);
         }
     }
 
@@ -47,10 +49,30 @@ public class SnakeArray {
     private static void printArray(int[][] arr){
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[i].length; j++) {
-//                arr[i][j] = j;
                 System.out.print(arr[i][j] + " ");
             }
             System.out.println();
         }
+    }
+
+    private static int[][] fillInWithNumbers(int[][] arr, int maxNumberInArr, int startWith){
+        int presentValue = 1;
+        for (int i = 0; i < arr[0].length; i++) {
+            arr[0][i] = presentValue;
+            presentValue++;
+        }
+        for (int i = 1; i < arr.length; i++) {
+            arr[i][arr.length - 1] = presentValue;
+            presentValue++;
+        }
+        for (int i = arr.length - 2; i >= 0; i--) {
+            arr[arr.length - 1][i] = presentValue;
+            presentValue++;
+        }
+        for (int i = arr.length - 2; i >= 1; i--) {
+            arr[i][0] = presentValue;
+            presentValue++;
+        }
+        return arr;
     }
 }
