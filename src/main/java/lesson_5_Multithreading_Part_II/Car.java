@@ -49,7 +49,8 @@ public class Car implements Runnable {
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
             cdl_1.countDown();                                                          //Закончил подготовку
-            Thread.sleep(1);                                                            //Чтобы избежать фальстартов
+//            Thread.sleep(1);                                                            //Чтобы избежать фальстартов
+            cb.await();                                                                 //Чтобы избежать фальстартов - лучше еще раз использовать барьер
             cb.await();                                                                 //Готов к старту!
         } catch (Exception e) {
             e.printStackTrace();
