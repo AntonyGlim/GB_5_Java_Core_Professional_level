@@ -13,6 +13,20 @@ public class Ship {
         this.shipSpeed = shipSpeed;
     }
 
+    public void loadShip(SeaPort seaPort){
+        if (seaPort.getPortCapacity() >= maxShipCapacity){
+            shipCapacity = maxShipCapacity;
+        }else {
+            shipCapacity = seaPort.getPortCapacity();
+        }
+        seaPort.setPortCapacity(seaPort.getPortCapacity() - shipCapacity);
+    }
+
+    public void reloadShip(SeaPort seaPort){
+        seaPort.setPortCapacity(seaPort.getPortCapacity() + shipCapacity);
+        shipCapacity = 0;
+    }
+
     public int getShipCapacity() {
         return shipCapacity;
     }
