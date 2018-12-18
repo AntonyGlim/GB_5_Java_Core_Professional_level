@@ -9,12 +9,12 @@ public class OpenSea  extends SeaAdventure{
 
     @Override
     public void go(Ship ship) {
-        System.out.println("Корабль " + ship.getShipName() + " начал этап открытое море, протяженностьью " + openSeaLength);
+        System.out.println("Корабль " + ship.getShipName() + "(" + ship.getShipCapacity() + ")" + " начал этап открытое море, протяженностьью " + openSeaLength);
         try {
-            Thread.sleep(openSeaLength/ship.getShipSpeed());
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Корабль " + ship.getShipName() + " завершил этап открытое море, протяженностьью " + openSeaLength);
+        System.out.println("Корабль " + ship.getShipName() + "(" + ship.getShipCapacity() + ")" + " завершил этап открытое море, протяженностьью " + openSeaLength);
     }
 }

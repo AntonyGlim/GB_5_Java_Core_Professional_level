@@ -21,6 +21,10 @@ public class SeaPort extends SeaAdventure{
         this.portCapacity = portCapacity;
     }
 
+    public String getPortName() {
+        return portName;
+    }
+
     @Override
     public void go(Ship ship) {
         System.out.println("Корабль " + ship.getShipName() + " прибыл в порт " + portName);

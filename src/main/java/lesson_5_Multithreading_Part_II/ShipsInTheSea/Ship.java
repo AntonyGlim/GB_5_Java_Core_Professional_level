@@ -14,17 +14,26 @@ public class Ship {
     }
 
     public void loadShip(SeaPort seaPort){
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " прибыл в порт " + seaPort.getPortName());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (seaPort.getPortCapacity() >= maxShipCapacity){
             shipCapacity = maxShipCapacity;
         }else {
             shipCapacity = seaPort.getPortCapacity();
         }
         seaPort.setPortCapacity(seaPort.getPortCapacity() - shipCapacity);
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " завершил погрузку в порту " + seaPort.getPortName());
     }
 
     public void reloadShip(SeaPort seaPort){
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " прибыл в порт " + seaPort.getPortName());
         seaPort.setPortCapacity(seaPort.getPortCapacity() + shipCapacity);
         shipCapacity = 0;
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " завершил разгрузку в порту " + seaPort.getPortName());
     }
 
     public int getShipCapacity() {
