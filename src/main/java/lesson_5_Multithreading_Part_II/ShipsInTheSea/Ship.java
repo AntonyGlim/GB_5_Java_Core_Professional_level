@@ -1,6 +1,6 @@
 package lesson_5_Multithreading_Part_II.ShipsInTheSea;
 
-public class Ship {
+public class Ship implements Runnable {
     private String shipName;                                            //Название корабля
     private int shipCapacity;                                           //Текущая вместимость корабля, ед
     private int maxShipCapacity;                                        //Максимальная вместимость корабля, ед
@@ -11,6 +11,11 @@ public class Ship {
         this.shipCapacity = shipCapacity;
         this.maxShipCapacity = maxShipCapacity;
         this.shipSpeed = shipSpeed;
+    }
+
+    @Override
+    public void run() {
+
     }
 
     public void loadShip(SeaPort seaPort){
