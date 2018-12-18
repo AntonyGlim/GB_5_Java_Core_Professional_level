@@ -11,11 +11,14 @@ public class MainShipsInTheSea {
             for (int i = 0; i < trip.length; i++) {
                 portStart.go(ship_1);
                 trip[i].go(ship_1);
+                System.out.println("1111111111111111111111111");
+                System.out.println(portStart.getPortCapacity());
             }
-            if (portStart.getPortCapacity() == 0) break;
-            for (int i = trip.length - 1; i <= 0; i--) {
+            if (portStart.getPortCapacity() <= 0) break;
+            for (int i = trip.length - 1; i >= 0; i--) {
                 portEnd.go(ship_1);
                 trip[i].go(ship_1);
+                System.out.println("222222222222222222222222");
             }
         }
     }

@@ -20,4 +20,12 @@ public class Ship {
     public String getShipName() {
         return shipName;
     }
+
+    public int getShipSpeed() {
+        return shipSpeed;
+    }
+
+    public void setShipCapacity(int shipCapacity) {
+        this.shipCapacity = shipCapacity;
+    }
 }

@@ -22,7 +22,8 @@ public class SeaPort extends SeaAdventure{
         System.out.println("Корабль " + ship.getShipName() + " прибыл в порт " + portName);
         try {
             Thread.sleep(ship.getShipCapacity()/loadingSpeed);
-            portCapacity -= ship.getShipCapacity();
+            ship.setShipCapacity(100);
+            portCapacity = portCapacity - ship.getShipCapacity();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
