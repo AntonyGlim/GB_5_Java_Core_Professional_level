@@ -1,23 +1,25 @@
 package lesson_5_Multithreading_Part_II.ShipsInTheSea;
 
+import java.math.BigInteger;
+
 public class SeaPort extends SeaAdventure{
-    private int portCapacity;                       //Текущая вместимость порта, ед
+    private BigInteger portCapacity;                       //Текущая вместимость порта, ед
     private int maxPortCapacity;                    //Максимальная вместимость порта, ед
     private int loadingSpeed;                       //Скорость погрузки на корабль ед/с
     private String portName;                        //Название порта
 
-    public SeaPort(String portName,int maxPortCapacity, int portCapacity, int loadingSpeed) {
+    public SeaPort(String portName,int maxPortCapacity, BigInteger portCapacity, int loadingSpeed) {
         this.portName = portName;
         this.portCapacity = portCapacity;
         this.maxPortCapacity = maxPortCapacity;
         this.loadingSpeed = loadingSpeed;
     }
 
-    public int getPortCapacity() {
+    public BigInteger getPortCapacity() {
         return portCapacity;
     }
 
-    public void setPortCapacity(int portCapacity) {
+    public void setPortCapacity(BigInteger portCapacity) {
         this.portCapacity = portCapacity;
     }
 
