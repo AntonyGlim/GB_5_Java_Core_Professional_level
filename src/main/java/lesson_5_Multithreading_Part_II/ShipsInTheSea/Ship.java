@@ -58,14 +58,16 @@ public class Ship implements Runnable {
         System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
                 + " начал погрузку");
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         if (seaPort.getPortCapacity().intValue() >= maxShipCapacity){
             shipCapacity = maxShipCapacity;
-        }else {
+        }else if (seaPort.getPortCapacity().intValue() < maxShipCapacity && seaPort.getPortCapacity().intValue() != 0) {
             shipCapacity = seaPort.getPortCapacity().intValue();
+        }else {
+            return;
         }
         seaPort.setPortCapacity(BigInteger.valueOf(seaPort.getPortCapacity().intValue() - shipCapacity));
         System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"

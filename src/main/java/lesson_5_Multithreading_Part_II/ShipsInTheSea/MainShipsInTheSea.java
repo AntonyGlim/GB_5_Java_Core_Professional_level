@@ -9,7 +9,7 @@ public class MainShipsInTheSea {
     public static void main(String[] args) {
 
         SeaObstacles seaObstacles = new SeaObstacles(new OpenSea(100), new TunnelInTheSea(200), new OpenSea(80));
-        String[] shipsNames = {"Победа", "Беда"};
+        String[] shipsNames = {"Победа", "Беда", "Шхуна", "Верди", "Боцман"};
         for (int i = 0; i < shipsNames.length; i++) {
             new Thread(new Ship(seaObstacles, shipsNames[i], 1000, 0, 20)).start();
         }
