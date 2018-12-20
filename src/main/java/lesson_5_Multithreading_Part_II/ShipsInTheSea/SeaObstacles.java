@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Класс формирует массив с этапами движения корабля
+ * Класс формирует лист с этапами движения корабля
  * (используя аргумент переменной длинны)
  */
 public class SeaObstacles {
