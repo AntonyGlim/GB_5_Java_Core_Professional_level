@@ -1,10 +1,10 @@
 package lesson_5_Multithreading_Part_II.ShipsInTheSea;
 
-public class OpenSea  extends SeaAdventure{
+public class TunnelInTheSea extends SeaAdventure{
 
-    public OpenSea(int openSeaLength) {
-        length = openSeaLength;
-        description = "открытое море";
+    public TunnelInTheSea(int tunnelSeaLength) {
+        length = tunnelSeaLength;
+        description = "узкий канал";
     }
 
     @Override
