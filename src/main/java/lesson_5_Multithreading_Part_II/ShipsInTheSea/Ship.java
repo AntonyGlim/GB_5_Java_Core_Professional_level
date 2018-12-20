@@ -1,12 +1,17 @@
 package lesson_5_Multithreading_Part_II.ShipsInTheSea;
 
+import static lesson_5_Multithreading_Part_II.ShipsInTheSea.MainShipsInTheSea.portEnd;
+import static lesson_5_Multithreading_Part_II.ShipsInTheSea.MainShipsInTheSea.portStart;
+
 public class Ship implements Runnable {
+    private SeaObstacles seaObstacles;                                  //Морские препятствия
     private String shipName;                                            //Название корабля
     private int shipCapacity;                                           //Текущая вместимость корабля, ед
     private int maxShipCapacity;                                        //Максимальная вместимость корабля, ед
     private int shipSpeed;                                              //Скорость движения корабля миль/час
 
-    public Ship(String shipName, int maxShipCapacity, int shipCapacity, int shipSpeed) {
+    public Ship(SeaObstacles seaObstacles, String shipName, int maxShipCapacity, int shipCapacity, int shipSpeed) {
+        this.seaObstacles = seaObstacles;
         this.shipName = shipName;
         this.shipCapacity = shipCapacity;
         this.maxShipCapacity = maxShipCapacity;
@@ -15,7 +20,23 @@ public class Ship implements Runnable {
 
     @Override
     public void run() {
-
+        while (true){
+            this.loadShip(portStart);
+            for (int i = 0; i < seaObstacles.getSeaAdventures().size(); i++) {
+                seaObstacles.getSeaAdventures().get(i).go(this);
+            }
+            System.out.println(portStart.getPortCapacity());
+            System.out.println(portEnd.getPortCapacity());
+            System.out.println("1111111111111111111111111");
+            this.reloadShip(portEnd);
+            if (portStart.getPortCapacity() <= 0) break;
+            for (int i = seaObstacles.getSeaAdventures().size() - 1; i >= 0; i--) {
+                seaObstacles.getSeaAdventures().get(i).go(this);
+            }
+            System.out.println(portStart.getPortCapacity());
+            System.out.println(portEnd.getPortCapacity());
+            System.out.println("222222222222222222222222");
+        }
     }
 
     /**
