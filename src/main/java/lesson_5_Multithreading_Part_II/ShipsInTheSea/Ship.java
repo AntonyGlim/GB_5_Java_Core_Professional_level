@@ -18,8 +18,16 @@ public class Ship implements Runnable {
 
     }
 
+    /**
+     * Метод описывает погрузку корабля
+     * @param seaPort - морской порт
+     */
     public void loadShip(SeaPort seaPort){
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " прибыл в порт " + seaPort.getPortName());
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " прибыл в порт " + seaPort.getPortName()
+                + ", и ожидает погрузки");
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " начал погрузку");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -31,14 +39,24 @@ public class Ship implements Runnable {
             shipCapacity = seaPort.getPortCapacity();
         }
         seaPort.setPortCapacity(seaPort.getPortCapacity() - shipCapacity);
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " завершил погрузку в порту " + seaPort.getPortName());
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " завершил погрузку в порту " + seaPort.getPortName());
     }
 
+    /**
+     * Метод описывает разгрузку корабля
+     * @param seaPort - морской порт
+     */
     public void reloadShip(SeaPort seaPort){
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " прибыл в порт " + seaPort.getPortName());
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " прибыл в порт " + seaPort.getPortName()
+                + ", и ожидает разгрузки");
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " начал разгрузку");
         seaPort.setPortCapacity(seaPort.getPortCapacity() + shipCapacity);
         shipCapacity = 0;
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")" + " завершил разгрузку в порту " + seaPort.getPortName());
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " завершил разгрузку в порту " + seaPort.getPortName());
     }
 
     public int getShipCapacity() {
