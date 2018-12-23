@@ -2,9 +2,6 @@ package lesson_5_Multithreading_Part_II.ShipsInTheSea;
 
 import java.math.BigInteger;
 
-import static lesson_5_Multithreading_Part_II.ShipsInTheSea.MainShipsInTheSea.portEnd;
-import static lesson_5_Multithreading_Part_II.ShipsInTheSea.MainShipsInTheSea.portStart;
-
 public class Ship implements Runnable {
     private SeaObstacles seaObstacles;                                  //Морские препятствия
     private String shipName;                                            //Название корабля
