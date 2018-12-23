@@ -11,6 +11,8 @@ public class Ship implements Runnable {
     private int shipCapacity;                                           //Текущая вместимость корабля, ед
     private int maxShipCapacity;                                        //Максимальная вместимость корабля, ед
     private int shipSpeed;                                              //Скорость движения корабля миль/час
+    private SeaPort portStart;
+    private SeaPort portEnd;
 
     public Ship(SeaObstacles seaObstacles, String shipName, int maxShipCapacity, int shipCapacity, int shipSpeed) {
         this.seaObstacles = seaObstacles;
