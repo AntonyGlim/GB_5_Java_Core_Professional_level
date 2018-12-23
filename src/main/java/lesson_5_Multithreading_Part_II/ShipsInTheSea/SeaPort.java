@@ -27,6 +27,11 @@ public class SeaPort extends SeaAdventure{
         return portName;
     }
 
+    public void seaPortInformation(){
+        System.out.println(this.portName + " сейчас вмещает: " + this.portCapacity.intValue());
+    }
+
+    //Удалить
     @Override
     public void go(Ship ship) {
 //

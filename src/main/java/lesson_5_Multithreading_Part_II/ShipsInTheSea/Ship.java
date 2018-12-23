@@ -15,7 +15,7 @@ public class Ship implements Runnable {
         this.seaObstacles = seaObstacles;
         this.shipName = shipName;
         this.shipCapacity = 0;
-        this.maxShipCapacity = 1000;
+        this.maxShipCapacity = 4000;
         this.shipSpeed = shipSpeed;
         this.portStart = portStart;
         this.portEnd = portEnd;
@@ -29,23 +29,25 @@ public class Ship implements Runnable {
                 seaObstacles.getSeaAdventures().get(i).go(this);
             }
             //Блок вывода вспомогательной информации
-            {
-                System.out.println(portStart.getPortCapacity());
-                System.out.println(portEnd.getPortCapacity());
-                System.out.println("1111111111111111111111111");
-            }
+//            {
+//                System.out.println(portStart.getPortCapacity());
+//                System.out.println(portEnd.getPortCapacity());
+//                System.out.println("1111111111111111111111111");
+//            }
             this.reloadShip(portEnd);
             if (portStart.getPortCapacity().intValue() == 0) break;
             for (int i = seaObstacles.getSeaAdventures().size() - 1; i >= 0; i--) {
                 seaObstacles.getSeaAdventures().get(i).go(this);
             }
             //Блок вывода вспомогательной информации
-            {
-                System.out.println(portStart.getPortCapacity());
-                System.out.println(portEnd.getPortCapacity());
-                System.out.println("222222222222222222222222");
-            }
+//            {
+//                System.out.println(portStart.getPortCapacity());
+//                System.out.println(portEnd.getPortCapacity());
+//                System.out.println("222222222222222222222222");
+//            }
         }
+        portStart.seaPortInformation();
+        portEnd.seaPortInformation();
     }
 
     /**
@@ -71,7 +73,7 @@ public class Ship implements Runnable {
             return;
         }
         seaPort.setPortCapacity(BigInteger.valueOf(seaPort.getPortCapacity().intValue() - shipCapacity));
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+        System.out.println(">>> Корабль " + shipName + "(" + shipCapacity + ")"
                 + " завершил погрузку в порту " + seaPort.getPortName());
     }
 
@@ -87,7 +89,7 @@ public class Ship implements Runnable {
                 + " начал разгрузку");
         seaPort.setPortCapacity(BigInteger.valueOf(seaPort.getPortCapacity().intValue() + shipCapacity));
         shipCapacity = 0;
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+        System.out.println(">>>>>> Корабль " + shipName + "(" + shipCapacity + ")"
                 + " завершил разгрузку в порту " + seaPort.getPortName());
     }
 
