@@ -11,12 +11,14 @@ public class Ship implements Runnable {
     private SeaPort portStart;
     private SeaPort portEnd;
 
-    public Ship(SeaObstacles seaObstacles, String shipName, int maxShipCapacity, int shipCapacity, int shipSpeed) {
+    public Ship(SeaObstacles seaObstacles, String shipName, int shipSpeed, SeaPort portStart, SeaPort portEnd) {
         this.seaObstacles = seaObstacles;
         this.shipName = shipName;
-        this.shipCapacity = shipCapacity;
-        this.maxShipCapacity = maxShipCapacity;
+        this.shipCapacity = 0;
+        this.maxShipCapacity = 1000;
         this.shipSpeed = shipSpeed;
+        this.portStart = portStart;
+        this.portEnd = portEnd;
     }
 
     @Override
