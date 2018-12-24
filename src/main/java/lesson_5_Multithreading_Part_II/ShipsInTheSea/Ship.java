@@ -54,17 +54,10 @@ public class Ship implements Runnable {
      * Метод описывает погрузку корабля
      * @param seaPort - морской порт
      */
-    public void loadShip(SeaPort seaPort){
+    public synchronized void loadShip(SeaPort seaPort){
         System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
                 + " прибыл в порт " + seaPort.getPortName()
-                + ", и ожидает погрузки");
-        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
-                + " начал погрузку");
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+                + ", и готовиться к погрузке");
         if (seaPort.getPortCapacity().intValue() >= maxShipCapacity){
             shipCapacity = maxShipCapacity;
         }else if (seaPort.getPortCapacity().intValue() < maxShipCapacity && seaPort.getPortCapacity().intValue() != 0) {
@@ -72,7 +65,14 @@ public class Ship implements Runnable {
         }else {
             return;
         }
+        System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
+                + " начал погрузку в порту " + seaPort.getPortName());
         seaPort.setPortCapacity(BigInteger.valueOf(seaPort.getPortCapacity().intValue() - shipCapacity));
+        try {
+            Thread.sleep(10000 + (int) Math.random() * 500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println(">>> Корабль " + shipName + "(" + shipCapacity + ")"
                 + " завершил погрузку в порту " + seaPort.getPortName());
     }
@@ -81,12 +81,12 @@ public class Ship implements Runnable {
      * Метод описывает разгрузку корабля
      * @param seaPort - морской порт
      */
-    public void reloadShip(SeaPort seaPort){
+    public synchronized void reloadShip(SeaPort seaPort){
         System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
                 + " прибыл в порт " + seaPort.getPortName()
                 + ", и ожидает разгрузки");
         System.out.println("Корабль " + shipName + "(" + shipCapacity + ")"
-                + " начал разгрузку");
+                + " начал разгрузку в порту " + seaPort.getPortName());
         seaPort.setPortCapacity(BigInteger.valueOf(seaPort.getPortCapacity().intValue() + shipCapacity));
         shipCapacity = 0;
         System.out.println(">>>>>> Корабль " + shipName + "(" + shipCapacity + ")"

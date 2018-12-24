@@ -4,7 +4,8 @@ import java.math.BigInteger;
 
 public class MainShipsInTheSea {
 
-    static final int SHIPSCOUNT = 3;                                                //Количество кораблей
+    static final int SHIPSCOUNT = 9;                                                //Количество кораблей
+    static final int portsCount = 3;
 
     public static void main(String[] args) {
 
@@ -35,9 +36,9 @@ public class MainShipsInTheSea {
         SeaPort portStart = portsStartArr[0];
         SeaPort portEnd = portsEndArr[0];
         for (int i = 0; i < shipsNames.length; i++) {
-            if (i % 1 == 0){
-                portStart = portsStartArr[i/1];
-                portEnd = portsEndArr[i/1];
+            if (i % portsCount == 0){
+                portStart = portsStartArr[i/portsCount];
+                portEnd = portsEndArr[i/portsCount];
             }
             new Thread(new Ship(seaObstacles, shipsNames[i], 20, portStart, portEnd)).start();
         }
